@@ -4,6 +4,7 @@ import {Hero} from "@/components/landing/Hero/Hero";
 import {Footer} from "@/components/landing/Footer/Footer";
 
 
+
 export default function Home() {
   return (
     <>

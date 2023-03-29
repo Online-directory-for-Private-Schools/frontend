@@ -14,7 +14,10 @@ module.exports = {
       "green": "#1ACD77",
     },
     extend: {
-     // TODO: add fonts
+      fontFamily: {
+        sans: ["Raleway", "ui-sans-serif", "system-ui"],
+        serif: ["Inter", "ui-serif", "serif"]
+      }
     },
   },
   plugins: [],
