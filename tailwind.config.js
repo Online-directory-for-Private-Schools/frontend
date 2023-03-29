@@ -9,14 +9,14 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      "dark-blue": "#07133B",
-      "green": "#1ACD77",
-    },
     extend: {
       fontFamily: {
         sans: ["Raleway", "ui-sans-serif", "system-ui"],
         serif: ["Inter", "ui-serif", "serif"]
+      },
+      colors: {
+        "dark-blue": "#07133B",
+        "green": "#1ACD77",
       }
     },
   },
