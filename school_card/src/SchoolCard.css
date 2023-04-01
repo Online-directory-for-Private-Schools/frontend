@@ -1,11 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Niramit:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Niramit:ital,wght@0,200;1,500&display=swap');
 body{
     margin: 10px;
-      font-family: 'Montserrat', sans-serif;
+    
     
     
     
 }
 .school-card {
+    
     width: 800px;
     height: auto;
     display: flex;
@@ -28,6 +31,7 @@ body{
     flex: 1;
     margin-top: 15px;
     height: 111px;
+    margin-left: 0.7rem;
   }
   
   .school-image img {
@@ -51,10 +55,12 @@ body{
 
   }
   .school-name{
+    font-family: 'Niramit', sans-serif;
     padding-left: 120px;
     padding-top: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
+    color: #07133B;
   }
   .buttons{
     padding-top: 0.5rem;
@@ -63,23 +69,30 @@ body{
     padding-bottom: 0px;
     
   }
+  .city-button{
+    font-family: 'Niramit', sans-serif;
+    color: #07133B;
+  }
+  
+
   .favorite-button {
-    
+    font-family: 'Niramit', sans-serif;
   }
   
   .favorite-button {
-    color: #1a4683;
+    color: #07133B;
+
   }
   .city-button{
     padding: 10px 10px 10px 10px;
-    color: #1a4683;
+    color: #07133B;
   }
   
 
   .map-icon, .bookmark-icon {
     margin-right: 8px;
     align-items: center;
-    color: #1a4683;
+    color: #07133B;;
     
   }
   .bookmark-icon{
@@ -93,7 +106,7 @@ body{
   }
   
   .star-icon.filled {
-    color: #1a307e;
+    color: #07133B;;
   }
   
   .review-stars {
@@ -106,7 +119,7 @@ body{
   }
 
   .school-description {
-    margin-top: 0.4rem;
-    margin-left: 0px;
-    
+    margin-top: 0rem;
+    margin-left: 0.7rem;
+    font-family: 'Niramit', sans-serif;
   }

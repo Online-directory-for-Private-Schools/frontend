@@ -52,3 +52,5 @@ const renderStars = (rating) => {
 };
 
 export default SchoolCard;
+
+
