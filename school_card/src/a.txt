@@ -1,0 +1,8 @@
+create me a footer for my website, it is composed of two parts(row 1 row 2) 
+the first row contain 3 divs they are at the same dimensions,
+the first one contain an input for name of the person who wants to contact us under it its email under these two buttons of the same shape and dimensions
+the second div contains a place holder for the message and under iit a send button
+the third div contains a header CONTACT US and some text under it
+to seperate the secon row from the first row we pu a line
+the second row contains the logo the social media we have and services
+please use REACT JS and give what are the files I need to add because I already have an react app
