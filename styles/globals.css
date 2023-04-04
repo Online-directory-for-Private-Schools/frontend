@@ -4,8 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply bg-gradient-to-b
+}
 .btn {
-    @apply mx-2 px-4 py-1 text-white bg-white rounded-xl text-dark-blue font-bold
+    @apply mx-2 px-4 py-1 bg-white rounded-xl text-dark-blue font-bold
 }
 
 .link {
