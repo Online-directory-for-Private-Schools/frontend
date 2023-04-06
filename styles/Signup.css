@@ -31,7 +31,6 @@ nav {
 nav ul li {
     color: #07133B;
     text-decoration: none;
-    font-family: 'Niramit';
     font-weight: bold;
 }
 nav ul li a{
@@ -91,7 +90,6 @@ nav ul li a span:hover {
 .form_wrap .input_wrap label{
     display: block;
     font-size: 14px;
-    font-family: 'Raleway';
     margin-bottom: 3px;
     color: #000000;
 }

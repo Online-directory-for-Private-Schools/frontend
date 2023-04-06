@@ -125,7 +125,6 @@ nav ul li a span:hover {
 	cursor: pointer;
   transition: all 0.3 ease;
   box-shadow: 0 7px 10px #ccc;
-  position: relative;
   left: auto;
   right: 30px;
 }
