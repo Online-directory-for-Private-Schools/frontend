@@ -1,0 +1,33 @@
+.input-wrapper{
+    position: absolute;
+width: 1229px;
+height: 60px;
+left: 345px;
+top: 791px;
+
+background: #1ACD77;
+backdrop-filter: blur(20px);
+/* Note: backdrop-filter has minimal browser support */
+
+border-radius: 64px;
+}
+
+input{
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    font-size: 1.5rem;
+    width: 100%;
+    margin-left: 40px;
+}
+
+input:focus{
+    outline: none;
+}
+
+#search-icon{
+    color: rgb(255, 255, 255);
+    position: absolute;
+    margin-top: 25px;
+    margin-left: 18px ;
+}

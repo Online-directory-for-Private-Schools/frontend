@@ -1,0 +1,43 @@
+.SearchBar-container{
+padding-top: 20vh; 
+width: 65%;
+margin: auto;
+display:flex;
+flex-direction: column;
+align-items: center;
+min-width: 200px;
+}
+.TITLE{
+  position: absolute;
+width: 1450px;
+height: 338px;
+left: 235px;
+top: 239px;
+
+font-family: 'Niramit';
+font-style: normal;
+font-weight: 700;
+font-size: 130px;
+line-height: 169px;
+text-align: center;
+
+color: #07133B;
+
+}
+.SUBTITLE{
+  position: absolute;
+width: 975px;
+height: 123px;
+left: 472px;
+top: 640px;
+
+font-family: 'Lucida Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 35px;
+line-height: 41px;
+text-align: center;
+
+color: #07133B;
+
+}
