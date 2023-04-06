@@ -46,7 +46,7 @@ const SchoolCard = ({ schoolName, schoolCity, googleMapLocation, initialFavorite
                         <BiMap className="map-icon" />
                         {schoolCity}
                     </a>
-                    <a className="favorite-button" href = "#"  target="_blank" rel="noreferrer"><BsBookmark className="bookmark-icon" />Add to Favourites
+                    <a className="favorite-button" href = "#"  target="_blank" rel="noreferrer" onClick={toggleFavorite}><BsBookmark className="bookmark-icon" />Add to Favourites
                     </a>
                 </div>
                 <div className="review-stars">

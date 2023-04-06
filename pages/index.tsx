@@ -2,7 +2,6 @@ import Head from 'next/head'
 import {Hero} from "@/components/landing/Hero/Hero";
 import Footer from "@/components/landing/Footer/Footer";
 import dynamic from "next/dynamic";
-import SchoolCard from "@/components/School/SchoolCard";
 
 const Navbar = dynamic(() => import('../components/landing/Navbar/Navbar'), { ssr: false })
 

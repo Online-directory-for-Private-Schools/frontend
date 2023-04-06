@@ -1,6 +1,4 @@
 import React from 'react';
-import Image from "next/image";
-// import search from "@/public/search.svg";
 
 const SearchBar = () => {
     return (
