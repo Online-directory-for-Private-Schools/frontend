@@ -43,10 +43,9 @@ export default function Navbar({ loggedIn }: NavbarProps) {
     >
       <div
         className={
-          "flex flex-row justify-between fixed w-[95%] mt-4 p-2 gap-2 bg-white rounded-2xl h-20"
+          "z-50 flex flex-row justify-between fixed w-[95%] mt-4 p-2 gap-2 bg-white rounded-2xl h-20"
         }
       >
-        ,
         <div className={"w-[10%] lg:w-[25%] flex justify-left"}>
           <Image
             className={" hidden lg:block bg-dark-blue p-1 rounded-xl"}

@@ -1,21 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Niramit:wght@200&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  font-family: 'Niramit', sans-serif;
-  box-sizing: border-box;
-  overflow: hidden;
-  
-}
-body{
-  background: #eef8ff;
-}
-
 footer{
   width: 100%;
   position: absolute;
   bottom: 0;
-  left: 0.3rem;
+  left: 0;
   background: linear-gradient(to right, #07133B, #001660);
   color: #fff;
   padding: 100px 0 30px;
@@ -54,18 +41,19 @@ footer{
   border-bottom: 1px, solid #ccc;
   margin: 20px 0;
 }
-ul li{
+
+.col ul li{
   list-style: none;
   margin-bottom: 12px;
 }
-ul li a{
+.col ul li a{
   text-decoration: none;
   color: #fff;
 }
 .email{
   width: fit-content;
 }
-form{
+.col form{
   padding-bottom: 15px;
   display: flex;
   align-items: center;
@@ -74,11 +62,11 @@ form{
   margin-bottom: 50px;
 
 }
-form .far{
+.col form .far{
   font-size: 18px;
   margin-right: 10px;
 }
-form input{
+.col form input{
   width: 100%;
   background: transparent;
   color: #ccc;
@@ -86,7 +74,7 @@ form input{
   outline: none;
 
 }
-form button{
+.col form button{
   background: transparent;
   border: 0;
   outline: none;
@@ -94,17 +82,17 @@ form button{
 
 }
 
-.social-icons a{
-  text-decoration-line: none;
+.social-icons Link{
   text-decoration: none;
   text-emphasis: none;
   color:#ccc;
 }
-form button .send{
+.col form button .send{
   font-size: 18px;
   color: #ccc;
 }
 .social-icons{
+  line-height: 10;
   justify-content: space-around;
 }
 .social-icons .Fa{

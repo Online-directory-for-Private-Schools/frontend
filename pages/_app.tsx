@@ -1,4 +1,7 @@
 import '@/styles/globals.css'
+import '@/styles/footer.css';
+import '@/styles/SchoolCard.css';
+
 import type { AppProps } from 'next/app'
 
 
