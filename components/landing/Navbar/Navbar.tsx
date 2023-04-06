@@ -103,14 +103,20 @@ export default function Navbar({ loggedIn }: NavbarProps) {
             <SearchBar />
           ) : (
             <>
-              <button className={"btn hover:text-green "}>{login}</button>
-              <button
+              <Link
+                href={"/login"}
+                className={"btn hover:text-green my-auto align-middle"}
+              >
+                {login}
+              </Link>
+              <Link
+                href={"/signup"}
                 className={
-                  "btn outline outline-2 outline-green hover:bg-green hover:text-white-500 hover:text-white"
+                  "hover:duration-300 hover:p-4 my-auto btn outline outline-2 outline-green hover:bg-green hover:text-white-500 hover:text-white"
                 }
               >
                 {signUp}
-              </button>
+              </Link>
             </>
           )}
         </div>

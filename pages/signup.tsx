@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Link from "next/link";
 
 function Sign_up() {
   const [email, setEmail] = useState("");
@@ -11,14 +12,15 @@ function Sign_up() {
   return (
     <div className="Sign_up">
       <nav id="navbar" className="navbar">
-        <h2 className="logo"> Website Logo </h2>
+        <Link href={"/"}>
+          <h2 className="logo"> Website Logo </h2>
+        </Link>
         <ul>
           <li>
-            Have an account?{" "}
-            <a href="">
-              {" "}
-              <span> Sign in </span>
-            </a>{" "}
+            Have an account?
+            <Link href="/login">
+              <span className={"mx-1 hover:p-2"}> Log in </span>
+            </Link>
             instead
           </li>
         </ul>
