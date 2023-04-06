@@ -1,0 +1,155 @@
+/* Navbar */
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 25px;
+  padding-left: 7%;
+  padding-right: 7%;
+}
+
+.logo {
+  color: #000000;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+nav ul li {
+  color: #07133B;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a{
+
+  color: #1ACD77;
+  text-decoration: none;
+}
+nav ul li a span:hover {
+  background-color: #1ACD77;
+  color: #FFFFFF;
+  padding: 2px;
+  padding-bottom: 3px;
+  border-radius: 7px;
+  transition: .3s;
+  margin-right: 2px;
+}
+
+ /*End navbar*/
+
+
+.wrapper{
+
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    margin-top: 1px;
+}
+
+.registration_form{
+    margin-top: -80px;
+    position: absolute;
+	background: #FFFFFF;
+    padding-top: 80px;
+	padding-bottom: 80px;
+	border-radius: 20px;
+	width: 450px;
+    box-shadow: 0 3px 7px #000;
+    left: auto;
+    right: auto;
+}
+
+.registration_form .title{
+    position: relative;
+	text-align: center;
+	font-size: 28px;
+	color: #07133B;
+	letter-spacing: 1px;
+	font-weight: 700;
+    top: -30px;
+
+}
+
+.form_wrap{
+	margin-top: 35px;
+    align-items: center;
+}
+
+.form_wrap .input_wrap{
+	margin-bottom: 15px;
+}
+
+.form_wrap .input_wrap:last-child{
+	margin-bottom: 0;
+}
+
+.form_wrap  input[type="email"],
+.form_wrap  input[type="password"]{
+    position: relative;
+	width: 90%;
+	border-radius: 8px;
+	border: 1px solid #9597a6;
+	padding: 10px;
+	outline: none;
+    left: auto;
+    right: auto;
+}
+
+.form_wrap  input[type="password"]:focus,
+.form_wrap  input[type="email"]:focus{
+	border-color: #1ACD77;
+  box-shadow: 2px 2px 3px #1ACD77;
+  transition: .6s;
+}
+
+
+
+.form_wrap .submit_btn{
+    position: relative;
+  margin-top: 20px;
+  align-items: center;
+	width: 55%;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Niramit', sans-serif;
+	background: #1ACD77;
+	padding: 10px;
+  margin-left: 25%;
+	border: none;
+	border-radius: 10px;
+  color: #FFFFFF;
+	letter-spacing: 3px;
+	cursor: pointer;
+  transition: all 0.3 ease;
+  box-shadow: 0 7px 10px #ccc;
+  left: auto;
+  right: 30px;
+}
+
+
+.form_wrap .submit_btn:hover ,
+.form_wrap .submit_btn:focus {
+  font-size: 18px;
+  border-color:#1ACD77 ;
+  padding: 11px;
+  box-shadow: 0 5px 10px #504f4f;
+  background: linear-gradient(to left, #1ACD77 0%, #78c9a1 100%);
+  transition: all .2s ease ;
+}
+
+.form_wrap .forgot_pwd a{
+    position: relative;
+    color: #000000;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: 90px;
+    text-decoration: none;
+    left: auto;
+    right: auto;
+}
+.form_wrap .forgot_pwd a:hover {
+    text-decoration: underline;
+}
