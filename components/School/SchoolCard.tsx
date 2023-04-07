@@ -40,7 +40,7 @@ const SchoolCard = ({
   return (
     <div
       className={
-        "z-40 flex flex-col gap-4 w-[90%]" +
+        "z-40 flex flex-col gap-4 w-[90%] bg-white" +
         " h-44 rounded-xl border-2 p-3 shadow-[0_5px_10px] " +
         "shadow-gray-900/20 overflow-hidden " +
         "duration-300 hover:-translate-y-[5px] transform"
@@ -49,7 +49,7 @@ const SchoolCard = ({
       <div className="flex flex-row justify-between h-max ">
         <div className="h-[80px] w-[25%]">
           <Image
-            className={"w-[100%] rounded-xl"}
+            className={"w-[100%] rounded-xl bg-green p-2"}
             src={Logo.src}
             width={200}
             height={200}
@@ -68,20 +68,17 @@ const SchoolCard = ({
               <BiMap className="my-auto mr-2 fill-green" />
               <h2 className={"my-auto"}>{schoolCity}</h2>
             </Link>
-            <Link
+            <button
               className="flex flex-row justify-self-stretch"
-              href="#"
-              target="_blank"
-              rel="noreferrer"
               onClick={toggleFavorite}
             >
-              {initialFavorite ? (
+              {!favorite ? (
                 <BsBookmark className=" w-[25%] my-auto fill-green" />
               ) : (
                 <BsBookmarkFill className=" w-[25%] my-auto fill-green" />
               )}
               <p className={"w-[75%] text-sm my-auto"}>Add to favourites</p>
-            </Link>
+            </button>
             <div className="flex flex-row justify-start pt-2 ">
               {renderStars(rating)}
             </div>

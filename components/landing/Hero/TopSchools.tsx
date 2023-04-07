@@ -5,7 +5,10 @@ import SchoolCard from "@/components/School/SchoolCard";
 
 const TopSchools = ({ topSchools }: { topSchools: Array<SchoolCardProps> }) => {
   return (
-    <div className={"flex flex-col lg:flex-row gap-10 justify-between"}>
+    <div
+      id={"top-schools"}
+      className={"flex flex-col lg:flex-row gap-10 justify-between"}
+    >
       <div className={"text-center my-auto  [&>*]:m-10"}>
         <h1 className={"text-4xl font-bold"}>Top Rated Schools</h1>
         <Link

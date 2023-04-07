@@ -21,7 +21,7 @@ const SearchBar = () => {
       </button>
       <input
         className={
-          "my-2 mx-1 pl-4 border-l border-grey-500 outline-none w-max rounded-r-2xl"
+          "my-2 mx-1 pl-4 border-l border-grey-500 outline-none w-max rounded-r-2xl bg-transparent"
         }
         type={"search"}
         onBlur={unFocus}

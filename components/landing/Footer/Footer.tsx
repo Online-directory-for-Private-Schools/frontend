@@ -2,10 +2,10 @@
 import React from "react";
 import { BsFillEnvelopeFill } from "react-icons/bs";
 import {
-  FaInstagram,
-  FaTwitter,
   FaFacebook,
+  FaInstagram,
   FaLinkedinIn,
+  FaTwitter,
 } from "react-icons/fa";
 import { BiSend } from "react-icons/bi";
 import Image from "next/image";
@@ -14,7 +14,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer id={"footer"}>
       <div className="row">
         <div className="col">
           <Image
