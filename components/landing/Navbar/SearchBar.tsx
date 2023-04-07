@@ -12,8 +12,8 @@ const SearchBar = () => {
     <div
       className={
         searching
-          ? "fixed flex border-green border rounded-3xl  border-2 shadow-xl scale-105"
-          : "fixed flex border-green border rounded-3xl  hover:border-2"
+          ? "m-auto flex border-green border rounded-3xl shadow-xl scale-105 duration-300"
+          : "m-auto flex border-green border rounded-3xl hover:border-2 duration-300"
       }
     >
       <button className={"ml-2 p-2 flex-shrink-0 my-auto"}>

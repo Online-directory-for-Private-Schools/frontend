@@ -5,7 +5,7 @@ import Link from "next/link";
 import hamburger from "@/public/bars-solid.svg";
 import closeIcon from "@/public/close.svg";
 import logo from "@/public/School_Logo.svg";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import SearchBar from "@/components/landing/Navbar/SearchBar";
 
 interface NavbarProps {
@@ -15,7 +15,7 @@ interface NavbarProps {
 export default function Navbar({ loggedIn }: NavbarProps) {
   let [clicked, setClicked] = useState(false);
 
-  const handleResize: Function = () => {
+  const handleResize: EventListener = () => {
     if (window.screen.width >= 768 && clicked) {
       console.log("clicked");
       window.removeEventListener("resize", handleResize);
@@ -23,12 +23,12 @@ export default function Navbar({ loggedIn }: NavbarProps) {
     }
   };
   window.addEventListener("resize", handleResize);
-  const toggleLinks = (e) => {
-    e.stopPropagation();
+  const toggleLinks: MouseEventHandler = (event) => {
+    event.stopPropagation();
     setClicked(!clicked);
   };
 
-  const close: Function = () => setClicked(false);
+  const close: MouseEventHandler = () => setClicked(false);
   const login: String = "login";
   const signUp: String = "Sign Up";
 
@@ -36,17 +36,16 @@ export default function Navbar({ loggedIn }: NavbarProps) {
     <div
       className={
         clicked
-          ? "flex flex-row justify-center w-[100%] h-[100vh] bg-black/70"
-          : "flex flex-row justify-center w-[100%] h-[100vh]"
+          ? "z-50 flex fixed flex-row justify-center w-[100%] h-[100%] bg-black/70"
+          : "flex flex-row justify-center w-[100%] h-[100%]"
       }
       onClick={close}
     >
       <div
         className={
-          "flex flex-row justify-between fixed w-[95%] mt-4 p-2 gap-2 bg-white rounded-2xl h-20"
+          "shadow flex flex-row justify-between fixed w-[95%] mt-4 p-2 gap-2 bg-white rounded-2xl h-20 hover:shadow-md"
         }
       >
-        ,
         <div className={"w-[10%] lg:w-[25%] flex justify-left"}>
           <Image
             className={" hidden lg:block bg-dark-blue p-1 rounded-xl"}

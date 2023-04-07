@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Hero } from "@/components/landing/Hero/Hero";
-import { Footer } from "@/components/landing/Footer/Footer";
+import Footer from "@/components/landing/Footer/Footer";
 import dynamic from "next/dynamic";
 
 const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
@@ -17,7 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
+      <Navbar loggedIn />
       <Hero />
       <Footer />
     </>
