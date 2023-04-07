@@ -1,11 +1,11 @@
 import * as React from "react";
+import { MouseEventHandler, useState } from "react";
 import Image from "next/image";
 import { links } from "@/components/landing/Navbar/links";
 import Link from "next/link";
 import hamburger from "@/public/bars-solid.svg";
 import closeIcon from "@/public/close.svg";
 import logo from "@/public/School_Logo.svg";
-import { MouseEventHandler, useState } from "react";
 import SearchBar from "@/components/landing/Navbar/SearchBar";
 
 interface NavbarProps {
@@ -43,7 +43,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
     >
       <div
         className={
-          "shadow flex flex-row justify-between fixed w-[95%] mt-4 p-2 gap-2 bg-white rounded-2xl h-20 hover:shadow-md"
+          "z-50 fixed shadow flex flex-row justify-between w-[95%] mt-4 p-2 gap-2 bg-white rounded-2xl h-20 hover:shadow-md hover:-translate-y-[5px] transform duration-300"
         }
       >
         <div className={"w-[10%] lg:w-[25%] flex justify-left"}>

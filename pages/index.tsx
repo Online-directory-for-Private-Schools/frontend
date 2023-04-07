@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { Hero } from "@/components/landing/Hero/Hero";
 import Footer from "@/components/landing/Footer/Footer";
+import Hero from "@/components/landing/Hero/Hero";
 import dynamic from "next/dynamic";
 
 const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
