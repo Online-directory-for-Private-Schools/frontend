@@ -1,5 +1,5 @@
 export const links = [
-    { title: "link1", route: ""},
-    { title: "link2", route: ""},
-    { title: "link3", route: ""},
+  { title: "Welcome", route: "#Hero" },
+  { title: "Top Schools", route: "#top-schools" },
+  { title: "Contact Us", route: "#footer" },
 ];

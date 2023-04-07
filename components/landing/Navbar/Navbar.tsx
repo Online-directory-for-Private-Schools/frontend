@@ -17,12 +17,22 @@ export default function Navbar({ loggedIn }: NavbarProps) {
 
   const handleResize: EventListener = () => {
     if (window.screen.width >= 768 && clicked) {
-      console.log("clicked");
       window.removeEventListener("resize", handleResize);
       setClicked(false);
     }
   };
+  const handleScroll = (event) => {
+    if (window.scrollY > 100 && !scrolled) {
+      setScrolled(true);
+      window.removeEventListener("scroll", handleScroll);
+    } else if (window.scrollY <= 100 && scrolled) {
+      setScrolled(false);
+      window.removeEventListener("scroll", handleScroll);
+    }
+  };
+
   window.addEventListener("resize", handleResize);
+  window.addEventListener("scroll", handleScroll);
   const toggleLinks: MouseEventHandler = (event) => {
     event.stopPropagation();
     setClicked(!clicked);
@@ -32,6 +42,8 @@ export default function Navbar({ loggedIn }: NavbarProps) {
   const login: String = "login";
   const signUp: String = "Sign Up";
 
+  let [scrolled, setScrolled] = useState(false);
+
   return (
     <div
       className={
@@ -39,11 +51,12 @@ export default function Navbar({ loggedIn }: NavbarProps) {
           ? "z-50 flex fixed flex-row justify-center w-[100%] h-[100%] bg-black/70"
           : "flex flex-row justify-center w-[100%] h-[100%]"
       }
-      onClick={close}
     >
       <div
         className={
-          "z-50 fixed shadow flex flex-row justify-between w-[95%] mt-4 p-2 gap-2 bg-white rounded-2xl h-20 hover:shadow-md hover:-translate-y-[5px] transform duration-300"
+          scrolled
+            ? "z-50 fixed bg-white shadow flex flex-row justify-between w-[95%] mt-4 p-2 gap-2 bg-white rounded-2xl h-20 hover:shadow-md hover:-translate-y-[5px] transform duration-300"
+            : "z-50 fixed bg-transparent flex flex-row justify-between w-[95%] mt-4 p-2 gap-2 rounded-2xl h-20 hover:-translate-y-[5px] transform duration-300"
         }
       >
         <div className={"w-[10%] lg:w-[25%] flex justify-left"}>

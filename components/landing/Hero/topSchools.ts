@@ -24,7 +24,7 @@ const schools: Array<SchoolCardProps> = [
     description:
       "I am a good school, I like schooling, I am the best at what i school, no one is schooler than me",
     googleMapLocation: "13123, 131",
-    initialFavorite: true,
+    initialFavorite: false,
   },
 ];
 
