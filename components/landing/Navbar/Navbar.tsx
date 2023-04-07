@@ -21,7 +21,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
       setClicked(false);
     }
   };
-  const handleScroll = (event: Event) => {
+  const handleScroll = () => {
     if (window.scrollY > 100 && !scrolled) {
       setScrolled(true);
       window.removeEventListener("scroll", handleScroll);
