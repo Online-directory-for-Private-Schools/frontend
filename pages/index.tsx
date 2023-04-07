@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { Hero } from "@/components/landing/Hero/Hero";
 import Footer from "@/components/landing/Footer/Footer";
+import Hero from "@/components/landing/Hero/Hero";
 import dynamic from "next/dynamic";
 
 const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
@@ -8,6 +8,14 @@ const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
 });
 
 export default function Home() {
+  const k = {
+    schoolName: "test1",
+    rating: 5,
+    schoolCity: "mohamadia",
+    description: "I am a good school",
+    googleMapLocation: "13123, 131",
+    initialFavorite: true,
+  };
   return (
     <>
       <Head>

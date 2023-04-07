@@ -4,12 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background:linear-gradient(to right, #8a99ba, #FFFFFF );
+body {
+    background: linear-gradient(to right, #8a99ba, #FFFFFF);
+    @apply text-dark-blue
 }
 
 .btn {
-    @apply mx-2 px-4 py-1 text-white bg-white rounded-xl text-dark-blue font-bold
+    @apply mx-2 px-4 py-1 bg-white rounded-xl text-dark-blue font-bold
 }
 
 .link {
