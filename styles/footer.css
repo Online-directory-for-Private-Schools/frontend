@@ -1,6 +1,6 @@
 footer{
   width: 100%;
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   background: linear-gradient(to right, #07133B, #001660);
