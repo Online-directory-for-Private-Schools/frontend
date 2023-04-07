@@ -40,16 +40,12 @@ const Footer = () => {
                         <BsFillEnvelopeFill className="far enevelope" />
                         <input type = "email" placeholder="Enter your email" required></input>
                         <button type = "submit"><BiSend className='send' /></button>
-
                     </form>
                     <div className='social-icons'>
                         <Link href = "#"> <FaInstagram className='Fa'/></Link>
                         <Link href = "#"> <FaTwitter className='Fa'/></Link>
                         <Link href = "#"> <FaFacebook className='Fa'/></Link>
                         <Link href = "#"> <FaLinkedinIn className='Fa'/></Link>
-
-
-
                     </div>
                 </div>
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import hamburger from "@/public/bars-solid.svg";
 import closeIcon from "@/public/close.svg";
 import logo from "@/public/School_Logo.svg";
-import {MouseEventHandler, useState} from "react";
+import { MouseEventHandler, useState } from "react";
 import SearchBar from "@/components/landing/Navbar/SearchBar";
 
 interface NavbarProps {
@@ -36,14 +36,14 @@ export default function Navbar({ loggedIn }: NavbarProps) {
     <div
       className={
         clicked
-          ? "flex flex-row justify-center w-[100%] h-[100vh] bg-black/70"
-          : "flex flex-row justify-center w-[100%] h-[100vh]"
+          ? "z-50 flex fixed flex-row justify-center w-[100%] h-[100%] bg-black/70"
+          : "flex flex-row justify-center w-[100%] h-[100%]"
       }
       onClick={close}
     >
       <div
         className={
-          "shadow z-50 flex flex-row justify-between fixed w-[95%] mt-4 p-2 gap-2 bg-white rounded-2xl h-20"
+          "shadow flex flex-row justify-between fixed w-[95%] mt-4 p-2 gap-2 bg-white rounded-2xl h-20 hover:shadow-md"
         }
       >
         <div className={"w-[10%] lg:w-[25%] flex justify-left"}>

@@ -3,7 +3,7 @@ import { BsBookmark, BsBookmarkFill} from 'react-icons/bs';
 import { AiTwotoneStar } from 'react-icons/ai';
 import { BiMap } from 'react-icons/bi';
 import Image from "next/image";
-
+import Logo from "@/public/School_Logo.svg"
 
 interface SchoolCardProps {
     schoolName: string;
@@ -14,7 +14,9 @@ interface SchoolCardProps {
     description: string;
 
 }
-const SchoolCard = ({ schoolName, schoolCity, googleMapLocation, initialFavorited, rating, description }: SchoolCardProps) => {
+const SchoolCard = ({SchoolProps: { schoolName, schoolCity, googleMapLocation, initialFavorited, rating, description }} : {
+    SchoolProps: SchoolCardProps
+}) => {
     const [favorited, setFavorited] = useState(initialFavorited);
     const toggleFavorite = () => {
         setFavorited(!favorited);
@@ -37,7 +39,7 @@ const SchoolCard = ({ schoolName, schoolCity, googleMapLocation, initialFavorite
     return (
         <div className="school-card">
             <div className="school-image">
-                <Image src="https://img.freepik.com/vecteurs-libre/creation-logo-ecole-elementaire-degrade_23-2149626923.jpg?w=740&t=st=1680121070~exp=1680121670~hmac=d7f57a77286878f9108cc915b08c20c0b730a50ec7fe2c1d7cb82d31e03272b8"  width={80} height={80} alt="School" />
+                <Image src={Logo.src}  width={80} height={80} alt="School" />
             </div>
             <div className="school-info">
                 <h2 className="school-name">{schoolName}</h2>

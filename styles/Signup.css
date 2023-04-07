@@ -1,11 +1,3 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-    font-family: 'Niramit', sans-serif;
-}
-
 body{
     background:linear-gradient(to right, #8a99ba, #FFFFFF )
 }
