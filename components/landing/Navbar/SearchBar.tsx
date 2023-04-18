@@ -12,12 +12,12 @@ const SearchBar = () => {
     <div
       className={
         searching
-          ? "m-auto flex border-green border rounded-3xl shadow-xl scale-105 duration-300"
-          : "m-auto flex border-green border rounded-3xl hover:border-2 duration-300"
+          ? "m-auto h-8 flex border-green border rounded-3xl shadow-xl scale-105 duration-300"
+          : "m-auto h-8 flex border-green border rounded-3xl hover:border-2 duration-300"
       }
     >
       <button className={"ml-2 p-2 flex-shrink-0 my-auto"}>
-        <Image src={search.src} alt={"search"} width={20} height={10} />
+        <Image src={search.src} alt={"search"} width={15} height={7} />
       </button>
       <input
         className={
