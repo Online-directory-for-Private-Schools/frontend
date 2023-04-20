@@ -47,7 +47,7 @@ nav ul li a span:hover {
 
 
 .wrapper {
-    min-height: 100vh;
+    /*min-height: 100vh;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,7 +156,7 @@ input[type="radio"] {
     justify-content: space-evenly;
     align-items: flex-start;
     margin-top: 40px;
-    
+
 }
 
 .form_wrap .category label {

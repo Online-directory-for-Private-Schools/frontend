@@ -8,6 +8,8 @@ function Sign_up() {
   const [lastname, setLastName] = useState("");
   const [passwd, setPasswd] = useState("");
   const [passwdConfirm, setPasswdConfirm] = useState("");
+  const [matching, setMatching] = useState(true);
+
   const [category, setCategory] = useState("student");
   const [phoneNumber, setPhoneNumber] = useState("");
   // Signup for schools
@@ -18,6 +20,16 @@ function Sign_up() {
   const [country, setCountry] = useState("");
   const [isHiring, setIsHiring] = useState(false);
   const [bio, setBio] = useState("");
+
+  const countries = ["Algeria"];
+  const provinces = ["Algiers"];
+  const cities = [
+    "Mahelma",
+    "Sidi Abdelah",
+    "Zeralda",
+    "Bordj El Bahri",
+    "Ain Taya",
+  ];
 
   return (
     <div className="Sign_up ">
@@ -96,7 +108,16 @@ function Sign_up() {
                   onChange={(e) => {
                     setPasswdConfirm(e.target.value);
                   }}
+                  onBlur={() => {
+                    if (passwdConfirm !== passwd) setMatching(false);
+                    else setMatching(true);
+                  }}
                 />
+                {!matching && (
+                  <div className={"text-right text-red-600"}>
+                    Unmatching Password
+                  </div>
+                )}
               </div>
               <div className="input_wrap">
                 <label htmlFor="phone">Phone Number</label>
@@ -135,132 +156,6 @@ function Sign_up() {
                   />
                   <label htmlFor="educator">Educator</label>
                 </div>
-                <br />
-                {/*Only show this section for educators*/}
-                {category === "educator" && (
-                  <>
-                    <div className="input_wrap">
-                      <label htmlFor="school_name">School Name</label>
-                      <input
-                        type="text"
-                        id="school_name"
-                        value={schoolName}
-                        onChange={(e) => {
-                          setSchoolName(e.target.value);
-                        }}
-                      />
-                    </div>
-                    <div className="input_grp">
-                      <div className="input_wrap">
-                        <label htmlFor="city">Country</label>
-                        <select
-                          id={"Country"}
-                          className={
-                            "w-[165px] rounded-xl outline-none p-3 border border-[#9597a6] duration-300 bg-white focus:shadow-[2px_2px_3px_#1ACD77]"
-                          }
-                        >
-                          <option defaultChecked>Country</option>
-                          <option>Algeria</option>
-                        </select>
-                      </div>
-                      <div className="input_wrap">
-                        <label htmlFor="province">Province</label>
-                        <select
-                          id={"province"}
-                          className={
-                            "w-[165px] rounded-xl outline-none p-3 border border-[#9597a6] duration-300 bg-white focus:shadow-[2px_2px_3px_#1ACD77]"
-                          }
-                        >
-                          <option defaultChecked>Province</option>
-                          <option>Algiers</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="input_grp">
-                      <div className="input_wrap">
-                        <label htmlFor="city">City</label>
-                        <select
-                          id={"City"}
-                          className={
-                            "w-[165px] rounded-xl outline-none p-3 border border-[#9597a6] duration-300 bg-white focus:shadow-[2px_2px_3px_#1ACD77]"
-                          }
-                        >
-                          <option defaultChecked>City</option>
-                          <option>Mahelma</option>
-                          <option>Sidi Abdelah</option>
-                          <option>Zeralda</option>
-                          <option>Bordj El Bahri</option>
-                          <option>Ain Taya</option>
-                        </select>
-                      </div>
-                      <div className="input_wrap">
-                        <label htmlFor="street">Street</label>
-                        <input
-                          type="text"
-                          id="street"
-                          value={street}
-                          onChange={(e) => {
-                            setStreet(e.target.value);
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="input_wrap">
-                      <label htmlFor="bio">
-                        School Biography
-                        <span className={"text-gray-500"}> (optional)</span>
-                      </label>
-                      <div
-                        className={
-                          "relative border border-[#9597a6]  rounded-xl"
-                        }
-                      >
-                        <textarea
-                          className={
-                            "w-full outline-none  rounded-xl p-3 resize-none col-span-9"
-                          }
-                          id="bio"
-                          value={bio}
-                          onChange={(e) => {
-                            if (e.target.value.length <= MAX_BIO_SIZE)
-                              setBio(e.target.value);
-                          }}
-                        />
-                        <p className={"text-[10px] text-right pt-0 pr-4"}>
-                          {bio.length}/{MAX_BIO_SIZE}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="input_wrap">
-                      <p>Are you hiring?</p>
-                      <div className="category">
-                        <input
-                          type="radio"
-                          name="hiring"
-                          id="Yes"
-                          value={"Yes"}
-                          checked={isHiring}
-                          onChange={() => {
-                            if (!isHiring) setIsHiring(true);
-                          }}
-                        />
-                        <label htmlFor="Yes">Yes</label>
-                        <input
-                          type="radio"
-                          name="hiring"
-                          checked={!isHiring}
-                          id="No"
-                          value={"No"}
-                          onChange={() => {
-                            if (isHiring) setIsHiring(false);
-                          }}
-                        />
-                        <label htmlFor="No">No</label>
-                      </div>
-                    </div>
-                  </>
-                )}
               </div>
 
               <div className="input_wrap">
