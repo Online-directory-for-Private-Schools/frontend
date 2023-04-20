@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 function Sign_up() {
-  let MAX_BIO_SIZE = 255;
   const [email, setEmail] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastName] = useState("");
@@ -13,13 +12,6 @@ function Sign_up() {
   const [category, setCategory] = useState("student");
   const [phoneNumber, setPhoneNumber] = useState("");
   // Signup for schools
-  const [schoolName, setSchoolName] = useState("");
-  const [street, setStreet] = useState("");
-  const [cityName, setCityName] = useState("");
-  const [province, setProvince] = useState("");
-  const [country, setCountry] = useState("");
-  const [isHiring, setIsHiring] = useState(false);
-  const [bio, setBio] = useState("");
 
   const countries = ["Algeria"];
   const provinces = ["Algiers"];

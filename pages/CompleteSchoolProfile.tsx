@@ -2,13 +2,7 @@ import React, { useState } from "react";
 
 function Sign_up() {
   let MAX_BIO_SIZE = 255;
-  const [email, setEmail] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [passwd, setPasswd] = useState("");
-  const [passwdConfirm, setPasswdConfirm] = useState("");
-  const [category, setCategory] = useState("student");
-  const [phoneNumber, setPhoneNumber] = useState("");
+
   // Signup for schools
   const [schoolName, setSchoolName] = useState("");
   const [street, setStreet] = useState("");
