@@ -13,16 +13,6 @@ function Sign_up() {
   const [phoneNumber, setPhoneNumber] = useState("");
   // Signup for schools
 
-  const countries = ["Algeria"];
-  const provinces = ["Algiers"];
-  const cities = [
-    "Mahelma",
-    "Sidi Abdelah",
-    "Zeralda",
-    "Bordj El Bahri",
-    "Ain Taya",
-  ];
-
   return (
     <div className="Sign_up ">
       <nav id="navbar" className="navbar">
