@@ -152,35 +152,27 @@ function Sign_up() {
                     </div>
                     <div className="input_grp">
                       <div className="input_wrap">
-                        <label htmlFor="city">City</label>
+                        <label htmlFor="city">Country</label>
                         <select
-                          id={"City"}
+                          id={"Country"}
                           className={
                             "w-[165px] rounded-xl outline-none p-3 border border-[#9597a6] duration-300 bg-white focus:shadow-[2px_2px_3px_#1ACD77]"
                           }
                         >
-                          <option defaultChecked>City</option>
-                          <option>Mahelma</option>
-                          <option>Sidi Abdelah</option>
-                          <option>Zeralda</option>
-                          <option>Bordj El Bahri</option>
-                          <option>Ain Taya</option>
+                          <option defaultChecked>Country</option>
+                          <option>Algeria</option>
                         </select>
                       </div>
                       <div className="input_wrap">
                         <label htmlFor="province">Province</label>
                         <select
-                          id={"City"}
+                          id={"province"}
                           className={
                             "w-[165px] rounded-xl outline-none p-3 border border-[#9597a6] duration-300 bg-white focus:shadow-[2px_2px_3px_#1ACD77]"
                           }
                         >
-                          <option defaultChecked>City</option>
-                          <option>Mahelma</option>
-                          <option>Sidi Abdelah</option>
-                          <option>Zeralda</option>
-                          <option>Bordj El Bahri</option>
-                          <option>Ain Taya</option>
+                          <option defaultChecked>Province</option>
+                          <option>Algiers</option>
                         </select>
                       </div>
                     </div>
