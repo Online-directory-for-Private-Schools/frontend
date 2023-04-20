@@ -54,8 +54,8 @@ export default function Navbar({ loggedIn }: NavbarProps) {
       <div
         className={
           scrolled
-            ? "z-50 h-12 fixed bg-white shadow flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 bg-white rounded-2xl h-20 hover:shadow-md hover:-translate-y-[5px] transform duration-300"
-            : "z-50 h-12 fixed bg-transparent flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 rounded-2xl h-20 hover:-translate-y-[5px] transform duration-300"
+            ? "z-50 h-12 fixed  shadow flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 bg-white rounded-2xl hover:shadow-md hover:-translate-y-[5px] transform duration-300"
+            : "z-50 h-12 fixed bg-transparent flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 rounded-2xl hover:-translate-y-[5px] transform duration-300"
         }
       >
         <div className={"w-[10%] lg:w-[25%] flex justify-left pl-2"}>

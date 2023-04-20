@@ -17,7 +17,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar loggedIn />
+      {/*<Navbar loggedIn />*/}
+      <Navbar />
+
       <Hero />
       <Footer />
     </>
