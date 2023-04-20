@@ -123,7 +123,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
               <Link
                 href={"/signup"}
                 className={
-                  "hover:duration-300 hover:p-4 my-auto btn outline outline-2 outline-green hover:bg-green hover:text-white-500 hover:text-white"
+                  "hover:duration-300 hover:py-2 hover:mx-0 hover:relative hover:bottom-1 my-auto btn outline outline-2 outline-green hover:bg-green hover:text-white-500 hover:text-white"
                 }
               >
                 {signUp}
