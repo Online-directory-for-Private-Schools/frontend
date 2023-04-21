@@ -7,7 +7,7 @@ const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
   ssr: false,
 });
 
-export default function Home() {
+export default function Home({ username }: { username?: string }) {
   return (
     <>
       <Head>
@@ -18,9 +18,9 @@ export default function Home() {
       </Head>
 
       {/*<Navbar loggedIn />*/}
-      <Navbar />
+      <Navbar loggedIn={username === undefined} />
 
-      <Hero />
+      <Hero username={"RayanZak"} />
       <Footer />
     </>
   );

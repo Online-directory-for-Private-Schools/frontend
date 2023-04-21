@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 function Sign_up() {
@@ -7,10 +6,15 @@ function Sign_up() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastName] = useState("");
   const [passwd, setPasswd] = useState("");
-  const [category, setCategory] = useState("");
+  const [passwdConfirm, setPasswdConfirm] = useState("");
+  const [matching, setMatching] = useState(true);
+
+  const [category, setCategory] = useState("student");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  // Signup for schools
 
   return (
-    <div className="Sign_up">
+    <div className="Sign_up ">
       <nav id="navbar" className="navbar">
         <Link href={"/"}>
           <h2 className="logo"> Website Logo </h2>
@@ -77,6 +81,37 @@ function Sign_up() {
                   }}
                 />
               </div>
+              <div className="input_wrap">
+                <label htmlFor="conf">Confirm Password</label>
+                <input
+                  type="password"
+                  id={"conf"}
+                  value={passwdConfirm}
+                  onChange={(e) => {
+                    setPasswdConfirm(e.target.value);
+                  }}
+                  onBlur={() => {
+                    if (passwdConfirm !== passwd) setMatching(false);
+                    else setMatching(true);
+                  }}
+                />
+                {!matching && (
+                  <div className={"text-right text-red-600"}>
+                    Unmatching Password
+                  </div>
+                )}
+              </div>
+              <div className="input_wrap">
+                <label htmlFor="phone">Phone Number</label>
+                <input
+                  type="text"
+                  id="phone"
+                  value={phoneNumber}
+                  onChange={(e) => {
+                    setPhoneNumber(e.target.value);
+                  }}
+                />
+              </div>
 
               <div className="input_wrap">
                 <div className="category">
@@ -84,8 +119,8 @@ function Sign_up() {
                     type="radio"
                     name="cat"
                     id="student"
-                    checked="checked"
-                    value={category}
+                    value={"student"}
+                    checked={category === "student"}
                     onChange={(e) => {
                       setCategory(e.target.value);
                     }}
@@ -94,9 +129,9 @@ function Sign_up() {
                   <input
                     type="radio"
                     name="cat"
+                    checked={category === "educator"}
                     id="educator"
-                    checked="checked"
-                    value={category}
+                    value={"educator"}
                     onChange={(e) => {
                       setCategory(e.target.value);
                     }}
