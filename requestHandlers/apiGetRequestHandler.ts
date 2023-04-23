@@ -1,5 +1,3 @@
-import { Simulate } from "react-dom/test-utils";
-
 const apiGetRequestHandler: Function = async (
   route: string,
   query: string,
