@@ -2,7 +2,7 @@ import React, { MouseEventHandler } from "react";
 import { useState } from "react";
 import Link from "next/link";
 import LoginHandler from "@/requestHandlers/apiPostRequestHandler";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const [email, setEmail] = useState("");

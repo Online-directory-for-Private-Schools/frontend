@@ -1,7 +1,6 @@
 import React, { MouseEventHandler, useState } from "react";
 import Link from "next/link";
 import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
-import LoginHandler from "@/requestHandlers/apiPostRequestHandler";
 import { useRouter } from "next/router";
 
 function Sign_up() {
