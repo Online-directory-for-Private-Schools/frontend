@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import Link from "next/link";
 import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
+import LoginHandler from "@/requestHandlers/apiPostRequestHandler";
+import { useRouter } from "next/router";
 
 function Sign_up() {
   const [email, setEmail] = useState("");
@@ -15,6 +17,25 @@ function Sign_up() {
 
   // error message
   let [message, setErrorMessage] = useState("");
+
+  const router = useRouter();
+  const signUpHandler: MouseEventHandler = (e) => {
+    e.preventDefault();
+    const body = {
+      name: firstname + " " + lastname,
+      email: email,
+      phone_number: phoneNumber,
+      password: passwd,
+      type: category,
+    };
+
+    apiPostRequestHandler("/auth/register", body, setErrorMessage, true).then(
+      (success: boolean) => {
+        if (success) router.push("/");
+      }
+    );
+  };
+
   return (
     <div className="Sign_up ">
       <nav id="navbar" className="navbar">
@@ -151,23 +172,7 @@ function Sign_up() {
               </div>
 
               <div className="input_wrap">
-                <button
-                  className="submit_btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    apiPostRequestHandler(
-                      "/auth/register",
-                      {
-                        name: firstname + " " + lastname,
-                        email: email,
-                        phone_number: phoneNumber,
-                        password: passwd,
-                        type: category,
-                      },
-                      setErrorMessage
-                    );
-                  }}
-                >
+                <button className="submit_btn" onClick={signUpHandler}>
                   Create Account
                 </button>
               </div>

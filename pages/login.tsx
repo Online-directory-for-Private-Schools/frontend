@@ -1,7 +1,8 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { useState } from "react";
 import Link from "next/link";
 import LoginHandler from "@/requestHandlers/apiPostRequestHandler";
+import { Router, useRouter } from "next/router";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +10,20 @@ const Login = () => {
 
   // error message
   let [errorMessage, setErrorMessage] = useState("");
-
+  const router = useRouter();
+  const handleLogin: MouseEventHandler = (e) => {
+    e.preventDefault();
+    const body = {
+      email: email,
+      password: passwd,
+    };
+    LoginHandler("/auth/login", body, setErrorMessage, true).then(
+      (success: boolean) => {
+        console.log(success);
+        if (success) router.push("/");
+      }
+    );
+  };
   return (
     <div className="Login">
       <nav id="navbar" className="navbar">
@@ -70,17 +84,7 @@ const Login = () => {
                   type="submit"
                   value="Continue"
                   className="submit_btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    LoginHandler(
-                      "/auth/login",
-                      {
-                        email: email,
-                        password: passwd,
-                      },
-                      setErrorMessage
-                    );
-                  }}
+                  onClick={handleLogin}
                 />
               </div>
               <br />
