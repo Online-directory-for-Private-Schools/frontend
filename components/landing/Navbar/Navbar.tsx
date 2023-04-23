@@ -48,8 +48,9 @@ export default function Navbar({ loggedIn }: NavbarProps) {
       className={
         clicked
           ? "z-50 flex fixed flex-row justify-center w-[100%] h-[100%] bg-black/70"
-          : "flex flex-row justify-center w-[100%] h-[100%]"
+          : "z-50 flex flex-row justify-center w-[100%] h-[100%]"
       }
+      onClick={() => setClicked(!clicked)}
     >
       <div
         className={
