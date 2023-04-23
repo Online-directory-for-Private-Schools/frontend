@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
-import { Simulate } from "react-dom/test-utils";
-import error = Simulate.error;
 
 function Sign_up() {
   const [email, setEmail] = useState("");
