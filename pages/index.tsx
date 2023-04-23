@@ -17,8 +17,7 @@ export default function Home({ username }: { username?: string }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/*<Navbar loggedIn />*/}
-      <Navbar loggedIn={username === undefined} />
+      <Navbar loggedIn={!!username} />
 
       <Hero username={"RayanZak"} />
       <Footer />

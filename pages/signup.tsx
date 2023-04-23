@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
+import { Simulate } from "react-dom/test-utils";
+import error = Simulate.error;
 
 function Sign_up() {
   const [email, setEmail] = useState("");
@@ -11,8 +14,9 @@ function Sign_up() {
 
   const [category, setCategory] = useState("student");
   const [phoneNumber, setPhoneNumber] = useState("");
-  // Signup for schools
 
+  // error message
+  let [message, setErrorMessage] = useState("");
   return (
     <div className="Sign_up ">
       <nav id="navbar" className="navbar">
@@ -32,7 +36,15 @@ function Sign_up() {
       <div className="wrapper">
         <div className="registration_form">
           <div className="title">Welcome to XXXX</div>
-
+          {message !== "" && (
+            <p
+              className={
+                "bg-red-500 p-2 rounded-2xl text-white font-bold text-center"
+              }
+            >
+              {message}
+            </p>
+          )}
           <form>
             <div className="form_wrap">
               <div className="input_grp">
@@ -141,11 +153,25 @@ function Sign_up() {
               </div>
 
               <div className="input_wrap">
-                <input
-                  type="submit"
-                  value="Create Account"
+                <button
                   className="submit_btn"
-                />
+                  onClick={(e) => {
+                    e.preventDefault();
+                    apiPostRequestHandler(
+                      "/auth/register",
+                      {
+                        name: firstname + " " + lastname,
+                        email: email,
+                        phone_number: phoneNumber,
+                        password: passwd,
+                        type: category,
+                      },
+                      setErrorMessage
+                    );
+                  }}
+                >
+                  Create Account
+                </button>
               </div>
             </div>
           </form>
