@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 const cookieCutter = require("cookie-cutter");
 interface NavbarProps {
   loggedIn?: boolean;
-  style2?: boolean
+  style2?: boolean;
 }
 
 export default function Navbar({ loggedIn }: NavbarProps) {
@@ -38,7 +38,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
 
   window.addEventListener("resize", handleResize);
   window.addEventListener("scroll", handleScroll);
-  
+
   const toggleLinks: MouseEventHandler = (event) => {
     event.stopPropagation();
     setClicked(!clicked);
@@ -92,7 +92,11 @@ export default function Navbar({ loggedIn }: NavbarProps) {
           className={"lg:flex flex-row justify-center gap-20 hidden lg:w-[50%]"}
         >
           {links.map((link, index) => (
-            <li className={"link"} key={index}>
+            <li
+              className={"link"}
+              key={index}
+              onClick={(e: any) => e.stopPropagation()}
+            >
               <Link href={link.route} draggable={"false"}>
                 {link.title}
               </Link>
@@ -108,7 +112,12 @@ export default function Navbar({ loggedIn }: NavbarProps) {
             >
               <ul>
                 {links.map((link, index) => (
-                  <Link key={index} href={link.route} draggable={"false"}>
+                  <Link
+                    key={index}
+                    href={link.route}
+                    draggable={"false"}
+                    onClick={(e: any) => e.stopPropagation()}
+                  >
                     <li
                       className={
                         index == 0 ? "link p-5" : "link p-5 border-t-2"
@@ -146,7 +155,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
             <Link
               href={"/signup"}
               className={
-                "duration-300 hover:py-2 hover:mx-0 my-auto btn py-2 outline outline-2 outline-green hover:bg-green hover:text-white"
+                "duration-300 hover:py-2 hover:mx-0 my-auto btn outline outline-2 outline-green hover:bg-green hover:text-white"
               }
               onClick={(event) => event.stopPropagation()}
             >
