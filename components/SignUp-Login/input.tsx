@@ -14,10 +14,10 @@ export default function Input({
   onBlur?: FocusEventHandler;
 }) {
     return (
-      <div className="mb-[15px] w-full">
+      <div className="py-2 w-full">
         <label
-          className={"text-[18px] text-dark-blue block  mb-[3px] w-full"}
-          htmlFor={value}
+        className={"text-[18px] text-dark-blue block  mb-[3px] w-full"}
+        htmlFor={value}
         >
           {label}
         </label>

@@ -122,7 +122,6 @@ export default function Navbar({ loggedIn }: NavbarProps) {
             </div>
           </div>
         )}
-        {/*<div className={"flex justify-end lg:w-[25%] w-[90%] "}>*/}
         {loggedIn ? (
           <div className={"flex flex-row justify-center w-full lg:w-[25%] "}>
             <SearchBar />
@@ -147,7 +146,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
             <Link
               href={"/signup"}
               className={
-                "hover:duration-300 hover:py-2 hover:mx-0 hover:relative hover:bottom-1 my-auto btn outline outline-2 outline-green hover:bg-green hover:text-white-500 hover:text-white"
+                "duration-300 hover:py-2 hover:mx-0 my-auto btn py-2 outline outline-2 outline-green hover:bg-green hover:text-white"
               }
               onClick={(event) => event.stopPropagation()}
             >

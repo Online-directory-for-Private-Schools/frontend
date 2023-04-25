@@ -1,9 +1,9 @@
 import React, { MouseEventHandler, useState } from "react";
-import Navbar from "./navbar";
+import Navbar from "../navbar";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Form from "./form";
-import Input from "./input";
+import Form from "../form";
+import Input from "../input";
 import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
 
 export default function LogIn() {
