@@ -2,6 +2,10 @@ import Head from "next/head";
 import Footer from "@/components/landing/Footer/Footer";
 import Hero from "@/components/landing/Hero/Hero";
 import dynamic from "next/dynamic";
+import { NextApiRequest, NextApiResponse } from "next";
+
+const Cookies = require("cookies");
+const jwt = require("jsonwebtoken");
 
 const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
   ssr: false,
@@ -17,11 +21,32 @@ export default function Home({ username }: { username?: string }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/*<Navbar loggedIn />*/}
-      <Navbar loggedIn={username === undefined} />
-
-      <Hero username={"RayanZak"} />
+      <Navbar loggedIn={!!username} />
+      <Hero username={username} />
       <Footer />
     </>
   );
+}
+export async function getServerSideProps({
+  req,
+  res,
+}: {
+  req: NextApiRequest;
+  res: NextApiResponse;
+}) {
+  const cookies = new Cookies(req, res);
+  const token = cookies.get("token");
+  if (!!token) {
+    const user = jwt.decode(token);
+    return {
+      props: {
+        username: user.name,
+      },
+    };
+  } else
+    return {
+      props: {
+        username: "",
+      },
+    };
 }

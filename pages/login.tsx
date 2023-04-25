@@ -1,11 +1,29 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { useState } from "react";
 import Link from "next/link";
+import LoginHandler from "@/requestHandlers/apiPostRequestHandler";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [passwd, setPasswd] = useState("");
 
+  // error message
+  let [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
+  const handleLogin: MouseEventHandler = (e) => {
+    e.preventDefault();
+    const body = {
+      email: email,
+      password: passwd,
+    };
+    LoginHandler("/auth/login", body, setErrorMessage, true).then(
+      (success: boolean) => {
+        console.log(success);
+        if (success) router.push("/");
+      }
+    );
+  };
   return (
     <div className="Login">
       <nav id="navbar" className="navbar">
@@ -14,7 +32,7 @@ const Login = () => {
         </Link>
         <ul>
           <li>
-            New here ?{" "}
+            New here ?
             <Link href="/signup">
               <span className={"mx-1 hover:p-2"}> Sign up </span>
             </Link>
@@ -26,6 +44,15 @@ const Login = () => {
       <div className="wrapper">
         <div className="registration_form">
           <div className="title">Welcome back !</div>
+          {errorMessage !== "" && (
+            <p
+              className={
+                "bg-red-500 p-2 rounded-2xl text-white font-bold text-center"
+              }
+            >
+              {errorMessage}
+            </p>
+          )}
 
           <form>
             <div className="form_wrap">
@@ -53,7 +80,12 @@ const Login = () => {
               </div>
 
               <div className="input_wrap">
-                <input type="submit" value="Continue" className="submit_btn" />
+                <input
+                  type="submit"
+                  value="Continue"
+                  className="submit_btn"
+                  onClick={handleLogin}
+                />
               </div>
               <br />
               <br />

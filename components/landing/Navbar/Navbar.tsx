@@ -7,7 +7,10 @@ import hamburger from "@/public/bars-solid.svg";
 import closeIcon from "@/public/close.svg";
 import SearchBar from "@/components/landing/Navbar/SearchBar";
 import logo from "@/public/School_Logo.svg";
+import logout from "@/public/logout.svg";
+import { useRouter } from "next/router";
 
+const cookieCutter = require("cookie-cutter");
 interface NavbarProps {
   loggedIn?: boolean;
 }
@@ -15,6 +18,7 @@ interface NavbarProps {
 export default function Navbar({ loggedIn }: NavbarProps) {
   let [clicked, setClicked] = useState(false);
 
+  const router = useRouter();
   const handleResize: EventListener = () => {
     if (window.screen.width >= 768 && clicked) {
       window.removeEventListener("resize", handleResize);
@@ -38,6 +42,12 @@ export default function Navbar({ loggedIn }: NavbarProps) {
     setClicked(!clicked);
   };
 
+  const logoutHandler: MouseEventHandler = (e) => {
+    e.stopPropagation();
+    cookieCutter.set("token", "");
+    router.push("/login");
+  };
+
   const login: String = "login";
   const signUp: String = "Sign Up";
 
@@ -48,8 +58,9 @@ export default function Navbar({ loggedIn }: NavbarProps) {
       className={
         clicked
           ? "z-50 flex fixed flex-row justify-center w-[100%] h-[100%] bg-black/70"
-          : "flex flex-row justify-center w-[100%] h-[100%]"
+          : "z-50 flex flex-row justify-center w-[100%] h-[100%]"
       }
+      onClick={() => setClicked(!clicked)}
     >
       <div
         className={
@@ -109,28 +120,38 @@ export default function Navbar({ loggedIn }: NavbarProps) {
             </div>
           </div>
         )}
-        <div className={"flex justify-end lg:w-[25%] w-[90%]"}>
-          {loggedIn ? (
+        {/*<div className={"flex justify-end lg:w-[25%] w-[90%] "}>*/}
+        {loggedIn ? (
+          <div className={"flex flex-row justify-center w-full lg:w-[25%] "}>
             <SearchBar />
-          ) : (
-            <>
-              <Link
-                href={"/login"}
-                className={"btn hover:text-green my-auto align-middle"}
-              >
-                {login}
-              </Link>
-              <Link
-                href={"/signup"}
-                className={
-                  "hover:duration-300 hover:py-2 hover:mx-0 hover:relative hover:bottom-1 my-auto btn outline outline-2 outline-green hover:bg-green hover:text-white-500 hover:text-white"
-                }
-              >
-                {signUp}
-              </Link>
-            </>
-          )}
-        </div>
+            <Image
+              className={"p-1 rounded-xl "}
+              src={logout.src}
+              alt={"logo"}
+              width={35}
+              height={20}
+              onClick={logoutHandler}
+            />
+          </div>
+        ) : (
+          <>
+            <Link
+              href={"/login"}
+              className={"btn hover:text-green my-auto align-middle"}
+            >
+              {login}
+            </Link>
+            <Link
+              href={"/signup"}
+              className={
+                "hover:duration-300 hover:py-2 hover:mx-0 hover:relative hover:bottom-1 my-auto btn outline outline-2 outline-green hover:bg-green hover:text-white-500 hover:text-white"
+              }
+            >
+              {signUp}
+            </Link>
+          </>
+        )}
+        {/*</div>*/}
       </div>
     </div>
   );

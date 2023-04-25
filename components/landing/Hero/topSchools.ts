@@ -10,7 +10,7 @@ const schools: Array<SchoolCardProps> = [
     initialFavorite: true,
   },
   {
-    schoolName: "test1",
+    schoolName: "test2",
     rating: 4,
     schoolCity: "mohamadia",
     description: "I am a good school",
@@ -18,7 +18,7 @@ const schools: Array<SchoolCardProps> = [
     initialFavorite: true,
   },
   {
-    schoolName: "test1",
+    schoolName: "test3",
     rating: 3,
     schoolCity: "mohamadia",
     description:
