@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 const cookieCutter = require("cookie-cutter");
 interface NavbarProps {
   loggedIn?: boolean;
+  style2?: boolean
 }
 
 export default function Navbar({ loggedIn }: NavbarProps) {
@@ -37,6 +38,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
 
   window.addEventListener("resize", handleResize);
   window.addEventListener("scroll", handleScroll);
+  
   const toggleLinks: MouseEventHandler = (event) => {
     event.stopPropagation();
     setClicked(!clicked);
@@ -137,6 +139,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
           <div className="w-[25%] flex flex-row justify-end">
             <Link
               href={"/login"}
+              onClick={(event) => event.stopPropagation()}
               className={"btn hover:text-green my-auto align-middle"}
             >
               {login}
@@ -146,12 +149,12 @@ export default function Navbar({ loggedIn }: NavbarProps) {
               className={
                 "hover:duration-300 hover:py-2 hover:mx-0 hover:relative hover:bottom-1 my-auto btn outline outline-2 outline-green hover:bg-green hover:text-white-500 hover:text-white"
               }
+              onClick={(event) => event.stopPropagation()}
             >
               {signUp}
             </Link>
           </div>
         )}
-        {/*</div>*/}
       </div>
     </div>
   );
