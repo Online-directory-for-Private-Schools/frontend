@@ -134,7 +134,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
             />
           </div>
         ) : (
-          <>
+          <div className="w-[25%] flex flex-row justify-end">
             <Link
               href={"/login"}
               className={"btn hover:text-green my-auto align-middle"}
@@ -149,7 +149,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
             >
               {signUp}
             </Link>
-          </>
+          </div>
         )}
         {/*</div>*/}
       </div>
