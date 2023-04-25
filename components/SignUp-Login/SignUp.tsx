@@ -1,12 +1,15 @@
-import apiPostRequestHandler from '@/requestHandlers/apiPostRequestHandler';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { MouseEventHandler, useState } from 'react'
-import Navbar from './navbar';
+import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
+import { useRouter } from "next/router";
+import React, { MouseEventHandler, useState } from "react";
+import Navbar from "./navbar";
+import Form from "./form";
+import InputGrp from "./input_grep";
+import Input from "./input";
+import Radio from "./radio";
+import { InputInterface } from "@/interfaces/Input";
 
 function SignUp() {
-
-const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastName] = useState("");
   const [passwd, setPasswd] = useState("");
@@ -37,140 +40,103 @@ const [email, setEmail] = useState("");
     );
   };
 
+  const categoryOptions = [
+    {
+      value: "student",
+      label: "Student",
+      onChange: (e: any) => {
+        setCategory(e.target.value);
+      },
+    },
+    {
+      value: "educator",
+      label: "Educator",
+      onChange: (e: any) => {
+        setCategory(e.target.value);
+      },
+    },
+  ];
 
+  const nameInputs: Array<InputInterface> = [
+    {
+      type: "text",
+      label: "First Name",
+      value: firstname,
+      onChange: (e: any) => setFirstname(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Last Name",
+      value: lastname,
+      onChange: (e: any) => setLastName(e.target.value),
+    },
+  ];
   return (
-    <div >
+    <div>
       <Navbar SignUp />
-      <div className="wrapper">
-        <div className="registration_form">
-          <div className="title">Welcome to XXXX</div>
-          {message !== "" && (
-            <p
-              className={
-                "bg-red-500 p-2 rounded-2xl text-white font-bold text-center"
-              }
-            >
-              {message}
-            </p>
-          )}
-          <form>
-            <div className="form_wrap">
-              <div className="input_grp">
-                <div className="input_wrap">
-                  <label htmlFor="fname">First Name</label>
-                  <input
-                    type="text"
-                    id="fname"
-                    value={firstname}
-                    onChange={(e) => {
-                      setFirstname(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="input_wrap">
-                  <label htmlFor="lname">Last Name</label>
-                  <input
-                    type="text"
-                    id="lname"
-                    value={lastname}
-                    onChange={(e) => {
-                      setLastName(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="input_wrap">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="input_wrap">
-                <label htmlFor="passwd">Password</label>
-                <input
-                  type="password"
-                  id="pwd"
-                  value={passwd}
-                  onChange={(e) => {
-                    setPasswd(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="input_wrap">
-                <label htmlFor="conf">Confirm Password</label>
-                <input
-                  type="password"
-                  id={"conf"}
-                  value={passwdConfirm}
-                  onChange={(e) => {
-                    setPasswdConfirm(e.target.value);
-                  }}
-                  onBlur={() => {
-                    if (passwdConfirm !== passwd) setMatching(false);
-                    else setMatching(true);
-                  }}
-                />
-                {!matching && (
-                  <div className={"text-right text-red-600"}>
-                    Unmatching Password
-                  </div>
-                )}
-              </div>
-              <div className="input_wrap">
-                <label htmlFor="phone">Phone Number</label>
-                <input
-                  type="text"
-                  id="phone"
-                  value={phoneNumber}
-                  onChange={(e) => {
-                    setPhoneNumber(e.target.value);
-                  }}
-                />
-              </div>
+      <Form errorMessage={message} onSubmit={signUpHandler}>
+        <>
+          <InputGrp inputs={nameInputs} />
+          <Input
+            type="email"
+            label={"Email"}
+            value={email}
+            onChange={(e: any) => setEmail(e.target.value)}
+          />
 
-              <div className="input_wrap">
-                <div className="category">
-                  <input
-                    type="radio"
-                    name="cat"
-                    id="student"
-                    value={"student"}
-                    checked={category === "student"}
-                    onChange={(e) => {
-                      setCategory(e.target.value);
-                    }}
-                  />
-                  <label htmlFor="student">Student</label>
-                  <input
-                    type="radio"
-                    name="cat"
-                    checked={category === "educator"}
-                    id="educator"
-                    value={"educator"}
-                    onChange={(e) => {
-                      setCategory(e.target.value);
-                    }}
-                  />
-                  <label htmlFor="educator">Educator</label>
-                </div>
-              </div>
+          <Input
+            type="password"
+            label={"Password"}
+            value={passwd}
+            onChange={(e: any) => setPasswd(e.target.value)}
+            onBlur={() => {
+              if (passwdConfirm !== passwd) setMatching(false);
+              else setMatching(true);
+            }}
+          />
 
-              <div className="input_wrap">
-                <button className="submit_btn" onClick={signUpHandler}>
-                  Create Account
-                </button>
-              </div>
+          <Input
+            type="password"
+            label={"Confirm Password"}
+            value={passwdConfirm}
+            onChange={(e: any) => {
+              setPasswdConfirm(e.target.value);
+            }}
+            onBlur={() => {
+              if (passwdConfirm !== passwd) setMatching(false);
+              else setMatching(true);
+            }}
+          />
+
+          {!matching && (
+            <div className={"text-right text-red-600 p-0"}>
+              Unmatching Password
             </div>
-          </form>
-        </div>
-      </div>
+          )}
+
+          <Input
+            type="text"
+            label="Phone Number"
+            value={phoneNumber}
+            onChange={(e: any) => {
+              if (
+                !isNaN(e.target.value) &&
+                e.target.value[e.target.value.length - 1] !== " "
+              )
+                setPhoneNumber(e.target.value);
+            }}
+          />
+
+          <Radio
+            label="Are you?"
+            value={category}
+            name={"cat"}
+            options={categoryOptions}
+          />
+        </>
+      </Form>
     </div>
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;
