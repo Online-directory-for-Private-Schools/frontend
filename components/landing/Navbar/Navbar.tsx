@@ -135,7 +135,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
           <div className={"flex flex-row justify-center w-full lg:w-[25%] "}>
             <SearchBar />
             <Image
-              className={"p-1 rounded-xl "}
+              className={"p-1 rounded-xl cursor-pointer"}
               src={logout.src}
               alt={"logo"}
               width={35}

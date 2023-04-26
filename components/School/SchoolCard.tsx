@@ -7,6 +7,18 @@ import Image from "next/image";
 import Logo from "@/public/School_Logo.svg";
 import Link from "next/link";
 
+export const renderStars = (rating: number) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <AiTwotoneStar
+          key={`star-${i}`}
+          className={`${i <= rating ? "fill-amber-500" : "fill-amber-100"}`}
+        />
+      );
+    }
+    return stars;
+  };
 const SchoolCard = ({
   SchoolProps: {
     schoolName,
@@ -24,18 +36,6 @@ const SchoolCard = ({
     setFavorite(!favorite);
   };
 
-  const renderStars = (rating: number) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <AiTwotoneStar
-          key={`star-${i}`}
-          className={`${i <= rating ? "fill-amber-500" : "fill-amber-100"}`}
-        />
-      );
-    }
-    return stars;
-  };
 
   return (
     <div

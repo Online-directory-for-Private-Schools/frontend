@@ -121,7 +121,6 @@ function SignUp() {
   console.log(isHiring);
   return (
     <div>
-      <Navbar SignUp />
       <Form errorMessage={message} onSubmit={signUpHandler}>
         <>
           <InputGrp input inputs={nameInputs} />

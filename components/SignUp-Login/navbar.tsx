@@ -5,7 +5,7 @@ import logo from "@/public/School_Logo.svg";
 import { useRouter } from "next/router";
 
 
-export default function Navbar({
+export default function Navbar2({
   SignUp,
   Login,
 }: {

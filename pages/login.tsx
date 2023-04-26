@@ -1,11 +1,17 @@
 import React from "react";
 import LogIn from "@/components/SignUp-Login/Login/Login";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Router } from "next/router";
+import Navbar from "@/components/SignUp-Login/navbar";
 
 const Cookies = require("cookies");
+
 const Login = () => {
-  return <LogIn />;
+  return (
+    <>
+      <Navbar Login />
+      <LogIn />
+    </>
+  );
 };
 
 export default Login;

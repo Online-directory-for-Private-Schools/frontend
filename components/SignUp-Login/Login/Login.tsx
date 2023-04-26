@@ -28,7 +28,6 @@ export default function LogIn() {
   };
   return (
     <>
-      <Navbar Login />
       <Form errorMessage={errorMessage} onSubmit={handleLogin}>
         <>
           <Input
