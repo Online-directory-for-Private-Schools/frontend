@@ -8,9 +8,11 @@ import { useRouter } from "next/router";
 export default function Navbar({
   SignUp,
   Login,
+  changePassword
 }: {
   SignUp?: boolean;
   Login?: boolean;
+  changePassword?: boolean;
 }) {
   const router = useRouter();
   return (
@@ -47,6 +49,21 @@ export default function Navbar({
                 </span>
               </Link>
               instead{" "}
+            </div>
+          )}
+          {!!changePassword && (
+            <div className={"font-bold text-xl"}>
+             Return to
+              <Link href="/home">
+                <span
+                  className={
+                    "mx-1 hover:p-2 text-green hover:bg-green hover:text-white duration-300 rounded-xl"
+                  }
+                >
+                  Home
+                </span>
+              </Link>
+              page
             </div>
           )}
           {!!Login && (

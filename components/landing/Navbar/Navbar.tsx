@@ -148,18 +148,18 @@ export default function Navbar({ loggedIn }: NavbarProps) {
             <Link
               href={"/login"}
               onClick={(event) => event.stopPropagation()}
-              className={"btn hover:text-green my-auto align-middle"}
+              className={"btn hover:text-green flex flex-col justify-center"}
             >
-              {login}
+              <p>{login}</p>
             </Link>
             <Link
               href={"/signup"}
               className={
-                "duration-300 hover:py-2 hover:mx-0 my-auto btn outline outline-2 outline-green hover:bg-green hover:text-white"
+                "duration-300 hover:py-2 hover:mx-0 btn outline outline-2 outline-green hover:bg-green hover:text-white flex flex-col justify-center"
               }
               onClick={(event) => event.stopPropagation()}
             >
-              {signUp}
+              <p className="my-auto">{signUp}</p>
             </Link>
           </div>
         )}
