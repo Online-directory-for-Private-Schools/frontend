@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Footer from "@/components/landing/Footer/Footer";
 import Hero from "@/components/landing/Hero/Hero";
+import {SchoolProfile, SchoolTab, SchoolCardList} from "@/components/School/SchoolProfile";
 import dynamic from "next/dynamic";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -24,6 +25,9 @@ export default function Home({ username }: { username?: string }) {
       <Navbar loggedIn={!!username} />
       <Hero username={username} />
       <Footer />
+      <SchoolProfile />
+      <SchoolTab />
+
     </>
   );
 }
