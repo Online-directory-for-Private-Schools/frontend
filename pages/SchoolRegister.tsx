@@ -1,5 +1,4 @@
 import React, { MouseEventHandler, useState } from "react";
-import { categoryOptions } from "@/components/SignUp-Login/SignUp/categoryOptions";
 import Input from "@/components/SignUp-Login/input";
 import InputGrp from "@/components/SignUp-Login/InputGrp";
 import Select from "@/components/SignUp-Login/Select";
@@ -8,7 +7,6 @@ import Radio from "@/components/SignUp-Login/radio";
 import { RadioButton } from "@/interfaces/radioButton";
 import Form from "@/components/SignUp-Login/form";
 import { handleSchoolRegister } from "@/requestHandlers/SchoolRegisterHandler";
-import { cookies } from "next/headers";
 import { useRouter } from "next/router";
 import { useCookie } from "next-cookie";
 const SchoolRegister = () => {

@@ -8,10 +8,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import React, {
-  ReactComponentElement,
-  useState,
-} from "react";
+import React, { ReactComponentElement, useState } from "react";
 import { renderStars } from "@/components/School/SchoolCard";
 import FormControl from "./FormControl";
 
@@ -40,9 +37,9 @@ export default function RatingSection({
   values: Array<boolean>;
   onChange: Function;
 }) {
-  let [state, setState] = useState(false);
   return (
     <Accordion
+      className={"sidebar flex flex-col overflow-scroll"}
       sx={{
         background: "transparent",
         boxShadow: "none",

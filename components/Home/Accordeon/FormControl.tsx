@@ -16,14 +16,12 @@ export default function FormControl({
     <FormControlLabel
       key={number}
       control={
-        <Checkbox 
+        <Checkbox
           checked={values[number]}
           onChange={(e: any) => {
             let newValues: Array<boolean> = [];
-            for (let i = 0; i < values.length; i++)
-              [(newValues[i] = values[i])];
+            for (let i = 0; i < values.length; i++) newValues[i] = values[i];
             newValues[number] = !newValues[number];
-            console.log(newValues);
             onChange(newValues);
           }}
         />

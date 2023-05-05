@@ -23,10 +23,13 @@ export default function RatingSection({
         boxShadow: "none",
       }}
     >
-      <AccordionDetails sx={{
+      <AccordionDetails
+        className={"h-fit"}
+        sx={{
           padding: 0,
-          margin: 0
-        }}>
+          margin: 0,
+        }}
+      >
         <Accordion
           sx={{
             background: "transparent",

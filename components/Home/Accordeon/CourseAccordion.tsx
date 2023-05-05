@@ -2,12 +2,13 @@ import * as React from "react";
 import RatingSection from "./RatingSection";
 import LevelSection from "./Levels/LevelSection";
 import PhaseSection from "./Levels/PrimarySection";
+import PriceSection from "@/components/Home/Accordeon/PriceSection";
 
-export default function SimpleAccordion({
-  rating: rating,
+export default function CourseAccordion({
+  prices: prices,
   phases: phases,
 }: {
-  rating: { values: Array<boolean>; onChange: Function };
+  prices: { values: Array<boolean>; onChange: Function };
   phases: Array<{
     name: string;
     number: number;
@@ -17,7 +18,7 @@ export default function SimpleAccordion({
 }) {
   return (
     <div className="flex flex-col">
-      <RatingSection values={rating.values} onChange={rating.onChange} />
+      <PriceSection values={prices.values} onChange={prices.onChange} />
       <LevelSection>
         <>
           {phases.map((phase) => (
