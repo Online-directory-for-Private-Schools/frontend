@@ -11,7 +11,10 @@ export default function home() {
   return (
     <>
       <Navbar loggedIn />
-      <HomeScreenDashBoard schools={schools} />
+      <HomeScreenDashBoard
+        schools={schools}
+        // courses={courses}
+      />
     </>
   );
 }

@@ -5,6 +5,8 @@ import SchoolAccordion from "./Accordeon/SchoolAccordion";
 import CourseAccordion from "@/components/Home/Accordeon/CourseAccordion";
 import SchoolCard from "@/components/School/SchoolCard";
 import { SchoolCardProps } from "@/interfaces/SchoolCard";
+import { CourseCardProps } from "@/interfaces/CourseCardProps";
+import CourseCard from "@/components/School/CourseCard";
 const createBooleanArray = (number: number): Array<boolean> => {
   let ratingArray: Array<boolean> = [];
   for (let i = 0; i < number; i++) ratingArray.push(false);
@@ -13,10 +15,11 @@ const createBooleanArray = (number: number): Array<boolean> => {
 
 export default function HomeScreenDashBoard({
   schools,
+  courses,
 }: // courses,
 {
   schools?: Array<SchoolCardProps>;
-  // courses?: Array<CoursCardProps>;
+  courses?: Array<CourseCardProps>;
 }) {
   let [ratingArray, setRatingArray] = useState(createBooleanArray(6));
   let [priceArray, setPriceArray] = useState(createBooleanArray(5));
@@ -77,15 +80,19 @@ export default function HomeScreenDashBoard({
       </div>
       <div className="flex-1 w-full h-2 justify-center">
         <TabBar course={course} setCourse={setCourse} />
-        <div className={"m-5 p-5 rounded-xl [&>*]:m-3 [&>*]:mx-auto"}>
+        <div
+          className={
+            "m-5 p-5 rounded-xl [&>*]:m-3 flex flex-col justify-items-center flex-wrap"
+          }
+        >
           {!course &&
             schools!.map((School) => (
-              <SchoolCard key={School.schoolName} SchoolProps={School} />
+              <div key={School.schoolName} className={"m-auto"}>
+                <SchoolCard SchoolProps={School} />
+              </div>
             ))}
-          {/*{course &&*/}
-          {/*  courses!.map((Course) => (*/}
-          {/*    <SchoolCard key={School.schoolName} SchoolProps={School} />*/}
-          {/*  ))}*/}
+          {course &&
+            courses!.map((Course, index) => <CourseCard key={index} />)}
         </div>
       </div>
     </div>
