@@ -2,7 +2,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  FormControlLabel,
   FormGroup,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -67,7 +66,6 @@ export default function PriceSection({
   values: Array<boolean>;
   onChange: Function;
 }) {
-  let [state, setState] = useState(false);
   return (
     <Accordion
       sx={{

@@ -1,5 +1,4 @@
 import * as React from "react";
-import RatingSection from "./RatingSection";
 import LevelSection from "./Levels/LevelSection";
 import PhaseSection from "./Levels/PrimarySection";
 import PriceSection from "@/components/Home/Accordeon/PriceSection";

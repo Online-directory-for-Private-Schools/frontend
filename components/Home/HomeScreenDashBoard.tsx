@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SimpleAccordion from "./Accordeon/SchoolAccordion";
 import { AiFillFilter } from "react-icons/ai";
 import TabBar from "./TabBar";
 import SchoolAccordion from "./Accordeon/SchoolAccordion";

@@ -2,13 +2,11 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Checkbox,
-  FormControlLabel,
   FormGroup,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import React, { ReactComponentElement, useState } from "react";
+import React, { ReactComponentElement } from "react";
 import { renderStars } from "@/components/School/SchoolCard";
 import FormControl from "./FormControl";
 
