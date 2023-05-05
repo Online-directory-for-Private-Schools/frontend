@@ -52,6 +52,7 @@ export default function Navbar({ loggedIn }: NavbarProps) {
 
   const login: String = "login";
   const signUp: String = "Sign Up";
+  const Profile: String = "Profile";
 
   let [scrolled, setScrolled] = useState(false);
 
@@ -160,6 +161,15 @@ export default function Navbar({ loggedIn }: NavbarProps) {
               onClick={(event) => event.stopPropagation()}
             >
               <p className="my-auto">{signUp}</p>
+            </Link>
+            <Link
+              href={"/profileedit"}
+              className={
+                "duration-300 hover:py-2 hover:mx-0 btn outline outline-2 outline-green hover:bg-green hover:text-white flex flex-col justify-center"
+              }
+              onClick={(event) => event.stopPropagation()}
+            >
+              <p className="my-auto">{Profile}</p>
             </Link>
           </div>
         )}

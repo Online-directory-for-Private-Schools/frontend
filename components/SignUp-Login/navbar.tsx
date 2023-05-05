@@ -8,11 +8,15 @@ import { useRouter } from "next/router";
 export default function Navbar({
   SignUp,
   Login,
-  changePassword
+  changePassword,
+  ChangeEmail,
+  ChangeInfoComponent
 }: {
   SignUp?: boolean;
   Login?: boolean;
   changePassword?: boolean;
+  ChangeEmail?: boolean;
+  ChangeInfoComponent?: boolean;
 }) {
   const router = useRouter();
   return (
