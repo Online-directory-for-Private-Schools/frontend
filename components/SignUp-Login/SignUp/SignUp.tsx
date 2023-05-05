@@ -1,7 +1,5 @@
-import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
 import { useRouter } from "next/router";
 import React, { MouseEventHandler, useState } from "react";
-import Navbar from "../navbar";
 import Form from "../form";
 import InputGrp from "../InputGrp";
 import Input from "../input";
@@ -9,32 +7,23 @@ import Radio from "../radio";
 import { InputInterface } from "@/interfaces/Input";
 import { categoryOptions } from "./categoryOptions";
 import Select from "../Select";
-import TextArea from "../TextArea";
-import { RadioButton } from "@/interfaces/radioButton";
+import { handleSignUp } from "@/requestHandlers/SignUpHandler";
 
 function SignUp() {
-  let MAX_BIO_SIZE = 255;
-
+  // Shared Info between School and Educator
   const [email, setEmail] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastName] = useState("");
   const [passwd, setPasswd] = useState("");
   const [passwdConfirm, setPasswdConfirm] = useState("");
   const [matching, setMatching] = useState(true);
-
   const [category, setCategory] = useState("student");
   const [phoneNumber, setPhoneNumber] = useState("");
-
-  const [street, setStreet] = useState("");
   const [cityName, setCityName] = useState("");
   const [province, setProvince] = useState("");
   const [country, setCountry] = useState("");
 
-  // Signup for schools
-  const [schoolName, setSchoolName] = useState("");
-  const [isHiring, setIsHiring] = useState(false);
-  const [bio, setBio] = useState("");
-
+  // error message
   const countries = ["Algeria"];
   const provinces = ["Algiers"];
   const cities = [
@@ -44,28 +33,23 @@ function SignUp() {
     "Bordj El Bahri",
     "Ain Taya",
   ];
-
-  // error message
   let [message, setErrorMessage] = useState("");
 
   const router = useRouter();
   const signUpHandler: MouseEventHandler = (e) => {
     e.preventDefault();
-    const body = {
-      name: firstname + " " + lastname,
-      email: email,
-      phone_number: phoneNumber,
-      password: passwd,
-      type: category,
-      // country: country,
-      // province: province,
-      // cityName: cityName
-    };
-
-    apiPostRequestHandler("/auth/register", body, setErrorMessage, true).then(
-      (success: boolean) => {
-        if (success) router.push("/");
-      }
+    handleSignUp(
+      firstname,
+      lastname,
+      email,
+      phoneNumber,
+      passwd,
+      category,
+      country,
+      province,
+      cityName,
+      setErrorMessage,
+      router
     );
   };
 
@@ -74,20 +58,6 @@ function SignUp() {
       (option.onChange = (event: any) => setCategory(event.target.value))
   );
 
-  const hiringOpts: Array<RadioButton> = [
-    {
-      name: "Yes",
-      label: "Yes",
-      value: "Yes",
-      onChange: (e: any) => setIsHiring(true),
-    },
-    {
-      name: "No",
-      label: "No",
-      value: "No",
-      onChange: (e: any) => setIsHiring(false),
-    },
-  ];
   const nameInputs: Array<InputInterface> = [
     {
       type: "text",
@@ -117,8 +87,6 @@ function SignUp() {
       options: provinces,
     },
   ];
-
-  console.log(isHiring);
   return (
     <div>
       <Form errorMessage={message} onSubmit={signUpHandler}>
@@ -181,59 +149,13 @@ function SignUp() {
             options={categoryOptions}
           />
 
-          {category === categoryOptions[0].value && (
-            <>
-              <InputGrp select inputs={locationRow1} />
-              <Select
-                name="City"
-                value={cityName}
-                options={cities}
-                onChange={(e: any) => setCityName(e.target.value)}
-              />
-            </>
-          )}
-          {category === categoryOptions[1].value && (
-            <>
-              <Input
-                type="text"
-                value={schoolName}
-                label={"School Name"}
-                onChange={(e: any) => setSchoolName(e.target.value)}
-              />
-              <InputGrp select inputs={locationRow1} />
-              <div className="flex flex-row gap-5">
-                <Select
-                  name="City"
-                  value={cityName}
-                  options={cities}
-                  onChange={(e: any) => setCityName(e.target.value)}
-                />
-                <Input
-                  type="text"
-                  label="Street"
-                  value={street}
-                  onChange={(e: any) => setStreet(e.target.value)}
-                />
-              </div>
-
-              <TextArea
-                name={"School Bio"}
-                value={bio}
-                onChange={(e: any) => setBio(e.target.value)}
-                MAX_SIZE={MAX_BIO_SIZE}
-              >
-                <>
-                  School Bio <span className="text-[14px]">(optional)</span>
-                </>
-              </TextArea>
-              <Radio
-                label={"Are you hiring?"}
-                name="hiring"
-                value={isHiring ? "Yes" : "No"}
-                options={hiringOpts}
-              />
-            </>
-          )}
+          <InputGrp select inputs={locationRow1} />
+          <Select
+            name="City"
+            value={cityName}
+            options={cities}
+            onChange={(e: any) => setCityName(e.target.value)}
+          />
         </>
       </Form>
     </div>

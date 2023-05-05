@@ -1,10 +1,9 @@
 import React, { MouseEventHandler, useState } from "react";
-import Navbar from "../navbar";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Form from "../form";
 import Input from "../input";
-import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
+import { LoginHandler } from "@/requestHandlers/handleLogin";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
@@ -15,16 +14,7 @@ export default function LogIn() {
   const router = useRouter();
   const handleLogin: MouseEventHandler = (e) => {
     e.preventDefault();
-    const body = {
-      email: email,
-      password: passwd,
-    };
-    apiPostRequestHandler("/auth/login", body, setErrorMessage, true).then(
-      (success: boolean) => {
-        console.log(success);
-        if (success) router.push("/");
-      }
-    );
+    LoginHandler({ email: email, password: passwd }, setErrorMessage, router);
   };
   return (
     <>
