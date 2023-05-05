@@ -37,7 +37,7 @@ export default function RatingSection({
 }) {
   return (
     <Accordion
-      className={"sidebar flex flex-col overflow-scroll"}
+      className={"sidebar flex flex-col w-full overflow-scroll"}
       sx={{
         background: "transparent",
         boxShadow: "none",

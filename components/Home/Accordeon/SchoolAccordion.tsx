@@ -16,7 +16,7 @@ export default function SchoolAccordion({
   }>;
 }) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col md:flex-row">
       <RatingSection values={rating.values} onChange={rating.onChange} />
       <LevelSection>
         <>

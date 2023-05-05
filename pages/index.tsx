@@ -3,6 +3,7 @@ import Footer from "@/components/landing/Footer/Footer";
 import Hero from "@/components/landing/Hero/Hero";
 import dynamic from "next/dynamic";
 import { NextApiRequest, NextApiResponse } from "next";
+import { links } from "@/components/landing/Navbar/links";
 
 const Cookies = require("cookies");
 const jwt = require("jsonwebtoken");
@@ -21,7 +22,7 @@ export default function Home({ username }: { username?: string }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar loggedIn={!!username} />
+      <Navbar loggedIn={!!username} links={links} />
       <Hero username={username} />
       <Footer />
     </>

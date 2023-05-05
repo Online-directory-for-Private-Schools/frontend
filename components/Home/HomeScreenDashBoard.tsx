@@ -3,13 +3,21 @@ import { AiFillFilter } from "react-icons/ai";
 import TabBar from "./TabBar";
 import SchoolAccordion from "./Accordeon/SchoolAccordion";
 import CourseAccordion from "@/components/Home/Accordeon/CourseAccordion";
+import SchoolCard from "@/components/School/SchoolCard";
+import { SchoolCardProps } from "@/interfaces/SchoolCard";
 const createBooleanArray = (number: number): Array<boolean> => {
   let ratingArray: Array<boolean> = [];
   for (let i = 0; i < number; i++) ratingArray.push(false);
   return ratingArray;
 };
 
-export default function HomeScreenDashBoard() {
+export default function HomeScreenDashBoard({
+  schools,
+}: // courses,
+{
+  schools?: Array<SchoolCardProps>;
+  // courses?: Array<CoursCardProps>;
+}) {
   let [ratingArray, setRatingArray] = useState(createBooleanArray(6));
   let [priceArray, setPriceArray] = useState(createBooleanArray(5));
   let [primaryValues, setPrimaryValues] = useState(createBooleanArray(5));
@@ -39,8 +47,8 @@ export default function HomeScreenDashBoard() {
     },
   ];
   return (
-    <div className="mt-20 flex flex-row">
-      <div className="flex flex-col w-[25%]">
+    <div className="pt-20 flex flex-row">
+      <div className="flex flex-col w-[25%] ">
         <div className="flex flex-row justify-between mx-4">
           <p className="p-4 pl-0 text-xl font-semibold">Filters</p>
           <AiFillFilter className="my-auto" />
@@ -67,8 +75,18 @@ export default function HomeScreenDashBoard() {
           />
         )}
       </div>
-      <div className="flex-1 w-full h-2">
+      <div className="flex-1 w-full h-2 justify-center">
         <TabBar course={course} setCourse={setCourse} />
+        <div className={"m-5 p-5 rounded-xl [&>*]:m-3 [&>*]:mx-auto"}>
+          {!course &&
+            schools!.map((School) => (
+              <SchoolCard key={School.schoolName} SchoolProps={School} />
+            ))}
+          {/*{course &&*/}
+          {/*  courses!.map((Course) => (*/}
+          {/*    <SchoolCard key={School.schoolName} SchoolProps={School} />*/}
+          {/*  ))}*/}
+        </div>
       </div>
     </div>
   );
