@@ -3,8 +3,8 @@ export interface CourseCardProps {
   CourseName: string;
   Module: string;
   TeacherName: string;
-  Level: boolean;
-  Year: number;
+  Level: string;
+  Year: string;
   Description: string;
-  price: string;
+  price: number;
 }

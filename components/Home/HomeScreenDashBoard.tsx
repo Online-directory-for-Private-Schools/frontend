@@ -92,7 +92,9 @@ export default function HomeScreenDashBoard({
               </div>
             ))}
           {course &&
-            courses!.map((Course, index) => <CourseCard key={index} />)}
+            courses!.map((Course, index) => (
+              <CourseCard key={index} courseCardProps={Course} />
+            ))}
         </div>
       </div>
     </div>

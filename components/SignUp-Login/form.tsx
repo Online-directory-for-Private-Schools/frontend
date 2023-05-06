@@ -12,7 +12,7 @@ export default function Form({
   return (
     <div className={"bg-white p-12 w-[450px] rounded-xl m-auto mt-20 mb-20"}>
       <div className="text-center font-[700] text-dark-blue text-[20px]">
-        Welcome to XXXX
+        Please add the school info
       </div>
       {errorMessage !== "" && (
         <p
