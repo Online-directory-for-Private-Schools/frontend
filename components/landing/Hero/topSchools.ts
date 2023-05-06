@@ -5,7 +5,7 @@ const schools: Array<SchoolCardProps> = [
     schoolName: "test1",
     rating: 5,
     schoolCity: "mohamadia",
-    description: "I am a good school",
+    description: "I am a good school I am a good school I am a good school I am a good school I am a good school I am a good school I am a good school I am a good school I am a good school I am a good school I said I am a good school, and finally, I am a good school.",
     googleMapLocation: "13123, 131",
     initialFavorite: true,
   },

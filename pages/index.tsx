@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const Cookies = require("cookies");
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken"); 
 
 const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
   ssr: false,

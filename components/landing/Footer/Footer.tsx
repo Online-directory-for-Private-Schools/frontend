@@ -14,7 +14,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer id={"footer"}>
+    <footer id={"page_footer"}>
       <div className="row">
         <div className="col">
           <Image

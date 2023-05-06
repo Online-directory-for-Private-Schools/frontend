@@ -15,7 +15,7 @@ module.exports = {
         serif: ["Inter", "ui-serif", "serif"]
       },
       colors: {
-        "dark-blue": "#07133B",
+        "dark-blue": "#07133F",
         "green": "#1ACD77",
       }
     },

@@ -1,4 +1,4 @@
-footer{
+#page_footer{
   width: 100%;
   position: relative;
   bottom: 0;
@@ -7,10 +7,12 @@ footer{
   color: #fff;
   padding: 100px 0 30px;
   border-top-left-radius: 160px;
+  border-top-right-radius: 160px;
   font-size: 13px;
   line-height: 20px;
   
 }
+
 .row{
   width: 85%;
   margin: auto; 
