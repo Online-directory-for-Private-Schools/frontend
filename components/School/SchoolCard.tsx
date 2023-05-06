@@ -165,9 +165,9 @@ const SchoolCard = ({
                 <p className="w-full italic m-2 p-0 pb-[15px] border-b-2 border-[#07136B]">{description}</p>
                 
                 <div className="w-full m-2 mb-0 flex justify-center rounded-t-[15px] bg-gradient-to-br from-dark-blue to-[#07133B]">
-                  <h1 className="m-2 p-1  font-extrabold my-auto text-white">Schedule</h1>
+                  <h1 className="m-2 p-1  font-extrabold my-auto text-white">Courses</h1>
                 </div>
-                <div className="h-[100px] m-2 mt-0 w-full border-[1px] rounded-b border-dark-blue">Schedule //</div>
+                <div className="h-[100px] m-2 mt-0 w-full border-[1px] rounded-b border-dark-blue">Courses //</div>
                 </ModalBody>
               <ModalFooter>
                 
