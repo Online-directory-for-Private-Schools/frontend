@@ -10,9 +10,10 @@
     "init-tailwind": "tailwindcss init -p"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.6.1",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.2",
     "@types/node": "18.15.11",
@@ -22,6 +23,7 @@
     "cookies": "^0.8.0",
     "eslint": "^8.37.0",
     "eslint-config-next": "13.2.4",
+    "framer-motion": "^10.12.8",
     "jsonwebtoken": "^9.0.0",
     "next": "^13.2.4",
     "next-cookie": "^2.8.0",

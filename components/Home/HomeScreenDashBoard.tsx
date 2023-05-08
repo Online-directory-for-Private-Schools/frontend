@@ -59,24 +59,24 @@ export default function HomeScreenDashBoard({
         <hr className="h-2 w-full border-dark-blue" />
       </div>
       <div className={"sidebar w-[25%] h-full fixed overflow-y-scroll mt-20"}>
-        {!course && (
-          <SchoolAccordion
-            phases={phases}
-            rating={{
-              values: ratingArray,
-              onChange: setRatingArray,
-            }}
-          />
-        )}
-        {course && (
-          <CourseAccordion
-            phases={phases}
-            prices={{
-              values: priceArray,
-              onChange: setPriceArray,
-            }}
-          />
-        )}
+        {/*{!course && (*/}
+        {/*  <SchoolAccordion*/}
+        {/*    phases={phases}*/}
+        {/*    rating={{*/}
+        {/*      values: ratingArray,*/}
+        {/*      onChange: setRatingArray,*/}
+        {/*    }}*/}
+        {/*  />*/}
+        {/*)}*/}
+        {/*{course && (*/}
+        {/*  <CourseAccordion*/}
+        {/*    phases={phases}*/}
+        {/*    prices={{*/}
+        {/*      values: priceArray,*/}
+        {/*      onChange: setPriceArray,*/}
+        {/*    }}*/}
+        {/*  />*/}
+        {/*)}*/}
       </div>
       <div className="flex-1 w-full h-2 justify-center">
         <TabBar course={course} setCourse={setCourse} />
