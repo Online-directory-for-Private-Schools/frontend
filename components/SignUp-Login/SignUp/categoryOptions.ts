@@ -2,13 +2,15 @@ import { RadioButton } from "@/interfaces/radioButton";
 
 export const categoryOptions: Array<RadioButton> = [
   {
+    name: "student",
     value: "student",
     label: "Student",
-    onChange: () => {}
+    onChange: () => {},
   },
   {
+    name: "educator",
     value: "educator",
     label: "Educator",
-    onChange: () => {}
+    onChange: () => {},
   },
 ];
