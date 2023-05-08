@@ -129,7 +129,8 @@ const SchoolCard = ({
         </div>
       </div>
       <div>
-        <p>{description}</p>
+        <style>{cutoff}</style>
+        <p className={"cutoff-text"}>{description}</p>
       </div>
     </div>
   );
