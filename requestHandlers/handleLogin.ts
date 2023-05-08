@@ -1,4 +1,3 @@
-import { MouseEventHandler } from "react";
 import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
 import { NextRouter } from "next/router";
 // @ts-ignore

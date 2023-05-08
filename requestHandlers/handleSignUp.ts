@@ -1,5 +1,5 @@
 import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
-import { NextRouter, Router } from "next/router";
+import { NextRouter } from "next/router";
 // @ts-ignore
 import cookieCutter from "cookie-cutter";
 
