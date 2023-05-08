@@ -15,11 +15,12 @@ const apiGetRequestHandler: Function = async (
       }
     ).catch((e) => console.log(e));
 
-    console.log(process.env.NEXT_PUBLIC_BACKEND_URL + route + query);
+    // @ts-ignore
     if (!!res.error)
       // if an error occurred
       return {
         error: {
+          // @ts-ignore
           message: res.error.message,
         },
       };

@@ -3,8 +3,7 @@ import cookieCutter from "cookie-cutter";
 const apiPostRequestHandler: Function = async (
   route: string,
   body: object,
-  setErrorMessage: Function,
-  auth?: boolean
+  token: string
 ) => {
   let success: boolean;
 
@@ -13,25 +12,15 @@ const apiPostRequestHandler: Function = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify(body),
     }).then((res) => res.json());
 
-    if (!!res.error)
-      // if an error occurred
-      setErrorMessage(res.error.message);
-    else {
-      // reset error message
-      setErrorMessage("");
-      if (!!auth) cookieCutter.set("token", res.token);
-    }
-
-    success = !res.error;
-  } catch (e) {
-    console.error(e);
-    success = false;
+    return res;
+  } catch (e: any) {
+    return { error: { message: e.message } };
   }
-  return success;
 };
 
 export default apiPostRequestHandler;

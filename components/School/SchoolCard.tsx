@@ -60,11 +60,11 @@ const SchoolCard = ({
     borderRadius: "25px",
     maxHeight: "90vh",
     p: 5,
-    paddingTop: '20px',
-    margin: 'auto',
-    backdropFilter: 'blur(5px)',
+    paddingTop: "20px",
+    margin: "auto",
+    backdropFilter: "blur(5px)",
     minHeight: "50vh",
-    '&:focus': { outline: 'none'},
+    "&:focus": { outline: "none" },
   };
   return (
     <div
@@ -79,85 +79,100 @@ const SchoolCard = ({
       <div className="flex flex-row justify-between h-max ">
         <Modal
           open={open}
-          onBlur={handleClose}  
-          onBackdropClick={handleClose}     
+          onBlur={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
           BackdropProps={{
             style: {
-              backgroundColor: 'rgba(170,170,170,0.3)',
-              backdropFilter: 'blur(3px)',
+              backgroundColor: "rgba(170,170,170,0.3)",
+              backdropFilter: "blur(3px)",
             },
-          }}>
-          <Box sx={style}>           
-          <div className="mx-auto m-2 w-full relative text-dark-blue items-center flex justify-between my-auto mb-[0px] mt-0 pb-[20px] border-b-2 border-[#07136B]">                 
-            <div className="pt-3 grid-cols-[50%_50%] grid" >
-              <div className="mr-[40px]">
-                <div className="my-auto pb-[20px] font-bold text-2xl">{schoolName}</div> 
-                <Link
-                  className="flex flex-row my-auto text-left justify-start"
-                  href={`https://www.google.com/maps?q=${googleMapLocation}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <BiMap className="my-auto mr-1 fill-green hover:scale-[130%] duration-200 translate-y-[-2px] scale-[115%] "  />
+          }}
+        >
+          <Box sx={style}>
+            <div className="mx-auto m-2 w-full relative text-dark-blue items-center flex justify-between my-auto mb-[0px] mt-0 pb-[20px] border-b-2 border-[#07136B]">
+              <div className="pt-3 grid-cols-[50%_50%] grid">
+                <div className="mr-[40px]">
+                  <div className="my-auto pb-[20px] font-bold text-2xl">
+                    {schoolName}
+                  </div>
+                  <Link
+                    className="flex flex-row my-auto text-left justify-start"
+                    href={`https://www.google.com/maps?q=${googleMapLocation}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <BiMap className="my-auto mr-1 fill-green hover:scale-[130%] duration-200 translate-y-[-2px] scale-[115%] " />
                     <h2 className={"my-auto text-m"}>{schoolCity}</h2>
-                </Link>
-              </div>
-              <div className=" w-max ">
-                <div className="stars-text flex flex-row pb-[20px]">
-                  <div className="flex whitespace-nowrap flex-row justify-start pt-2 ">
-                    {renderStars(rating)} 
-                  </div> 
-                  <div className="pl-[5px] text-dark-blue pt-[4px]">(x ratings)</div>
+                  </Link>
                 </div>
-              
-                <button
-                  className="flex flex-row mt-[5px] justify-self-stretch"
-                  onClick={toggleFavorite}
-                >
-                  {!favorite ? (
-                    <BsBookmark className="w-[25%] my-auto fill-green" />
-                  ) : (
-                    <BsBookmarkFill className="w-[25%] my-auto fill-green" />
-                  )}
-                
-                  <p className={"text-sm pl-1 text-m whitespace-nowrap"}>Add to favourites</p>
-                </button>
-            
-                    
+                <div className=" w-max ">
+                  <div className="stars-text flex flex-row pb-[20px]">
+                    <div className="flex whitespace-nowrap flex-row justify-start pt-2 ">
+                      {renderStars(rating)}
+                    </div>
+                    <div className="pl-[5px] text-dark-blue pt-[4px]">
+                      (x ratings)
+                    </div>
+                  </div>
 
+                  <button
+                    className="flex flex-row mt-[5px] justify-self-stretch"
+                    onClick={toggleFavorite}
+                  >
+                    {!favorite ? (
+                      <BsBookmark className="w-[25%] my-auto fill-green" />
+                    ) : (
+                      <BsBookmarkFill className="w-[25%] my-auto fill-green" />
+                    )}
+
+                    <p className={"text-sm pl-1 text-m whitespace-nowrap"}>
+                      Add to favourites
+                    </p>
+                  </button>
+                </div>
+              </div>
+              <div className="h-[80px] items-center w-[25%] my-auto p-0 m-0 mr-[50px] flex flex-row">
+                <Image
+                  className={
+                    "w-[100%] min-h-full items-center rounded-xl bg-green mr-[30px] p-2 my-auto"
+                  }
+                  src={Logo.src}
+                  width={200}
+                  height={200}
+                  alt="School"
+                />
               </div>
             </div>
-            <div className="h-[80px] items-center w-[25%] my-auto p-0 m-0 mr-[50px] flex flex-row" >
-              <Image
-                className={"w-[100%] min-h-full items-center rounded-xl bg-green mr-[30px] p-2 my-auto"}
-                src={Logo.src}
-                width={200}
-                height={200}
-                alt="School"
-              />
-            </div>                         
-          </div>
-                
-                
-                
-                <p className="w-full mx-auto italic m-2 p-0 pb-[15px] border-b-2 border-[#07136B]">{description}</p>
-                
-                <div className="mx-auto w-full m-2 mb-0 flex justify-center rounded-t-[15px] bg-gradient-to-br from-dark-blue to-[#07133B]">
-                  <h1 className="m-2 p-1  font-extrabold my-auto text-white">Courses</h1>
-                </div>
-                <div className="mx-auto h-[100px] m-2 mt-0 w-full border-[1px] rounded-b border-dark-blue">Courses //</div>
-            
 
-            <IconButton sx={{ position: 'absolute', top: '0.5rem', right: '0.7rem', color: '#1ACD77', '&:hover': {color: '#07133B'}, transition: '0.1s ease' 
-          }} onChange={handleOpen}>
+            <p className="w-full mx-auto italic m-2 p-0 pb-[15px] border-b-2 border-[#07136B]">
+              {description}
+            </p>
+
+            <div className="mx-auto w-full m-2 mb-0 flex justify-center rounded-t-[15px] bg-gradient-to-br from-dark-blue to-[#07133B]">
+              <h1 className="m-2 p-1  font-extrabold my-auto text-white">
+                Courses
+              </h1>
+            </div>
+            <div className="mx-auto h-[100px] m-2 mt-0 w-full border-[1px] rounded-b border-dark-blue">
+              Courses //
+            </div>
+
+            <IconButton
+              sx={{
+                position: "absolute",
+                top: "0.5rem",
+                right: "0.7rem",
+                color: "#1ACD77",
+                "&:hover": { color: "#07133B" },
+                transition: "0.1s ease",
+              }}
+              onChange={handleOpen}
+            >
               <AiFillCloseCircle />
             </IconButton>
           </Box>
         </Modal>
-
-
 
         <div className="w-[15%]">
           <Image

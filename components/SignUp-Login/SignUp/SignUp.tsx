@@ -7,7 +7,7 @@ import Radio from "../radio";
 import { InputInterface } from "@/interfaces/Input";
 import { categoryOptions } from "./categoryOptions";
 import Select from "../Select";
-import { handleSignUp } from "@/requestHandlers/SignUpHandler";
+import { handleSignUp } from "@/requestHandlers/handleSignUp";
 
 function SignUp() {
   // Shared Info between School and Educator

@@ -1,5 +1,7 @@
 import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
 import { NextRouter, Router } from "next/router";
+// @ts-ignore
+import cookieCutter from "cookie-cutter";
 
 export const handleSignUp: (
   firstname: string,
@@ -37,13 +39,12 @@ export const handleSignUp: (
     city: cityName,
   };
 
-  apiPostRequestHandler("/auth/register", body, setErrorMessage, true).then(
-    (success: boolean) => {
-      if (success) {
-        if (category === "student") router.push("/");
-      } else {
-        router.push("/SchoolRegister");
-      }
+  apiPostRequestHandler("/auth/register", body).then((res: any) => {
+    if (!!res.error) setErrorMessage(res.error.message);
+    else {
+      setErrorMessage("");
+      cookieCutter.set("token", res.token);
+      if (!res.error) router.push("/SchoolRegister");
     }
-  );
+  });
 };
