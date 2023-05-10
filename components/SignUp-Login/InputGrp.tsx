@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from "react";
+import React from "react";
 import Input from "./input";
 import { InputInterface } from "@/interfaces/Input";
 import Select from "./Select";
