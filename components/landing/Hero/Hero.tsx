@@ -1,6 +1,6 @@
 // @flow
 import * as React from "react";
-import TopSchools from "@/components/landing/Hero/TopSchools";
+import TopSchools from "@/components/landing/Hero/TopSchool";
 import schools from "@/components/landing/Hero/topSchools";
 
 export default function Hero() {
