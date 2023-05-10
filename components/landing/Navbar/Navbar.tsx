@@ -6,14 +6,9 @@ import hamburger from "@/public/bars-solid.svg";
 import closeIcon from "@/public/close.svg";
 import SearchBar from "@/components/landing/Navbar/SearchBar";
 import logo from "@/public/School_Logo.svg";
-import logout from "@/public/logout.svg";
 import { useRouter } from "next/router";
 
 const cookieCutter = require("cookie-cutter");
-interface NavbarProps {
-  loggedIn?: boolean;
-  style2?: boolean;
-}
 
 export default function Navbar({
   loggedIn,
