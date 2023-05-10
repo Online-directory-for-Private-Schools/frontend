@@ -1,6 +1,7 @@
 import * as React from "react";
 import { MouseEventHandler, useState } from "react";
 import Image from "next/image";
+import { links } from "@/components/landing/Navbar/links";
 import Link from "next/link";
 import hamburger from "@/public/bars-solid.svg";
 import closeIcon from "@/public/close.svg";
@@ -51,6 +52,7 @@ export default function Navbar({ loggedIn, links }: NavbarProps) {
 
   const login: String = "login";
   const signUp: String = "Sign Up";
+  const Profile: String = "Profile";
 
   let [scrolled, setScrolled] = useState(false);
 
@@ -160,7 +162,7 @@ export default function Navbar({ loggedIn, links }: NavbarProps) {
             <Link
               href={"/signup"}
               className={
-                "duration-300 hover:py-2 hover:mx-0 btn outline outline-2 outline-green hover:bg-green hover:text-white flex flex-col justify-center whitespace-nowrap"
+                "duration-300 hover:py-2 hover:mx-0 my-auto btn outline outline-2 outline-green hover:bg-green hover:text-white"
               }
               onClick={(event) => event.stopPropagation()}
             >
