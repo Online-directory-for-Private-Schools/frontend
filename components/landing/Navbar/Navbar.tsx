@@ -51,7 +51,6 @@ export default function Navbar({ loggedIn, links }: NavbarProps) {
 
   const login: String = "login";
   const signUp: String = "Sign Up";
-  const Profile: String = "Profile";
 
   let [scrolled, setScrolled] = useState(false);
 
