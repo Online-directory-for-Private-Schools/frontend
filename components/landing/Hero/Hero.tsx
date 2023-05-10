@@ -3,18 +3,13 @@ import * as React from "react";
 import TopSchools from "@/components/landing/Hero/TopSchools";
 import schools from "@/components/landing/Hero/topSchools";
 
-export default function Hero({ username }: { username?: string }) {
+export default function Hero() {
   return (
     <div className={"px-20 pb-52"}>
       <div
         id={"Hero"}
         className={"flex flex-col justify-around gap-10 text-dark-blue py-52"}
       >
-        {username !== undefined && (
-          <h1 className={"font-bold lg:text-8xl text-5xl text-center" + ""}>
-            Welcome <span className={"text-green"}>{username}</span>
-          </h1>
-        )}
         <h1 className={"font-bold lg:text-8xl text-5xl text-center" + ""}>
           Find the best educators in Algeria
         </h1>

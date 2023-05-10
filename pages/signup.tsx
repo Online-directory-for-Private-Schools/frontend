@@ -24,7 +24,7 @@ export async function getServerSideProps({
   res: NextApiResponse;
 }) {
   const cookie = new Cookies(req, res);
-  const token = cookie.get("token");
+  const token = cookie.get("TOKEN");
 
   if (token === "" || !token)
     return {
