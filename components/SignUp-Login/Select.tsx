@@ -5,11 +5,13 @@ export default function Select({
   value,
   onChange,
   options,
+  disabled,
 }: {
   name: string;
   value: string;
   onChange: ChangeEventHandler;
   options: Array<string>;
+  disabled?: boolean;
 }) {
   return (
     <div className="py-2 w-full">
@@ -20,17 +22,22 @@ export default function Select({
         {name}
       </label>
       <select
+        disabled={disabled}
         id={name}
         value={value}
         onChange={onChange}
         className={
-            "w-full p-[10px] rounded-xl border border-solid border-gray-400 outline-none focus:border-green focus:shadow-[2px_2px_3px_#1ACD77] duration-300"
-          }
+          "w-full p-[10px] rounded-xl border border-solid border-gray-400 outline-none focus:border-green focus:shadow-[2px_2px_3px_#1ACD77] duration-300"
+        }
       >
         <option defaultChecked>--{name}--</option>
         {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+          <option
+            key={!option.id ? option : option.id}
+            value={!option.id ? option : option.id}
+          >
+            {/*@ts-ignore*/}
+            {!option.name ? option : option.name}
           </option>
         ))}
       </select>

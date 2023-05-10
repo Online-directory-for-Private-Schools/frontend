@@ -8,6 +8,7 @@ import { InputInterface } from "@/interfaces/Input";
 import { categoryOptions } from "./categoryOptions";
 import Select from "../Select";
 import { handleSignUp } from "@/requestHandlers/handleSignUp";
+import SelectLocation from "@/components/SignUp-Login/SelectLocation";
 
 function SignUp() {
   // Shared Info between School and Educator
@@ -19,38 +20,27 @@ function SignUp() {
   const [matching, setMatching] = useState(true);
   const [category, setCategory] = useState("student");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [cityName, setCityName] = useState("");
+  const [city, setCityName] = useState("");
   const [province, setProvince] = useState("");
   const [country, setCountry] = useState("");
 
   // error message
-  const countries = ["Algeria"];
-  const provinces = ["Algiers"];
-  const cities = [
-    "Mahelma",
-    "Sidi Abdelah",
-    "Zeralda",
-    "Bordj El Bahri",
-    "Ain Taya",
-  ];
   let [message, setErrorMessage] = useState("");
 
   const router = useRouter();
   const signUpHandler: MouseEventHandler = (e) => {
     e.preventDefault();
-    handleSignUp(
-      firstname,
-      lastname,
-      email,
-      phoneNumber,
-      passwd,
-      category,
-      country,
-      province,
-      cityName,
-      setErrorMessage,
-      router
-    );
+    // handleSignUp(
+    //   firstname,
+    //   lastname,
+    //   email,
+    //   phoneNumber,
+    //   passwd,
+    //   category,
+    //   city,
+    //   setErrorMessage,
+    //   router
+    // );
   };
 
   categoryOptions.map(
@@ -73,18 +63,24 @@ function SignUp() {
     },
   ];
 
-  const locationRow1 = [
+  const address = [
     {
       name: "Country",
       value: country,
       onChange: (e: any) => setCountry(e.target.value),
-      options: countries,
     },
     {
       name: "Province",
       value: province,
-      onChange: (e: any) => setProvince(e.target.value),
-      options: provinces,
+      onChange: (e: any) => {
+        console.log(e.target.value);
+        setProvince(e.target.value);
+      },
+    },
+    {
+      name: "City",
+      value: city,
+      onChange: (e: any) => setCityName(e.target.value),
     },
   ];
   return (
@@ -149,13 +145,8 @@ function SignUp() {
             options={categoryOptions}
           />
 
-          <InputGrp select inputs={locationRow1} />
-          <Select
-            name="City"
-            value={cityName}
-            options={cities}
-            onChange={(e: any) => setCityName(e.target.value)}
-          />
+          {/*<InputGrp select inputs={locationRow1} />*/}
+          <SelectLocation inputs={address} />
         </>
       </Form>
     </div>

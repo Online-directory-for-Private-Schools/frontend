@@ -1,9 +1,8 @@
-import { ChangeEventHandler } from "react"
-
+import { ChangeEventHandler } from "react";
 
 export interface SelectInterface {
-    name: string
-    value: string
-    onChange: ChangeEventHandler
-    options: Array<string>
+  name: string;
+  value: string;
+  onChange: ChangeEventHandler;
+  options?: Array<string>;
 }
