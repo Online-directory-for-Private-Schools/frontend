@@ -12,14 +12,18 @@ export default function Radio({
   value: string;
   options: Array<RadioButton>;
 }) {
-  const selected = "bg-green px-4 py-2 rounded-xl text-white hover:shadow-[2px_3px_3px_grey]";
-  const notSelected = "border border-green bg-white px-4 py-2 rounded-xl hover:shadow-[2px_3px_3px_grey]";
+  const selected =
+    "bg-green px-4 py-2 rounded-xl text-white hover:shadow-[2px_3px_3px_grey]";
+  const notSelected =
+    "border border-green bg-white px-4 py-2 rounded-xl hover:shadow-[2px_3px_3px_grey]";
   return (
     <>
-      <div className={"text-[18px] text-dark-blue block  mb-[3px] w-full"}>{label}</div>
+      <div className={"text-[18px] text-dark-blue block  mb-[3px] w-full"}>
+        {label}
+      </div>
       <div className="flex justify-around gap-5 m-8 mt-4">
         {options.map((opt) => (
-          <>
+          <div key={opt.value}>
             <input
               className={"hidden"}
               type="radio"
@@ -35,7 +39,7 @@ export default function Radio({
             >
               {opt.label}
             </label>
-          </>
+          </div>
         ))}
       </div>
     </>

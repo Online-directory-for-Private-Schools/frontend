@@ -23,8 +23,8 @@ export default function InputGrp({
 
   return (
     <div className="flex justify-between gap-5">
-      {inputs.map((input) => (
-        <>
+      {inputs.map((input, index) => (
+        <div key={index}>
           {input && !select && (
             <Input
               // @ts-ignore
@@ -39,8 +39,8 @@ export default function InputGrp({
           )}
           {select && (
             <Select
-               // @ts-ignore
-               key={input.name}
+              // @ts-ignore
+              key={input.name}
               // @ts-ignore
               name={input.name}
               value={input.value}
@@ -49,7 +49,7 @@ export default function InputGrp({
               options={input.options}
             />
           )}
-        </>
+        </div>
       ))}
     </div>
   );
