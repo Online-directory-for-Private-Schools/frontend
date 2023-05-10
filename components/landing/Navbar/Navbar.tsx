@@ -160,7 +160,7 @@ export default function Navbar({ loggedIn, links }: NavbarProps) {
             <Link
               href={"/signup"}
               className={
-                "duration-300 hover:py-2 hover:mx-0 btn outline outline-2 outline-green hover:bg-green hover:text-white flex flex-col justify-center"
+                "duration-300 hover:py-2 hover:mx-0 btn outline outline-2 outline-green hover:bg-green hover:text-white flex flex-col justify-center whitespace-nowrap"
               }
               onClick={(event) => event.stopPropagation()}
             >

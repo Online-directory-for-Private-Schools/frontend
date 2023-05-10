@@ -76,7 +76,7 @@ const SchoolCard = ({
       }
       onClick={handleOpen}
     >
-      <div className="flex flex-row justify-between h-max ">
+      <div className="flex flex-row sm:flex justify-between h-max ">
         <Modal
           open={open}
           onBlur={handleClose}
@@ -91,7 +91,7 @@ const SchoolCard = ({
         >
           <Box sx={style}>
             <div className="mx-auto m-2 w-full relative text-dark-blue items-center flex justify-between my-auto mb-[0px] mt-0 pb-[20px] border-b-2 border-[#07136B]">
-              <div className="pt-3 grid-cols-[50%_50%] grid">
+              <div className="pt-3 grid-cols-[50%_50%] grid ">
                 <div className="mr-[40px]">
                   <div className="my-auto pb-[20px] font-bold text-2xl">
                     {schoolName}
