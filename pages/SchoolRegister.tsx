@@ -9,6 +9,7 @@ import Form from "@/components/SignUp-Login/form";
 import { handleSchoolRegister } from "@/requestHandlers/SchoolRegisterHandler";
 import { useRouter } from "next/router";
 import { useCookie } from "next-cookie";
+import Navbar from "@/components/SignUp-Login/navbar";
 const SchoolRegister = () => {
   let MAX_BIO_SIZE = 512;
 
@@ -84,7 +85,12 @@ const SchoolRegister = () => {
   };
   return (
     <div>
-      <Form errorMessage={message} onSubmit={schoolRegisterHandler}>
+      <Navbar />
+      <Form
+        CreateSchool
+        errorMessage={message}
+        onSubmit={schoolRegisterHandler}
+      >
         <>
           <Input
             type="text"

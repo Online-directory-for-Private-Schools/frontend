@@ -3,12 +3,14 @@ import React, { MouseEventHandler, ReactComponentElement } from "react";
 export default function Form({
   SignUp,
   Login,
+  CreateSchool,
   errorMessage,
   onSubmit,
   children,
 }: {
   SignUp?: boolean;
   Login?: boolean;
+  CreateSchool?: boolean;
   errorMessage: String;
   onSubmit: MouseEventHandler;
   children?: ReactComponentElement<any>;
@@ -18,6 +20,7 @@ export default function Form({
       <div className="text-center font-[700] text-dark-blue text-[28px]">
         {SignUp && "Sign Up"}
         {Login && "Login"}
+        {CreateSchool && "Create School"}
       </div>
 
       <form>
