@@ -6,8 +6,6 @@ import Input from "../input";
 import Radio from "../radio";
 import { InputInterface } from "@/interfaces/Input";
 import { categoryOptions } from "./categoryOptions";
-import Select from "../Select";
-import { handleSignUp } from "@/requestHandlers/handleSignUp";
 import SelectLocation from "@/components/SignUp-Login/SelectLocation";
 
 function SignUp() {

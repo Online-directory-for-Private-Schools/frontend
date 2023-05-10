@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import InputGrp from "@/components/SignUp-Login/InputGrp";
-import Input from "@/components/SignUp-Login/input";
+import React, { useEffect, useState } from "react";
 import Select from "@/components/SignUp-Login/Select";
 import { SelectInterface } from "@/interfaces/Select.interface";
 import apiGetRequestHandler from "@/requestHandlers/apiGetRequestHandler";
@@ -38,7 +36,6 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
       })
       .catch(() => setCities([]));
   };
-  console.error(inputs[0].value);
   return (
     <>
       <div className="flex justify-between gap-5">

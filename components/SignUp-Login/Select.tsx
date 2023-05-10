@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler } from "react";
+import React, { ChangeEventHandler } from "react";
 
 export default function Select({
   name,
@@ -30,7 +30,9 @@ export default function Select({
           "w-full p-[10px] rounded-xl border border-solid border-gray-400 outline-none focus:border-green focus:shadow-[2px_2px_3px_#1ACD77] duration-300"
         }
       >
-        <option defaultChecked>--{name}--</option>
+        <option defaultChecked value={""}>
+          --{name}--
+        </option>
         {options.map((option) => (
           <option
             key={!option.id ? option : option.id}
