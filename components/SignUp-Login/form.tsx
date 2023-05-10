@@ -1,28 +1,25 @@
 import React, { MouseEventHandler, ReactComponentElement } from "react";
 
 export default function Form({
+  SignUp,
+  Login,
   errorMessage,
   onSubmit,
   children,
 }: {
+  SignUp?: boolean;
+  Login?: boolean;
   errorMessage: String;
   onSubmit: MouseEventHandler;
   children?: ReactComponentElement<any>;
 }) {
   return (
     <div className={"bg-white p-12 w-[450px] rounded-xl m-auto mt-20 mb-20"}>
-      <div className="text-center font-[700] text-dark-blue text-[20px]">
-        Please add the school info
+      <div className="text-center font-[700] text-dark-blue text-[28px]">
+        {SignUp && "Sign Up"}
+        {Login && "Login"}
       </div>
-      {errorMessage !== "" && (
-        <p
-          className={
-            "bg-red-500 p-2 rounded-2xl text-white font-bold text-center"
-          }
-        >
-          {errorMessage}
-        </p>
-      )}
+
       <form>
         <div className="mt-10">
           {children}
@@ -34,6 +31,15 @@ export default function Form({
               Create Account
             </button>
           </div>
+          {errorMessage !== "" && (
+            <p
+              className={
+                "bg-red-500 p-2 mt-10 rounded-2xl text-white font-bold text-center"
+              }
+            >
+              {errorMessage}
+            </p>
+          )}
         </div>
       </form>
     </div>

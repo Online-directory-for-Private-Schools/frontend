@@ -7,6 +7,7 @@ import Radio from "../radio";
 import { InputInterface } from "@/interfaces/Input";
 import { categoryOptions } from "./categoryOptions";
 import SelectLocation from "@/components/SignUp-Login/SelectLocation";
+import { handleSignUp } from "@/requestHandlers/handleSignUp";
 
 function SignUp() {
   // Shared Info between School and Educator
@@ -28,17 +29,17 @@ function SignUp() {
   const router = useRouter();
   const signUpHandler: MouseEventHandler = (e) => {
     e.preventDefault();
-    // handleSignUp(
-    //   firstname,
-    //   lastname,
-    //   email,
-    //   phoneNumber,
-    //   passwd,
-    //   category,
-    //   city,
-    //   setErrorMessage,
-    //   router
-    // );
+    handleSignUp(
+      firstname,
+      lastname,
+      email,
+      phoneNumber,
+      passwd,
+      category,
+      city,
+      setErrorMessage,
+      router
+    );
   };
 
   categoryOptions.map(
@@ -83,7 +84,7 @@ function SignUp() {
   ];
   return (
     <div>
-      <Form errorMessage={message} onSubmit={signUpHandler}>
+      <Form SignUp errorMessage={message} onSubmit={signUpHandler}>
         <>
           <InputGrp input inputs={nameInputs} />
           <Input
@@ -119,7 +120,7 @@ function SignUp() {
 
           {!matching && (
             <div className={"text-right text-red-600 p-0"}>
-              Unmatching Password
+              Password not matching
             </div>
           )}
 
@@ -143,7 +144,6 @@ function SignUp() {
             options={categoryOptions}
           />
 
-          {/*<InputGrp select inputs={locationRow1} />*/}
           <SelectLocation inputs={address} />
         </>
       </Form>

@@ -18,7 +18,7 @@ export default function LogIn() {
   };
   return (
     <>
-      <Form errorMessage={errorMessage} onSubmit={handleLogin}>
+      <Form Login errorMessage={errorMessage} onSubmit={handleLogin}>
         <>
           <Input
             type="email"

@@ -8,8 +8,8 @@ export const categoryOptions: Array<RadioButton> = [
     onChange: () => {},
   },
   {
-    name: "educator",
-    value: "educator",
+    name: "School Owner",
+    value: "school_owner",
     label: "Educator",
     onChange: () => {},
   },

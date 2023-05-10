@@ -10,9 +10,7 @@ export const handleSignUp: (
   phoneNumber: string,
   passwd: string,
   category: string,
-  country: string,
-  province: string,
-  cityName: string,
+  cityId: string,
   setErrorMessage: Function,
   router: NextRouter
 ) => void = (
@@ -22,9 +20,7 @@ export const handleSignUp: (
   phoneNumber,
   passwd,
   category,
-  country,
-  province,
-  cityName,
+  cityId,
   setErrorMessage,
   router
 ) => {
@@ -34,17 +30,18 @@ export const handleSignUp: (
     phone_number: phoneNumber,
     password: passwd,
     type: category,
-    country: country,
-    province: province,
-    city: cityName,
+    cityId: cityId,
   };
 
+  console.log(body);
   apiPostRequestHandler("/auth/register", body).then((res: any) => {
     if (!!res.error) setErrorMessage(res.error.message);
     else {
       setErrorMessage("");
       cookieCutter.set("token", res.token);
-      if (!res.error) router.push("/SchoolRegister");
+      if (!res.error && category === "school_owner")
+        router.push("/SchoolRegister");
+      else if (!res.error && category === "student") router.push("/home");
     }
   });
 };
