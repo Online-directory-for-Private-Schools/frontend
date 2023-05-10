@@ -23,7 +23,7 @@ export default function Home({ username }: { username?: string }) {
       </Head>
 
       <Navbar loggedIn={!!username} links={links} />
-      <Hero username={username} />
+      <Hero />
       <Footer />
     </>
   );

@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from "react";
+import React from "react";
 import SignUp from "@/components/SignUp-Login/SignUp/SignUp";
 import { NextApiRequest, NextApiResponse } from "next";
 import Navbar from "@/components/SignUp-Login/navbar";
