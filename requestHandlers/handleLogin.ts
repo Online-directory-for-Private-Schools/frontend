@@ -1,25 +1,34 @@
-import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
+import { RequestHandler } from "@/requestHandlers/RequestHandler";
 import { NextRouter } from "next/router";
-// @ts-ignore
-import cookieCutter from "cookie-cutter";
+import { object, Requireable } from "prop-types";
+const cookieCutter = require("cookie-cutter");
 
-export const LoginHandler: Function = (
-  {
-    email,
-    passwd,
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
+export class HandleLogin extends RequestHandler {
+  email: string;
+  password: string;
+  constructor({ email, password }: ILogin) {
+    super();
+    this.email = email;
+    this.password = password;
+  }
+  execute({
+    setErrorMessage,
+    router,
   }: {
-    email: string;
-    passwd: string;
-  },
-  setErrorMessage: Function,
-  router: NextRouter
-) => {
-  const body = {
-    email: email,
-    password: passwd,
-  };
-  apiPostRequestHandler("/auth/login", body, setErrorMessage).then(
-    (res: any) => {
+    setErrorMessage: Function;
+    router: NextRouter;
+  }) {
+    const body = {
+      email: this.email,
+      password: this.password,
+    };
+
+    super.post("/auth/login", body).then((res: any) => {
       if (!!res.error)
         // if an error occurred
         setErrorMessage(res.error.message);
@@ -28,7 +37,8 @@ export const LoginHandler: Function = (
         setErrorMessage("");
         cookieCutter.set("token", res.token);
       }
-      if (!res.error) router.push("/home");
-    }
-  );
-};
+      if (!res.error)
+        router.push("/home").catch((e: Error) => console.error(e));
+    });
+  }
+}

@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Select from "@/components/SignUp-Login/Select";
 import { SelectInterface } from "@/interfaces/Select.interface";
-import apiGetRequestHandler from "@/requestHandlers/apiGetRequestHandler";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 
 const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
   let [countries, setCountries] = useState([]);
   let [provinces, setProvinces] = useState([]);
   let [cities, setCities] = useState([]);
-
+  const requestHandlerConstructor = new HandlerFactory("general");
+  const requestHandler = requestHandlerConstructor.createHandler();
   useEffect(() => {
-    apiGetRequestHandler("/addresses/countries").then((res: any) => {
-      setCountries(res.data);
-    });
+    requestHandler
+      .get("/addresses/countries")
+      .then((res: any) => {
+        setCountries(res.data);
+      })
+      .catch((e: Error) => console.error(e));
   }, []);
 
   useEffect(() => {
@@ -22,7 +26,8 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
     if (inputs[1].value !== "") loadCities();
   }, [inputs[1].value]);
   const loadProvinces = () => {
-    apiGetRequestHandler(`/addresses/provinces/${inputs[0].value}`)
+    requestHandler
+      .get(`/addresses/provinces/${inputs[0].value}`)
       .then((res: any) => {
         setProvinces(res.data);
       })
@@ -30,7 +35,8 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
   };
 
   const loadCities = () => {
-    apiGetRequestHandler(`/addresses/cities/${inputs[1].value}`)
+    requestHandler
+      .get(`/addresses/cities/${inputs[1].value}`)
       .then((res: any) => {
         setCities(res.data);
       })

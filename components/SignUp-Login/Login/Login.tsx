@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Form from "../form";
 import Input from "../input";
-import { LoginHandler } from "@/requestHandlers/handleLogin";
+import { HandleLogin } from "@/requestHandlers/handleLogin";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
@@ -14,11 +15,21 @@ export default function LogIn() {
   const router = useRouter();
   const handleLogin: MouseEventHandler = (e) => {
     e.preventDefault();
-    LoginHandler({ email: email, password: passwd }, setErrorMessage, router);
+    const handlerFactory = new HandlerFactory("login");
+    const loginHandler = handlerFactory.createHandler({
+      email: email,
+      password: passwd,
+    });
+    loginHandler.execute({ setErrorMessage: setErrorMessage, router: router });
   };
   return (
     <>
-      <Form Login errorMessage={errorMessage} onSubmit={handleLogin}>
+      <Form
+        Login
+        errorMessage={errorMessage}
+        onSubmit={handleLogin}
+        submitMessage={"Login"}
+      >
         <>
           <Input
             type="email"

@@ -10,7 +10,7 @@ export default function Select({
   name: string;
   value: string;
   onChange: ChangeEventHandler;
-  options: Array<string>;
+  options: Array<{ id: string; name: string }>;
   disabled?: boolean;
 }) {
   return (
@@ -33,11 +33,9 @@ export default function Select({
         <option defaultChecked value={""}>
           --{name}--
         </option>
-        {options.map((option) => (
-          <option
-            key={!option.id ? option : option.id}
-            value={!option.id ? option : option.id}
-          >
+        {options.map((option, index) => (
+          // @ts-ignore
+          <option key={index} value={!option.id ? option : option.id}>
             {/*@ts-ignore*/}
             {!option.name ? option : option.name}
           </option>

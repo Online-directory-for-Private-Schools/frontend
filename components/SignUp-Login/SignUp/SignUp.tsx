@@ -7,7 +7,7 @@ import Radio from "../radio";
 import { InputInterface } from "@/interfaces/Input";
 import { categoryOptions } from "./categoryOptions";
 import SelectLocation from "@/components/SignUp-Login/SelectLocation";
-import { handleSignUp } from "@/requestHandlers/handleSignUp";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 
 function SignUp() {
   // Shared Info between School and Educator
@@ -29,7 +29,8 @@ function SignUp() {
   const router = useRouter();
   const signUpHandler: MouseEventHandler = (e) => {
     e.preventDefault();
-    handleSignUp(
+    const handlerFactory = new HandlerFactory("signup");
+    const signupHandler = handlerFactory.createHandler({
       firstname,
       lastname,
       email,
@@ -37,9 +38,8 @@ function SignUp() {
       passwd,
       category,
       city,
-      setErrorMessage,
-      router
-    );
+    });
+    signupHandler.execute({ setErrorMessage: setErrorMessage, router: router });
   };
 
   categoryOptions.map(

@@ -2,46 +2,78 @@ import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
 import { NextRouter } from "next/router";
 // @ts-ignore
 import cookieCutter from "cookie-cutter";
+import { RequestHandler } from "@/requestHandlers/RequestHandler";
 
-export const handleSignUp: (
-  firstname: string,
-  lastname: string,
-  email: string,
-  phoneNumber: string,
-  passwd: string,
-  category: string,
-  cityId: string,
-  setErrorMessage: Function,
-  router: NextRouter
-) => void = (
-  firstname,
-  lastname,
-  email,
-  phoneNumber,
-  passwd,
-  category,
-  cityId,
-  setErrorMessage,
-  router
-) => {
-  const body = {
-    name: firstname + " " + lastname,
-    email: email,
-    phone_number: phoneNumber,
-    password: passwd,
-    type: category,
-    cityId: cityId,
-  };
+export interface ISignUp {
+  firstname: string;
+  lastname: string;
+  email: string;
+  phoneNumber: string;
+  passwd: string;
+  category: string;
+  cityId: string;
+}
+export class HandleSignUp extends RequestHandler {
+  firstname: string;
+  lastname: string;
+  email: string;
+  phoneNumber: string;
+  passwd: string;
+  category: string;
+  cityId: string;
+  constructor({
+    firstname,
+    lastname,
+    email,
+    phoneNumber,
+    passwd,
+    category,
+    city,
+  }: {
+    firstname: string;
+    lastname: string;
+    email: string;
+    phoneNumber: string;
+    passwd: string;
+    category: string;
+    city: string;
+  }) {
+    super();
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+    this.passwd = passwd;
+    this.category = category;
+    this.cityId = city;
+  }
 
-  console.log(body);
-  apiPostRequestHandler("/auth/register", body).then((res: any) => {
-    if (!!res.error) setErrorMessage(res.error.message);
-    else {
-      setErrorMessage("");
-      cookieCutter.set("token", res.token);
-      if (!res.error && category === "school_owner")
-        router.push("/SchoolRegister");
-      else if (!res.error && category === "student") router.push("/home");
-    }
-  });
-};
+  execute({
+    setErrorMessage,
+    router,
+  }: {
+    setErrorMessage: Function;
+    router: NextRouter;
+  }) {
+    const body = {
+      name: this.firstname + " " + this.lastname,
+      email: this.email,
+      phone_number: this.phoneNumber,
+      password: this.passwd,
+      type: this.category,
+      cityId: this.cityId,
+    };
+
+    super.post("/auth/register", body).then((res: any) => {
+      if (!!res.error) setErrorMessage(res.error.message);
+      else {
+        setErrorMessage("");
+        cookieCutter.set("token", res.token);
+        if (!res.error && this.category === "school_owner")
+          router.push("/SchoolRegister").catch((e: Error) => console.error(e));
+        else if (!res.error && this.category === "student")
+          router.push("/home").catch((e: Error) => console.error(e));
+      }
+    });
+  }
+}
