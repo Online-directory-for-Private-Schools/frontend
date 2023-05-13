@@ -1,4 +1,4 @@
-import { RequestHandler } from "@/requestHandlers/RequestHandler";
+import { RequestHandler } from "@/requestHandlers/REST-Handler/RequestHandler";
 import { NextRouter } from "next/router";
 import { object, Requireable } from "prop-types";
 const cookieCutter = require("cookie-cutter");

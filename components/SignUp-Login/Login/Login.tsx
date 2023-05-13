@@ -20,6 +20,7 @@ export default function LogIn() {
       email: email,
       password: passwd,
     });
+    // @ts-ignore
     loginHandler.execute({ setErrorMessage: setErrorMessage, router: router });
   };
   return (

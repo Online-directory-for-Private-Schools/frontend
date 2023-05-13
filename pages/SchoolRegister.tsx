@@ -1,15 +1,14 @@
 import React, { MouseEventHandler, useState } from "react";
 import Input from "@/components/SignUp-Login/input";
-import InputGrp from "@/components/SignUp-Login/InputGrp";
-import Select from "@/components/SignUp-Login/Select";
 import TextArea from "@/components/SignUp-Login/TextArea";
 import Radio from "@/components/SignUp-Login/radio";
 import { RadioButton } from "@/interfaces/radioButton";
 import Form from "@/components/SignUp-Login/form";
-import { handleSchoolRegister } from "@/requestHandlers/SchoolRegisterHandler";
 import { useRouter } from "next/router";
-import { useCookie } from "next-cookie";
 import Navbar from "@/components/SignUp-Login/navbar";
+import SelectLocation from "@/components/SignUp-Login/SelectLocation";
+import { useCookies } from "react-cookie";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 const SchoolRegister = () => {
   let MAX_BIO_SIZE = 512;
 
@@ -18,18 +17,29 @@ const SchoolRegister = () => {
   const [isHiring, setIsHiring] = useState(false);
   const [bio, setBio] = useState("");
   const [street, setStreet] = useState("");
-  const [cityName, setCityName] = useState("");
+  const [cityId, setCityName] = useState("");
   const [province, setProvince] = useState("");
   const [country, setCountry] = useState("");
 
-  const countries = ["Algeria"];
-  const provinces = ["Algiers"];
-  const cities = [
-    "Mahelma",
-    "Sidi Abdelah",
-    "Zeralda",
-    "Bordj El Bahri",
-    "Ain Taya",
+  const address = [
+    {
+      name: "Country",
+      value: country,
+      onChange: (e: any) => setCountry(e.target.value),
+    },
+    {
+      name: "Province",
+      value: province,
+      onChange: (e: any) => {
+        console.log(e.target.value);
+        setProvince(e.target.value);
+      },
+    },
+    {
+      name: "City",
+      value: cityId,
+      onChange: (e: any) => setCityName(e.target.value),
+    },
   ];
   const hiringOpts: Array<RadioButton> = [
     {
@@ -46,42 +56,30 @@ const SchoolRegister = () => {
     },
   ];
 
-  const locationRow1 = [
-    {
-      name: "Country",
-      value: country,
-      onChange: (e: any) => setCountry(e.target.value),
-      options: countries,
-    },
-    {
-      name: "Province",
-      value: province,
-      onChange: (e: any) => setProvince(e.target.value),
-      options: provinces,
-    },
-  ];
-
   // error message
   let [message, setErrorMessage] = useState("");
-  const userToken = useCookie("TOKEN");
-  console.log(userToken);
   const router = useRouter();
+  const [cookie, setUserToken] = useCookies(["token"]);
   const schoolRegisterHandler: MouseEventHandler = (e) => {
     e.preventDefault();
     const jwt = require("jsonwebtoken");
-    const user = jwt.decode(userToken);
-    handleSchoolRegister(
+    const user = jwt.decode(cookie.token);
+    const handlerFactory = new HandlerFactory("school-register");
+    const schoolRegisterHandler = handlerFactory.createHandler({
       schoolName,
       bio,
       isHiring,
-      country,
-      province,
-      cityName,
+      cityId,
       street,
-      user.id,
-      setErrorMessage,
-      router
-    );
+      userId: user.id,
+      lng: 0,
+      lat: 0,
+    });
+    // @ts-ignore
+    schoolRegisterHandler.execute({
+      setErrorMessage: setErrorMessage,
+      router: router,
+    });
   };
   return (
     <div>
@@ -90,6 +88,7 @@ const SchoolRegister = () => {
         CreateSchool
         errorMessage={message}
         onSubmit={schoolRegisterHandler}
+        submitMessage={"Create School"}
       >
         <>
           <Input
@@ -98,21 +97,14 @@ const SchoolRegister = () => {
             label={"School Name"}
             onChange={(e: any) => setSchoolName(e.target.value)}
           />
-          <InputGrp select inputs={locationRow1} />
-          <div className="flex flex-row gap-5">
-            <Select
-              name="City"
-              value={cityName}
-              options={cities}
-              onChange={(e: any) => setCityName(e.target.value)}
-            />
-            <Input
-              type="text"
-              label="Street"
-              value={street}
-              onChange={(e: any) => setStreet(e.target.value)}
-            />
-          </div>
+
+          <SelectLocation inputs={address} />
+          <Input
+            type="text"
+            label="Street"
+            value={street}
+            onChange={(e: any) => setStreet(e.target.value)}
+          />
 
           <TextArea
             name={"School Bio"}

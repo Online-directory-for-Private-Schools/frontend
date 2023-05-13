@@ -3,7 +3,7 @@ import Navbar from "../navbar";
 import { useRouter } from "next/router";
 import Form from "../form";
 import Input from "../input";
-import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 
 export default function ChangePassword() {
   const [currentPasswd, setCurrentPasswd] = useState("");
@@ -22,6 +22,7 @@ export default function ChangePassword() {
   const router = useRouter();
   const handleSubmit: MouseEventHandler = (e) => {
     e.preventDefault();
+    const handlerFactory = new HandlerFactory("signup");
     if (newPasswd !== confirmPasswd) {
       setErrorMessage("New password and Confirm password do not match.");
       return;
@@ -37,15 +38,15 @@ export default function ChangePassword() {
       new_email: newEmail,
       confirm_email: confirmEmail,
     };
-    apiPostRequestHandler(
-      "/auth/changepassword",
-      body,
-      setErrorMessage,
-      true
-    ).then((success: boolean) => {
-      console.log(success);
-      if (success) router.push("/");
-    });
+    //   apiPostRequestHandler(
+    //     "/auth/changepassword",
+    //     body,
+    //     setErrorMessage,
+    //     true
+    //   ).then((success: boolean) => {
+    //     console.log(success);
+    //     if (success) router.push("/");
+    //   });
   };
   return (
     <>

@@ -1,5 +1,4 @@
 import cookie from "js-cookie";
-import { NextRouter } from "next/router";
 
 export class RequestHandler {
   async post(route: string, body: object) {
@@ -8,7 +7,7 @@ export class RequestHandler {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + cookie.get("TOKEN"),
+          Authorization: "Bearer " + cookie.get("token"),
         },
         body: JSON.stringify(body),
       }).then((res) => res.json());

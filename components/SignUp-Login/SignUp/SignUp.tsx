@@ -39,6 +39,7 @@ function SignUp() {
       category,
       city,
     });
+    // @ts-ignore
     signupHandler.execute({ setErrorMessage: setErrorMessage, router: router });
   };
 

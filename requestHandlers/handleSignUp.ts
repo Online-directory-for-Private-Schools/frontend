@@ -1,8 +1,7 @@
-import apiPostRequestHandler from "@/requestHandlers/apiPostRequestHandler";
 import { NextRouter } from "next/router";
 // @ts-ignore
 import cookieCutter from "cookie-cutter";
-import { RequestHandler } from "@/requestHandlers/RequestHandler";
+import { RequestHandler } from "@/requestHandlers/REST-Handler/RequestHandler";
 
 export interface ISignUp {
   firstname: string;
@@ -11,7 +10,7 @@ export interface ISignUp {
   phoneNumber: string;
   passwd: string;
   category: string;
-  cityId: string;
+  city: string;
 }
 export class HandleSignUp extends RequestHandler {
   firstname: string;
@@ -20,7 +19,7 @@ export class HandleSignUp extends RequestHandler {
   phoneNumber: string;
   passwd: string;
   category: string;
-  cityId: string;
+  city: string;
   constructor({
     firstname,
     lastname,
@@ -45,7 +44,7 @@ export class HandleSignUp extends RequestHandler {
     this.phoneNumber = phoneNumber;
     this.passwd = passwd;
     this.category = category;
-    this.cityId = city;
+    this.city = city;
   }
 
   execute({
@@ -61,7 +60,7 @@ export class HandleSignUp extends RequestHandler {
       phone_number: this.phoneNumber,
       password: this.passwd,
       type: this.category,
-      cityId: this.cityId,
+      cityId: this.city,
     };
 
     super.post("/auth/register", body).then((res: any) => {

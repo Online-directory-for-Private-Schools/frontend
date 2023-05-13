@@ -1,6 +1,10 @@
 import { HandleLogin, ILogin } from "@/requestHandlers/handleLogin";
 import { HandleSignUp, ISignUp } from "@/requestHandlers/handleSignUp";
-import { RequestHandler } from "@/requestHandlers/RequestHandler";
+import { RequestHandler } from "@/requestHandlers/REST-Handler/RequestHandler";
+import {
+  HandleSchoolRegister,
+  ISchool,
+} from "@/requestHandlers/handleSchoolRegiser";
 
 export class HandlerFactory {
   type: string;
@@ -14,8 +18,11 @@ export class HandlerFactory {
     } else if (this.type === "signup") {
       if (!body) throw Error("Body not provided");
       return new HandleSignUp(<ISignUp>body);
-    } else if ("general") {
+    } else if (this.type === "general") {
       return new RequestHandler();
+    } else if (this.type === "school-register") {
+      if (!body) throw Error("Body not provided");
+      return new HandleSchoolRegister(<ISchool>body);
     } else {
       throw Error("Undefined Type of Request Handler");
     }
