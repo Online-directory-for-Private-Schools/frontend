@@ -10,3 +10,26 @@ function ChangePassword() {
 }
 
 export default ChangePassword;
+
+export async function getServerSideProps({
+  req,
+  res,
+}: {
+  req: NextApiRequest;
+  res: NextApiResponse;
+}) {
+  const cookie = new Cookies(req, res);
+  const token = cookie.get("token");
+
+  if (token === "" || !token)
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+
+  return {
+    props: {},
+  };
+}

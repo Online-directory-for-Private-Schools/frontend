@@ -15,7 +15,7 @@ export default function Navbar({
   links,
 }: {
   loggedIn?: boolean;
-  links: Array<{ title: string; route: string }>;
+  links?: Array<{ title: string; route: string }>;
 }) {
   let [clicked, setClicked] = useState(false);
   let [profileMenu, setProfileMenu] = useState(false);

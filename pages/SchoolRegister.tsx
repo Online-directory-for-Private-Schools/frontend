@@ -9,6 +9,8 @@ import Navbar from "@/components/SignUp-Login/navbar";
 import SelectLocation from "@/components/SignUp-Login/SelectLocation";
 import { useCookies } from "react-cookie";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { NextApiRequest, NextApiResponse } from "next";
+const Cookies = require("cookies");
 const SchoolRegister = () => {
   let MAX_BIO_SIZE = 512;
 
@@ -129,3 +131,26 @@ const SchoolRegister = () => {
 };
 
 export default SchoolRegister;
+
+export async function getServerSideProps({
+  req,
+  res,
+}: {
+  req: NextApiRequest;
+  res: NextApiResponse;
+}) {
+  const cookie = new Cookies(req, res);
+  const token = cookie.get("token");
+
+  if (token === "" || !token)
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+
+  return {
+    props: {},
+  };
+}
