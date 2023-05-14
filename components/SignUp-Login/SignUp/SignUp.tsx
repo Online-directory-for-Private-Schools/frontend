@@ -29,6 +29,10 @@ function SignUp() {
   const router = useRouter();
   const signUpHandler: MouseEventHandler = (e) => {
     e.preventDefault();
+    if (email === "" || passwd === "") {
+      setErrorMessage("Please enter a valid email or password");
+      return;
+    }
     const handlerFactory = new HandlerFactory("signup");
     const signupHandler = handlerFactory.createHandler({
       firstname,

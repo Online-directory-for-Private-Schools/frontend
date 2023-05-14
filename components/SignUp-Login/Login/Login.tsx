@@ -15,6 +15,11 @@ export default function LogIn() {
   const router = useRouter();
   const handleLogin: MouseEventHandler = (e) => {
     e.preventDefault();
+
+    if (email === "" || passwd === "") {
+      setErrorMessage("Please enter a valid email or password");
+      return;
+    }
     const handlerFactory = new HandlerFactory("login");
     const loginHandler = handlerFactory.createHandler({
       email: email,
