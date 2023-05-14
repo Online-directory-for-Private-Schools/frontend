@@ -22,7 +22,7 @@ export default function Home({ username }: { username?: string }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar loggedIn={!!username} links={links} />
+      <Navbar landing loggedIn={!!username} links={links} />
       <Hero />
       <Footer />
     </>

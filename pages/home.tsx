@@ -13,7 +13,7 @@ const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
 export default function home() {
   return (
     <>
-      <Navbar loggedIn />
+      <Navbar home loggedIn />
       <HomeScreenDashBoard schools={schools} courses={courses} />
     </>
   );

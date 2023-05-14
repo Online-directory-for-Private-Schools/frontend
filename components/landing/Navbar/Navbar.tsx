@@ -11,9 +11,13 @@ import { useRouter } from "next/router";
 const cookieCutter = require("cookie-cutter");
 
 export default function Navbar({
+  home,
+  landing,
   loggedIn,
   links,
 }: {
+  home?: boolean;
+  landing?: boolean;
   loggedIn?: boolean;
   links?: Array<{ title: string; route: string }>;
 }) {
@@ -47,7 +51,7 @@ export default function Navbar({
   const logoutHandler: MouseEventHandler = (e) => {
     e.stopPropagation();
     cookieCutter.set("token", "");
-    router.push("/login");
+    router.push("/login").catch((e) => console.error(e));
   };
 
   const login: String = "login";
@@ -57,6 +61,9 @@ export default function Navbar({
 
   let [scrolled, setScrolled] = useState(false);
 
+  const Redirect = () => {
+    router.push(landing ? "/home" : "/").catch((e) => console.error(e));
+  };
   return (
     <div
       className={
@@ -75,11 +82,14 @@ export default function Navbar({
       >
         <div className={"w-[10%] lg:w-[25%] flex justify-left pl-2"}>
           <Image
-            className={" hidden lg:block bg-dark-blue p-1 rounded-xl"}
+            className={
+              "cursor-pointers hidden lg:block bg-dark-blue p-1 rounded-xl"
+            }
             src={logo.src}
             alt={"logo"}
             width={200}
             height={36}
+            onClick={Redirect}
           />
           <Image
             className={"lg:hidden block cursor-pointer "}
@@ -114,22 +124,23 @@ export default function Navbar({
               }
             >
               <ul>
-                {links.map((link, index) => (
-                  <Link
-                    key={index}
-                    href={link.route}
-                    draggable={"false"}
-                    onClick={(e: any) => e.stopPropagation()}
-                  >
-                    <li
-                      className={
-                        index == 0 ? "link p-5" : "link p-5 border-t-2"
-                      }
+                {!!links &&
+                  links.map((link, index) => (
+                    <Link
+                      key={index}
+                      href={link.route}
+                      draggable={"false"}
+                      onClick={(e: any) => e.stopPropagation()}
                     >
-                      {link.title}
-                    </li>
-                  </Link>
-                ))}
+                      <li
+                        className={
+                          index == 0 ? "link p-5" : "link p-5 border-t-2"
+                        }
+                      >
+                        {link.title}
+                      </li>
+                    </Link>
+                  ))}
               </ul>
             </div>
           </div>
