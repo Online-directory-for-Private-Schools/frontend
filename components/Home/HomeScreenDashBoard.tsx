@@ -16,10 +16,12 @@ const createBooleanArray = (number: number): Array<boolean> => {
 export default function HomeScreenDashBoard({
   schools,
   courses,
+  course,
 }: // courses,
 {
   schools?: Array<SchoolCardProps>;
   courses?: Array<CourseCardProps>;
+  course: boolean;
 }) {
   let [ratingArray, setRatingArray] = useState(createBooleanArray(6));
   let [priceArray, setPriceArray] = useState(createBooleanArray(5));
@@ -30,8 +32,6 @@ export default function HomeScreenDashBoard({
   let [country, setCountry] = useState("");
   let [province, setProvince] = useState("");
   let [city, setCityName] = useState("");
-
-  let [course, setCourse] = useState(false);
 
   const address = [
     {
@@ -106,7 +106,7 @@ export default function HomeScreenDashBoard({
         )}
       </div>
       <div className="flex-1 w-full h-2 justify-center">
-        <TabBar course={course} setCourse={setCourse} />
+        <TabBar />
         <div
           className={
             "m-5 p-5 rounded-xl [&>*]:m-3 flex flex-col justify-items-center flex-wrap"

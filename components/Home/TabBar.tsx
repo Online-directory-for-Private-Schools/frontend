@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CourseContext } from "@/pages/home";
 
-export default function TabBar({ course, setCourse }: { course: boolean, setCourse: Function }) {
+export default function TabBar() {
+  const { course, setCourse } = useContext(CourseContext);
 
   const notSelectedLeft =
     "align-center font-bold text-2xl w-[50%] text-center  p-5 bg-cyan-600/20 rounded-l-[14px] cursor-pointer";
 
   const notSelectedRight =
     "align-center font-bold text-2xl w-[50%] text-center  p-5 bg-cyan-600/20 rounded-r-[14px] cursor-pointer";
-    
+
   const selectedLeft =
     "align-center font-bold text-2xl w-[50%] text-center  p-5 bg-green text-white rounded-l-[14px] cursor-pointer";
   const selectedRight =
