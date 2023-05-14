@@ -1,13 +1,8 @@
 import React from "react";
 import { SchoolCardProps } from "@/interfaces/SchoolCard";
 import Image from "next/image";
-import Logo from "@/public/School_Logo.svg";
-import Link from "next/link";
-import { AiTwotoneStar } from "react-icons/ai";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
-import { BiMap } from "react-icons/bi";
-import TabBar from "../Home/TabBar";
-import { useState } from "react";
+
+
 
 
 
@@ -54,107 +49,89 @@ export const SchoolCardList = () => {
       googleMapLocation: "Location 5",
       initialFavorite: false,
       rating: 4,
-      description: "Lorem ipsum dolor sit amet",
+      description: "Lorem ipsum dolor sit amet"
+    },
+    {
+      schoolName: "School 6",
+      schoolCity: "City 6",
+      googleMapLocation: "Location 6",
+      initialFavorite: false,
+      rating: 4,
+      description: "Lorem ipsum dolor sit amet"
     }
   ];
 
   return (
-    <div className="container">
-      <div className="row">
-        {schools.map((school, index) => (
-          <div key={index} className="col-md-4 mb-4">
-            <SchoolCard SchoolProps={school} />
-          </div>
-        ))}
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {schools.map((school, index) => (
+      <div key={index} className="rounded-lg mb-8 overflow-hidden">
+        <SchoolCard SchoolProps={school} />
       </div>
-    </div>
+    ))}
+  </div>
+</div>
+
   );
 };
 
 
 
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { fontFamily } from "@mui/system";
-import { red } from "@mui/material/colors";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
+
+export default function TabBarProfile({ course, setCourse }: { course: boolean, setCourse: Function }) {
+
+  const notSelectedLeft =
+    "align-center font-bold text-2xl w-[50%] text-center  p-5 bg-cyan-600/20 rounded-l-[14px] opacity-75 hover:opacity-90 cursor-pointer";
+
+  const notSelectedRight =
+    "align-center font-bold text-2xl w-[50%] text-center  p-5 bg-cyan-600/20 rounded-r-[14px] opacity-75 hover:opacity-90 cursor-pointer";
+    
+  const selectedLeft =
+    "align-center font-bold text-2xl  w-[50%] md:w-[65%] text-center transition-all duration-350  text-center transition-opacity duration-500 p-5 bg-green text-white rounded-l-[14px] cursor-pointer";
+  const selectedRight =
+    "align-center font-bold text-2xl  w-[50%] md:w-[65%] text-center transition-all duration-350 text-center transition-opacity duration-500 p-5 bg-green text-white rounded-r-[14px] cursor-pointer ]";
+  return (
+    <div className="flex flex-row justify-around  rounded-2x m-5">
+      <div
+        className={!course ? selectedLeft : notSelectedLeft}
+        onClick={() => setCourse(false)}
+      >
+        Course
+      </div>
+      <div
+        className={course ? selectedRight : notSelectedRight}
+        onClick={() => setCourse(true)}
+      >
+        Gallery
+      </div>
+    </div>
+  );
 }
 
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+
+
+ export function SchoolTab() {
+  const [course, setCourse] = React.useState(false);
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
+    <div>
+      <TabBarProfile course={course} setCourse={setCourse} />
+      {course ? (
+        <div className="min-h-[25rem]">
+          <h1>Gallery</h1>
+          <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nytimes.com%2F2021%2F07%2F12%2Fbriefing%2Fremote-learning-covid.html&psig=AOvVaw0uX9NhT0zYEuGijFFFwUtv&ust=1682875148586000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLD4sM3Mz_4CFQAAAAAdAAAAABAE" alt="" />
+        </div>
+      ) : (
+        <div>
+          <Button>Edit Course</Button>
+          <SchoolCardList />
+        </div>
       )}
     </div>
   );
 }
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
-export function SchoolTab() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  let [course , setCourse] = useState(false);
-  return (
-    <div>
-    {/* <Box sx={{ width: '87%', bgcolor: '#D9D9D9',  ml:9}}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-          <Tab sx={{color:red, ml:20, mr:15}} label="Courses" {...a11yProps(0)} />
-          <Tab sx={{color:red, ml:15, mr:20}} label="Gallery" {...a11yProps(1)} />
-        </Tabs>
-        {value === 0 && (
-          <Button sx={{ ml: 30 , color:"#ccc", background:"#1ACD77"}} variant="contained" >
-            <span style={{color:"#1ACD77", fontFamily:"Niramit"}}>Edit Course</span>
-            
-          </Button>
-        )}
-        {value === 1 && (
-          <Button sx={{ ml: 30 }} variant="contained">
-            <span style={{color:"#1ACD77", fontFamily:"Niramit"}}>Edit Gallery</span>
-          </Button>
-        )}
-      </Box>
-      <TabPanel value={value} index={0}>
-        <SchoolCardList />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Photos
-          <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nytimes.com%2F2021%2F07%2F12%2Fbriefing%2Fremote-learning-covid.html&psig=AOvVaw0uX9NhT0zYEuGijFFFwUtv&ust=1682875148586000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLD4sM3Mz_4CFQAAAAAdAAAAABAE" alt="" />
-      </TabPanel>
-    </Box> */}
-    <TabBar course = {course} setCourse={setCourse} />
-    </div>
-  );
-}
-
 
 
 
@@ -164,7 +141,7 @@ export function SchoolTab() {
 
 export function SchoolProfile() {
   return (
-    <div className="container-1">
+    <>
       <div className="hero">
         <div className="SchoolMain">
           <Image 
@@ -201,7 +178,7 @@ export function SchoolProfile() {
         <p>Email: info@schoolname.com</p>
       </div>
       <SchoolTab />
-    </div>
+    </>
   );
 }
 
