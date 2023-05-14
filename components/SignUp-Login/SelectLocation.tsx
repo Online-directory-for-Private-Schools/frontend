@@ -44,7 +44,7 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
   };
   return (
     <>
-      <div className="flex justify-between gap-5">
+      <div className="flex flex-col md:flex-row justify-between gap-5">
         <>
           <Select
             // @ts-ignore
@@ -65,14 +65,14 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
             }}
             // @ts-ignore
             options={provinces}
-            disabled={provinces.length === 0}
+            disabled={provinces.length === 0 || inputs[0].value === ""}
           />
         </>
       </div>
       <Select
         name={inputs[2].name}
         value={inputs[2].value}
-        disabled={cities.length === 0}
+        disabled={cities.length === 0 || inputs[1].value === ""}
         options={cities}
         onChange={(e: any) => inputs[2].onChange(e)}
       />

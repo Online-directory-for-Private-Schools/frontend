@@ -27,7 +27,32 @@ export default function HomeScreenDashBoard({
   let [middleValues, setMiddleValues] = useState(createBooleanArray(4));
   let [secondaryValues, setSecondaryValues] = useState(createBooleanArray(3));
 
+  let [country, setCountry] = useState("");
+  let [province, setProvince] = useState("");
+  let [city, setCityName] = useState("");
+
   let [course, setCourse] = useState(false);
+
+  const address = [
+    {
+      name: "Country",
+      value: country,
+      onChange: (e: any) => setCountry(e.target.value),
+    },
+    {
+      name: "Province",
+      value: province,
+      onChange: (e: any) => {
+        console.log(e.target.value);
+        setProvince(e.target.value);
+      },
+    },
+    {
+      name: "City",
+      value: city,
+      onChange: (e: any) => setCityName(e.target.value),
+    },
+  ];
 
   const phases = [
     {
@@ -66,6 +91,7 @@ export default function HomeScreenDashBoard({
               values: ratingArray,
               onChange: setRatingArray,
             }}
+            address={address}
           />
         )}
         {course && (
@@ -75,6 +101,7 @@ export default function HomeScreenDashBoard({
               values: priceArray,
               onChange: setPriceArray,
             }}
+            address={address}
           />
         )}
       </div>

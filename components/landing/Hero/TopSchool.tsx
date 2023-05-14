@@ -15,7 +15,7 @@ const TopSchools = ({ topSchools }: { topSchools: Array<SchoolCardProps> }) => {
           className={
             "text-white bg-green p-4 rounded-xl w-40 m-auto duration-300 hover:shadow-[2px_2px_3px] hover:shadow-gray-800/40"
           }
-          href={"#"}
+          href={"/home"}
         >
           Browse All
         </Link>
