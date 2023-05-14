@@ -18,7 +18,7 @@ export class RequestHandler {
 
   async get(route: string, query?: string) {
     try {
-      query = !query ? "" : "/?" + query;
+      query = !query ? "" : query;
       let res = await fetch(
         process.env.NEXT_PUBLIC_BACKEND_URL + route + query,
         {

@@ -44,9 +44,9 @@ export default function LogIn() {
             value={passwd}
             onChange={(e: any) => setPasswd(e.target.value)}
           />
-          <div className="text-right hover:underline">
-            <Link href={"/changepassword"}> Forgot password ?</Link>
-          </div>
+          {/*<div className="text-right hover:underline">*/}
+          {/*  <Link href={"/changepassword"}> Forgot password ?</Link>*/}
+          {/*</div>*/}
         </>
       </Form>
     </>

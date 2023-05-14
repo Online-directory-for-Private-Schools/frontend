@@ -197,22 +197,22 @@ const SchoolCard = ({
                 <h2 className={"my-auto"}>{schoolCity}</h2>
               </Link>
             </div>
-            <div className="flex flex-row justify-end ">
-              <button
-                className={"flex flex-row gap-2"}
-                onClick={toggleFavorite}
-              >
-                {!favorite ? (
-                  <BsBookmark className=" my-auto fill-green" />
-                ) : (
-                  <BsBookmarkFill className="my-auto fill-green" />
-                )}
-                <p className={"text-sm my-auto"}>Add to favourites</p>
-              </button>
-            </div>
-            <div className="flex flex-row justify-start pt-2 ">
-              {renderStars(rating)}
-            </div>
+            {/*<div className="flex flex-row justify-end ">*/}
+            {/*  <button*/}
+            {/*    className={"flex flex-row gap-2"}*/}
+            {/*    onClick={toggleFavorite}*/}
+            {/*  >*/}
+            {/*    {!favorite ? (*/}
+            {/*      <BsBookmark className=" my-auto fill-green" />*/}
+            {/*    ) : (*/}
+            {/*      <BsBookmarkFill className="my-auto fill-green" />*/}
+            {/*    )}*/}
+            {/*    <p className={"text-sm my-auto"}>Add to favourites</p>*/}
+            {/*  </button>*/}
+            {/*</div>*/}
+            {/*<div className="flex flex-row justify-start pt-2 ">*/}
+            {/*  {renderStars(rating)}*/}
+            {/*</div>*/}
           </div>
         </div>
       </div>
