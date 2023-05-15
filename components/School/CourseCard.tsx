@@ -20,7 +20,7 @@ const CourseCard = ({
   courseCardProps: CourseCardProps;
 }) => {
   return (
-    <div className="relative flex flex-col w-[350px] bg-dark-blue text-white border-2 rounded-xl ">
+    <div className="relative flex flex-col w-[350px] h-[500px] bg-dark-blue text-white border-2 rounded-xl ">
       <Image
         className="w-full h-[150px] "
         src={placeHolder.src}

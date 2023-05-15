@@ -1,4 +1,5 @@
 import React from "react";
+import CourseCard from "./CourseCard";
 import { SchoolCardProps } from "@/interfaces/SchoolCard";
 import TabBar from "../Home/TabBar";
 import { Box, Modal, IconButton } from "@mui/material";
@@ -10,11 +11,6 @@ import Logo from "@/public/School_Logo.svg";
 import SchoolCover from "@/public/school-cover.png"
 import Link from "next/link";
 
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import { fontFamily } from "@mui/system";
-import { red } from "@mui/material/colors";
 
 
 import { BiMap } from "react-icons/bi";
@@ -28,64 +24,67 @@ import { FaMapMarkedAlt } from "react-icons/fa"
 
 import SchoolCard from './SchoolCard';
 
-export const SchoolCardList = () => {
-  const schools = [
+export const CourseCardList = () => {
+  const courses:Array<CourseCardProps> = [
     {
-      schoolName: "School 1",
-      schoolCity: "City 1",
-      googleMapLocation: "Location 1",
-      initialFavorite: false,
-      rating: 4,
-      description: "Lorem ipsum dolor sit amet",
+      SchoolName: "GHI School",
+      CourseName: "Photography",
+      Module: "Lighting and Composition",
+      TeacherName: "Michael Anderson",
+      Level: "Beginner",
+      Year: "2023",
+      Description: "Master the art of capturing stunning photographs with proper lighting and composition techniques.",
+      price: 89.99
     },
     {
-      schoolName: "School 2",
-      schoolCity: "City 2",
-      googleMapLocation: "Location 2",
-      initialFavorite: true,
-      rating: 3,
-      description: "Lorem ipsum dolor sit amet",
+      SchoolName: "DEF Academy",
+      CourseName: "Graphic Design",
+      Module: "Digital Illustration",
+      TeacherName: "Emily Davis",
+      Level: "Intermediate",
+      Year: "2023",
+      Description: "Learn digital illustration techniques using industry-standard software.",
+      price: 129.99
     },
     {
-      schoolName: "School 3",
-      schoolCity: "City 3",
-      googleMapLocation: "Location 3",
-      initialFavorite: false,
-      rating: 5,
-      description: "Lorem ipsum dolor sit amet",
+      SchoolName: "PQR College",
+      CourseName: "Business Management",
+      Module: "Leadership and Organizational Behavior",
+      TeacherName: "Robert Thompson",
+      Level: "Advanced",
+      Year: "2023",
+      Description: "Develop skills in managing teams and leading organizations.",
+      price: 199.99
     },
     {
-      schoolName: "School 4",
-      schoolCity: "City 4",
-      googleMapLocation: "Location 4",
-      initialFavorite: false,
-      rating: 4,
-      description: "Lorem ipsum dolor sit amet",
+      SchoolName: "XYZ Institute",
+      CourseName: "Advanced Mathematics",
+      Module: "Calculus and Differential Equations",
+      TeacherName: "Sarah Johnson",
+      Level: "Intermediate",
+      Year: "2023",
+      Description: "Explore advanced mathematical concepts and their applications.",
+      price: 149.99
     },
     {
-      schoolName: "School 5",
-      schoolCity: "City 5",
-      googleMapLocation: "Location 5",
-      initialFavorite: false,
-      rating: 4,
-      description: "Lorem ipsum dolor sit amet"
-    },
-    {
-      schoolName: "School 6",
-      schoolCity: "City 6",
-      googleMapLocation: "Location 6",
-      initialFavorite: false,
-      rating: 4,
-      description: "Lorem ipsum dolor sit amet"
-    }
+      SchoolName: "ABC University",
+      CourseName: "Introduction to Computer Science",
+      Module: "Fundamentals of Programming",
+      TeacherName: "John Smith",
+      Level: "Beginner",
+      Year: "2023",
+      Description: "Learn the basics of computer programming and problem-solving.",
+      price: 99.99
+    }                
+    
   ];
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {schools.map((school, index) => (
+    {courses.map((course, index) => (
       <div key={index} className="rounded-lg mb-8 overflow-hidden">
-        <SchoolCard SchoolProps={school} />
+        <CourseCard courseCardProps={course} />
       </div>
     ))}
   </div>
@@ -97,6 +96,7 @@ export const SchoolCardList = () => {
 
 
 import Button from '@mui/material/Button';
+import { CourseCardProps } from "@/interfaces/CourseCardProps";
 
 
 export default function TabBarProfile({ course, setCourse }: { course: boolean, setCourse: Function }) {
@@ -145,7 +145,7 @@ export default function TabBarProfile({ course, setCourse }: { course: boolean, 
       ) : (
         <div>
           <Button>Edit Course</Button>
-          <SchoolCardList />
+          <CourseCardList />
         </div>
       )}
     </div>
