@@ -1,6 +1,5 @@
 import React from "react";
 import { SchoolCardProps } from "@/interfaces/SchoolCard";
-import { BiMap } from "react-icons/bi";
 import TabBar from "../Home/TabBar";
 import { Box, Modal, IconButton } from "@mui/material";
 import { useState } from "react";
@@ -18,6 +17,11 @@ import { fontFamily } from "@mui/system";
 import { red } from "@mui/material/colors";
 
 
+import { BiMap } from "react-icons/bi";
+import { AiOutlineGlobal  } from "react-icons/ai"
+import { BsFillTelephoneFill } from "react-icons/bs"
+import { MdEmail } from "react-icons/md"
+import { FaMapMarkedAlt } from "react-icons/fa"
 
 
 
@@ -167,10 +171,11 @@ export const renderStars = (rating: number) => {
 
 export function SchoolProfile() {
   return (
-    <div className="mt-12">
+    <div className="mt-[6rem] oveflow-hidden">
 
-    <div className=" h-[650px] b w-[98vw] p-[50px] grid text-white grid-cols-[2fr,1fr] grid-rows-[1fr,120px,95px] gap-[20px] ">
-      <div className="hero max-h-[300px] h-full items-start bg-dark-blue flex overflow-hidden  rounded-[15px] flex-col text-white justify-items-stretch  " style={{ gridRow: '1/2' }}>
+    <div className=" w-[97vw] px-[50px] md:grid text-white md:grid-cols-[2fr,1fr] md:grid-rows-[1fr,120px,95px] gap-[20px] flex-col flex">
+
+      <div className="md:max-h-[300px] min-h-[300px] mh-full items-start bg-dark-blue flex overflow-hidden rounded-[15px] flex-col text-white justify-items-stretch  " style={{ gridRow: '1/2' }}>
 
         <div className="min-w-[100%] min-h-[45%] max-h-[55%]  bg-green overflow-hidden">
         <Image
@@ -182,7 +187,7 @@ export function SchoolProfile() {
           />
         </div>
 
-        <div className="w-full flex lg:px-10 px-5 sm:p-0">
+        <div className="w-full flex lg:px-10 sm:px-5 p-3">
           <div className="w-[15%] ">
             <Image
               className={"w-fullh-full rounded-xl bg-gray-400"}
@@ -225,27 +230,51 @@ export function SchoolProfile() {
           </div>
           </div>
         </div> 
-        <div className="flex p-10">
+        <div className="flex w-full h-full lg:px-10 sm:px-5  p-3">
           desc desc desc desc desc desc desc 
         </div>
       </div>
 
-      <div className="bg-dark-blue text-white p-[20px] h-full rounded-[10px]  " style={{ gridRow: '1/3' }}>
-        <h2>map</h2>
+      <div className="bg-dark-blue text-white p-[20px] rounded-[10px] flex  " style={{ gridRow: '1/3' }}>
+        <h2 className="m-auto italic">map</h2>
       </div>
 
-      <div className="bg-red-400 align -flex flex-col rounded-[15px]  ">
-        <div className="w-full bg-blue-500">
-            upper
-        </div>      
-        <div className="w-full bg-red-500">
-          lower    
+      <div className="bg-dark-blue flex flex-col rounded-[15px] items-center justify-center overflow-hidden md:h-auto h-[250px] ">
+
+        <div className="w-full flex items-center md:h-1/2 h-3/4 md:justify-around md:flex-row flex-col">
+
+            <div className="flex flex-row my-auto">
+              <BsFillTelephoneFill className="fill-green scale-[120%] m-auto " />
+              <span className="px-2">+213 555 66 77 88</span>
+            </div>
+            <div className=" md:w-[1px] w-[70%] bg-white md:h-[70%] h-[1px] "></div>
+
+            <div className="flex flex-row my-auto ">
+              <MdEmail className="fill-green scale-[120%] m-auto " />
+              <span className="px-2">school@email.com</span>
+            </div>
+            <div className=" md:w-[1px] w-[80%] bg-white md:h-[70%] h-[1px] "></div>
+
+            <div className="flex flex-row my-auto">
+              <AiOutlineGlobal className="fill-green scale-[120%] m-auto "/>
+              <span className="px-2">school.website.com</span>
+            </div>
+            
+        </div>    
+
+        <div className=" h-[1px] bg-white w-[85%] "></div>  
+        
+        <div className="w-full flex justify-center items-center h-1/4 md:h-1/2 m-auto">
+        <div className="flex flex-row my-auto">
+              <FaMapMarkedAlt className="fill-green scale-[120%] m-auto "/>
+              <span className=" px-2">school adress street city zipcode</span>
+            </div>   
         </div>    
       
       
       </div>
     </div>
-      <SchoolTab />
+      <SchoolTab /> 
     </div>
   );
 }
