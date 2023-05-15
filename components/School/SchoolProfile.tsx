@@ -1,6 +1,21 @@
 import React from "react";
 import { SchoolCardProps } from "@/interfaces/SchoolCard";
+import { BiMap } from "react-icons/bi";
+import TabBar from "../Home/TabBar";
+import { Box, Modal, IconButton } from "@mui/material";
+import { useState } from "react";
+import { AiTwotoneStar, AiFillCloseCircle } from "react-icons/ai";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
+import Logo from "@/public/School_Logo.svg";
+import SchoolCover from "@/public/school-cover.png"
+import Link from "next/link";
+
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import { fontFamily } from "@mui/system";
+import { red } from "@mui/material/colors";
 
 
 
@@ -133,7 +148,18 @@ export default function TabBarProfile({ course, setCourse }: { course: boolean, 
   );
 }
 
-
+export const renderStars = (rating: number) => {
+  const stars = [];
+  for (let i = 1; i <= 5; i++) {
+    stars.push(
+      <AiTwotoneStar
+        key={`star-${i}`}
+        className={`${i <= rating ? "fill-amber-500" : "fill-amber-100"}`}
+      />
+    );
+  }
+  return stars;
+};
 
 
 // Should have added a parameter to check the School
@@ -141,44 +167,86 @@ export default function TabBarProfile({ course, setCourse }: { course: boolean, 
 
 export function SchoolProfile() {
   return (
-    <>
-      <div className="hero">
-        <div className="SchoolMain">
-          <Image 
-          src={"/chalal.jpg"}
-          alt="Hi"
-          width={10}
-          height={10}
-          /> 
+    <div className="mt-12">
 
-          
-          <h1>School Name</h1>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <div className="description">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum
-            ullam quasi facilis quam necessitatibus, esse debitis, nihil ad
-            dignissimos similique porro sunt deserunt voluptate eveniet nisi cum.
-            Eius, distinctio similique.
-          </div>
+    <div className=" h-[650px] b w-[98vw] p-[50px] grid text-white grid-cols-[2fr,1fr] grid-rows-[1fr,120px,95px] gap-[20px] ">
+      <div className="hero max-h-[300px] h-full items-start bg-dark-blue flex overflow-hidden  rounded-[15px] flex-col text-white justify-items-stretch  " style={{ gridRow: '1/2' }}>
+
+        <div className="min-w-[100%] min-h-[45%] max-h-[55%]  bg-green overflow-hidden">
+        <Image
+            className={" m-auto  min-h-[100%] min-w-[100%] "}
+            src={SchoolCover.src}
+            width={500}
+            height={100}
+            alt="School"
+          />
         </div>
-        <div className="add-to-favorite">Add to favorite</div>
+
+        <div className="w-full flex lg:px-10 px-5 sm:p-0">
+          <div className="w-[15%] ">
+            <Image
+              className={"w-fullh-full rounded-xl bg-gray-400"}
+              src={Logo.src}
+              width={200}
+              height={100}
+              alt="School"
+            /> 
+          </div>
+          <div className="w-[85%] pl-7 pt-2">
+          <h2 className="font-bold ">schoolName</h2>
+          <div className="pt-2 flex flex-row ">
+            <div className="">
+              <Link
+                className="flex flex-row text-left justify-start"
+                href={`https://www.google.com/maps?q=$`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <BiMap className="my-auto mr-2 fill-green scale-[115%] " />
+                <h2 className={"my-auto"}>schoolCity</h2>
+              </Link>
+            </div>
+            {/*<div className="flex bg-orange-500 flex-row justify-end ">
+               <button
+                className={"flex flex-row gap-2"}
+                onClick=toggleFavorite
+              >
+                {!favorite ? (
+                  <BsBookmark className=" my-auto fill-green" />
+                ) : (
+                  <BsBookmarkFill className="my-auto fill-green" />
+                )}
+                <p className={"text-sm my-auto"}>Add to favourites</p>
+              </button> 
+            </div> */}
+            <div className="flex flex-row justify-start m-auto flex items-center ">
+              {renderStars(5)} <span className="">(x ratings)</span>
+            </div>
+          </div>
+          </div>
+        </div> 
+        <div className="flex p-10">
+          desc desc desc desc desc desc desc 
+        </div>
       </div>
 
-      <div className="map">
+      <div className="bg-dark-blue text-white p-[20px] h-full rounded-[10px]  " style={{ gridRow: '1/3' }}>
         <h2>map</h2>
       </div>
 
-      <div className="info">
-        <h2>Contact Info</h2>
-        <p>Phone Number: 123-456-7890</p>
-        <p>Email: info@schoolname.com</p>
+      <div className="bg-red-400 align -flex flex-col rounded-[15px]  ">
+        <div className="w-full bg-blue-500">
+            upper
+        </div>      
+        <div className="w-full bg-red-500">
+          lower    
+        </div>    
+      
+      
       </div>
+    </div>
       <SchoolTab />
-    </>
+    </div>
   );
 }
 
