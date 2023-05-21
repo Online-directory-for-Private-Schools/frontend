@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import Select from "@/components/SignUp-Login/Select";
 import { SelectInterface } from "@/interfaces/Select.interface";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
-
+import cookie from "js-cookie";
 const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
   let [countries, setCountries] = useState([]);
   let [provinces, setProvinces] = useState([]);
   let [cities, setCities] = useState([]);
   const requestHandlerConstructor = new HandlerFactory("general");
   const requestHandler = requestHandlerConstructor.createHandler();
+
   useEffect(() => {
     requestHandler
-      .get("/addresses/countries")
+      .get("/addresses/countries", "", cookie.get("token") as string)
       .then((res: any) => {
         setCountries(res.data);
       })
@@ -27,7 +28,11 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
   }, [inputs[1].value]);
   const loadProvinces = () => {
     requestHandler
-      .get(`/addresses/provinces/${inputs[0].value}`)
+      .get(
+        `/addresses/provinces/${inputs[0].value}`,
+        "",
+        cookie.get("token") as string
+      )
       .then((res: any) => {
         setProvinces(res.data);
       })
@@ -36,7 +41,11 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
 
   const loadCities = () => {
     requestHandler
-      .get(`/addresses/cities/${inputs[1].value}`)
+      .get(
+        `/addresses/cities/${inputs[1].value}`,
+        "",
+        cookie.get("token") as string
+      )
       .then((res: any) => {
         setCities(res.data);
       })

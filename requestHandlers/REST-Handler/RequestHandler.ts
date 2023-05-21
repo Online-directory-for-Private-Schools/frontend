@@ -16,16 +16,15 @@ export class RequestHandler {
     }
   }
 
-  async get(route: string, query?: string) {
+  async get(route: string, query: string, token: string) {
     try {
-      query = !query ? "" : query;
       let res = await fetch(
         process.env.NEXT_PUBLIC_BACKEND_URL + route + query,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + cookie.get("token"),
+            Authorization: "Bearer " + token,
           },
         }
       ).catch((e) => console.log(e));
