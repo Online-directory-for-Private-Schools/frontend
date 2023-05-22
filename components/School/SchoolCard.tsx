@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiTwotoneStar, AiFillCloseCircle } from "react-icons/ai";
 import { BiMap } from "react-icons/bi";
 import { SchoolCardProps } from "@/interfaces/SchoolCard";
@@ -24,8 +24,8 @@ const SchoolCard = ({
     schoolName,
     schoolCity,
     googleMapLocation,
-    initialFavorite,
-    rating,
+    // initialFavorite,
+    // rating,
     description,
   },
 }: {
@@ -36,13 +36,6 @@ const SchoolCard = ({
   //   e.stopPropagation();
   //   setFavorite(!favorite);
   // };
-
-  const cutoff = `.cutoff-text{
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-  }`;
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
