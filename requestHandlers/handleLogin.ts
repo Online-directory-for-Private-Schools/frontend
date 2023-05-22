@@ -1,6 +1,5 @@
 import { RequestHandler } from "@/requestHandlers/REST-Handler/RequestHandler";
 import { NextRouter } from "next/router";
-import { object, Requireable } from "prop-types";
 const cookieCutter = require("cookie-cutter");
 
 export interface ILogin {
@@ -31,10 +30,11 @@ export class HandleLogin extends RequestHandler {
     };
 
     super.post("/auth/login", body).then((res: any) => {
-      if (!!res.error)
+      if (!!res.error) {
+        setSpinner(false);
         // if an error occurred
         setErrorMessage(res.error.message);
-      else {
+      } else {
         // reset error message
         setErrorMessage("");
         cookieCutter.set("token", res.token);

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { MouseEventHandler, useState } from "react";
+import React, { useState } from "react";
 import Form from "../form";
 import InputGrp from "../InputGrp";
 import Input from "../input";
