@@ -16,7 +16,7 @@ export default function Id(props: { school: ISchoolResp }) {
   return (
     <>
       <Navbar loggedIn />
-      <SchoolProfile school={props.school} />
+      <SchoolProfile school={props.school} courses={[]} />
       <Footer />
     </>
   );

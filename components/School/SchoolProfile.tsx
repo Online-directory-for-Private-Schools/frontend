@@ -12,65 +12,11 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { FaMapMarkedAlt } from "react-icons/fa";
 
-export const CourseCardList = () => {
-  const courses: Array<CourseCardProps> = [
-    {
-      SchoolName: "GHI School",
-      CourseName: "Photography",
-      Module: "Lighting and Composition",
-      TeacherName: "Michael Anderson",
-      Level: "Beginner",
-      Year: "2023",
-      Description:
-        "Master the art of capturing stunning photographs with proper lighting and composition techniques.",
-      price: 89.99,
-    },
-    {
-      SchoolName: "DEF Academy",
-      CourseName: "Graphic Design",
-      Module: "Digital Illustration",
-      TeacherName: "Emily Davis",
-      Level: "Intermediate",
-      Year: "2023",
-      Description:
-        "Learn digital illustration techniques using industry-standard software.",
-      price: 129.99,
-    },
-    {
-      SchoolName: "PQR College",
-      CourseName: "Business Management",
-      Module: "Leadership and Organizational Behavior",
-      TeacherName: "Robert Thompson",
-      Level: "Advanced",
-      Year: "2023",
-      Description:
-        "Develop skills in managing teams and leading organizations.",
-      price: 199.99,
-    },
-    {
-      SchoolName: "XYZ Institute",
-      CourseName: "Advanced Mathematics",
-      Module: "Calculus and Differential Equations",
-      TeacherName: "Sarah Johnson",
-      Level: "Intermediate",
-      Year: "2023",
-      Description:
-        "Explore advanced mathematical concepts and their applications.",
-      price: 149.99,
-    },
-    {
-      SchoolName: "ABC University",
-      CourseName: "Introduction to Computer Science",
-      Module: "Fundamentals of Programming",
-      TeacherName: "John Smith",
-      Level: "Beginner",
-      Year: "2023",
-      Description:
-        "Learn the basics of computer programming and problem-solving.",
-      price: 99.99,
-    },
-  ];
-
+export const CourseCardList = ({
+  courses,
+}: {
+  courses: Array<CourseCardProps>;
+}) => {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -84,7 +30,6 @@ export const CourseCardList = () => {
   );
 };
 
-import Button from "@mui/material/Button";
 import { CourseCardProps } from "@/interfaces/CourseCardProps";
 import { ISchoolResp } from "@/interfaces/ISchoolResp.interface";
 
@@ -102,9 +47,9 @@ export default function TabBarProfile({
     "align-center font-bold text-2xl w-[50%] text-center  p-5 bg-cyan-600/20 rounded-r-[14px] opacity-75 hover:opacity-90 cursor-pointer";
 
   const selectedLeft =
-    "align-center font-bold text-2xl  w-[50%] md:w-[65%] text-center transition-all duration-350  text-center transition-opacity duration-500 p-5 bg-green text-white rounded-l-[14px] cursor-pointer";
+    "align-center font-bold text-2xl  w-[50%] text-center transition-all duration-350  text-center transition-opacity duration-500 p-5 bg-green text-white rounded-l-[14px] cursor-pointer";
   const selectedRight =
-    "align-center font-bold text-2xl  w-[50%] md:w-[65%] text-center transition-all duration-350 text-center transition-opacity duration-500 p-5 bg-green text-white rounded-r-[14px] cursor-pointer ]";
+    "align-center font-bold text-2xl  w-[50%] text-center transition-all duration-350 text-center transition-opacity duration-500 p-5 bg-green text-white rounded-r-[14px] cursor-pointer ]";
   return (
     <div className="flex flex-row justify-around  rounded-2x m-5">
       <div
@@ -123,7 +68,7 @@ export default function TabBarProfile({
   );
 }
 
-export function SchoolTab() {
+export function SchoolTab({ courses }: { courses: Array<CourseCardProps> }) {
   const [course, setCourse] = React.useState(false);
 
   return (
@@ -131,16 +76,21 @@ export function SchoolTab() {
       <TabBarProfile course={course} setCourse={setCourse} />
       {course ? (
         <div className="min-h-[25rem]">
-          <h1>Gallery</h1>
-          <Image
-            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nytimes.com%2F2021%2F07%2F12%2Fbriefing%2Fremote-learning-covid.html&psig=AOvVaw0uX9NhT0zYEuGijFFFwUtv&ust=1682875148586000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLD4sM3Mz_4CFQAAAAAdAAAAABAE"
-            alt=""
-          />
+          <p className={"p-5 m-20 text-4xl font-bold text-center"}>
+            This feature is not available yet
+          </p>
         </div>
       ) : (
         <div>
-          <Button>Edit Course</Button>
-          <CourseCardList />
+          {courses.length === 0 ? (
+            <div className="min-h-[25rem]">
+              <p className={"p-5 m-20 text-4xl font-bold text-center"}>
+                No courses Provided by this school
+              </p>
+            </div>
+          ) : (
+            <CourseCardList courses={courses} />
+          )}
         </div>
       )}
     </div>
@@ -162,7 +112,13 @@ export const renderStars = (rating: number) => {
 
 // Should have added a parameter to check the School
 
-export function SchoolProfile({ school }: { school: ISchoolResp }) {
+export function SchoolProfile({
+  school,
+  courses,
+}: {
+  school: ISchoolResp;
+  courses: Array<CourseCardProps>;
+}) {
   return (
     <div className="mt-[6rem] oveflow-hidden">
       <div className=" w-[97vw] px-[50px] md:grid text-white md:grid-cols-[2fr,1fr] md:grid-rows-[1fr,120px,95px] gap-[20px] flex-col flex">
@@ -234,7 +190,7 @@ export function SchoolProfile({ school }: { school: ISchoolResp }) {
           className="bg-dark-blue text-white p-[20px] rounded-[10px] flex md:h-auto h-[300px] "
           style={{ gridRow: "1/3" }}
         >
-          <h2 className="m-auto italic">map</h2>
+          <h2 className="m-auto italic">Feature not implemented</h2>
         </div>
 
         <div className="bg-dark-blue flex flex-col rounded-[15px] items-center justify-center overflow-hidden md:h-auto h-[250px] ">
@@ -267,7 +223,7 @@ export function SchoolProfile({ school }: { school: ISchoolResp }) {
           </div>
         </div>
       </div>
-      <SchoolTab />
+      <SchoolTab courses={courses} />
     </div>
   );
 }
