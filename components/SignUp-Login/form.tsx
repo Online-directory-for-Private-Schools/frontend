@@ -1,4 +1,9 @@
-import React, { MouseEventHandler, ReactComponentElement } from "react";
+import React, {
+  MouseEventHandler,
+  ReactComponentElement,
+  useState,
+} from "react";
+import Spinner from "@/components/Utils/Spinner";
 
 export default function Form({
   SignUp,
@@ -14,11 +19,12 @@ export default function Form({
   Login?: boolean;
   CreateSchool?: boolean;
   errorMessage: String;
-  onSubmit: MouseEventHandler;
+  onSubmit: Function;
   children?: ReactComponentElement<any>;
   submitMessage?: String;
   title?: String;
 }) {
+  let [spinner, setSpinner] = useState(false);
   return (
     <div className={"bg-white p-12 w-[450px] rounded-xl m-auto mt-20 mb-20"}>
       {!!title && (
@@ -38,11 +44,19 @@ export default function Form({
           <div className="flex justify-center">
             <button
               className="mt-[20px] items-center w-[55%] rounded-xl text-[15px] font-bold bg-green p-2 border-none text-white cursor-pointer duration-300 shadow-sm hover:p-[11px] hover:shadow-[5px_5px_10px_#504f4f]"
-              onClick={onSubmit}
+              onClick={(e) => {
+                setSpinner(true);
+                onSubmit(e, setSpinner);
+              }}
             >
               {submitMessage}
             </button>
           </div>
+          {spinner && (
+            <div className={"m-5"}>
+              <Spinner />
+            </div>
+          )}
           {errorMessage !== "" && (
             <p
               className={

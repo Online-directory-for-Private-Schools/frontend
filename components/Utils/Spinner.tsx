@@ -5,7 +5,7 @@ const Spinner = () => {
   return (
     <div
       className={
-        "w-full h-full bg-gray-400/70 flex justify-center [&>*]:my-auto"
+        "w-full h-full bg-gray-400/0 flex justify-center [&>*]:my-auto"
       }
     >
       <CircularProgress />

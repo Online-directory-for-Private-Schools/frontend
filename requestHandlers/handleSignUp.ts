@@ -49,9 +49,11 @@ export class HandleSignUp extends RequestHandler {
 
   execute({
     setErrorMessage,
+    setSpinner,
     router,
   }: {
     setErrorMessage: Function;
+    setSpinner: Function;
     router: NextRouter;
   }) {
     const body = {
@@ -64,8 +66,10 @@ export class HandleSignUp extends RequestHandler {
     };
 
     super.post("/auth/register", body).then((res: any) => {
-      if (!!res.error) setErrorMessage(res.error.message);
-      else {
+      if (!!res.error) {
+        setSpinner(false);
+        setErrorMessage(res.error.message);
+      } else {
         setErrorMessage("");
         cookieCutter.set("token", res.token);
         if (!res.error && this.category === "school_owner")

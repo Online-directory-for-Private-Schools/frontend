@@ -8,6 +8,7 @@ import { InputInterface } from "@/interfaces/Input";
 import { categoryOptions } from "./categoryOptions";
 import SelectLocation from "@/components/SignUp-Login/SelectLocation";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { HandleSignUp } from "@/requestHandlers/handleSignUp";
 
 function SignUp() {
   // Shared Info between School and Educator
@@ -27,9 +28,13 @@ function SignUp() {
   let [message, setErrorMessage] = useState("");
 
   const router = useRouter();
-  const signUpHandler: MouseEventHandler = (e) => {
+  const signUpHandler: Function = async (
+    e: MouseEvent,
+    setSpinner: Function
+  ) => {
     e.preventDefault();
     if (email === "" || passwd === "") {
+      setSpinner(false);
       setErrorMessage("Please enter a valid email or password");
       return;
     }
@@ -42,9 +47,13 @@ function SignUp() {
       passwd,
       category,
       city,
+    }) as HandleSignUp;
+
+    signupHandler.execute({
+      setErrorMessage: setErrorMessage,
+      setSpinner: setSpinner,
+      router: router,
     });
-    // @ts-ignore
-    signupHandler.execute({ setErrorMessage: setErrorMessage, router: router });
   };
 
   categoryOptions.map(

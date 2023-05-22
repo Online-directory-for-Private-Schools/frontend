@@ -18,9 +18,11 @@ export class HandleLogin extends RequestHandler {
   }
   execute({
     setErrorMessage,
+    setSpinner,
     router,
   }: {
     setErrorMessage: Function;
+    setSpinner: Function;
     router: NextRouter;
   }) {
     const body = {

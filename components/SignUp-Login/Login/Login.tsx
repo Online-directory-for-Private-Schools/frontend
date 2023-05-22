@@ -13,10 +13,11 @@ export default function LogIn() {
   // error message
   let [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
-  const handleLogin: MouseEventHandler = (e) => {
+  const handleLogin: Function = (e: MouseEvent, setSpinner: Function) => {
     e.preventDefault();
 
     if (email === "" || passwd === "") {
+      setSpinner(false);
       setErrorMessage("Please enter a valid email or password");
       return;
     }
@@ -24,9 +25,12 @@ export default function LogIn() {
     const loginHandler = handlerFactory.createHandler({
       email: email,
       password: passwd,
+    }) as HandleLogin;
+    loginHandler.execute({
+      setErrorMessage: setErrorMessage,
+      setSpinner: setSpinner,
+      router: router,
     });
-    // @ts-ignore
-    loginHandler.execute({ setErrorMessage: setErrorMessage, router: router });
   };
   return (
     <>
