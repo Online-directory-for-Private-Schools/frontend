@@ -13,12 +13,12 @@ const Navbar = dynamic(() => import("../../components/landing/Navbar/Navbar"), {
   ssr: false,
 });
 
-export default function Id() {
+export default function Id(props: { school: ISchoolResp }) {
   const router = useRouter();
   return (
     <>
       <Navbar loggedIn />
-      <SchoolProfile />
+      <SchoolProfile school={props.school} />
       <Footer />
     </>
   );
@@ -53,7 +53,8 @@ export async function getServerSideProps({
     };
   }
 
+  console.log(response);
   return {
-    props: { school: response as ISchoolResp },
+    props: { school: response.res.school as ISchoolResp },
   };
 }
