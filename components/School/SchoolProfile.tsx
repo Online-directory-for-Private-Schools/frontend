@@ -1,6 +1,6 @@
 import React from "react";
 import CourseCard from "./CourseCard";
-import { AiTwotoneStar, AiFillCloseCircle } from "react-icons/ai";
+import { AiTwotoneStar } from "react-icons/ai";
 import Image from "next/image";
 import Logo from "@/public/School_Logo.svg";
 import SchoolCover from "@/public/school-cover.png";
@@ -132,7 +132,7 @@ export function SchoolTab() {
       {course ? (
         <div className="min-h-[25rem]">
           <h1>Gallery</h1>
-          <img
+          <Image
             src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nytimes.com%2F2021%2F07%2F12%2Fbriefing%2Fremote-learning-covid.html&psig=AOvVaw0uX9NhT0zYEuGijFFFwUtv&ust=1682875148586000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLD4sM3Mz_4CFQAAAAAdAAAAABAE"
             alt=""
           />

@@ -3,7 +3,6 @@ import Footer from "@/components/landing/Footer/Footer";
 import dynamic from "next/dynamic";
 import React from "react";
 import { NextApiRequest, NextApiResponse } from "next";
-import { useRouter } from "next/router";
 import { NextApiRequestQuery } from "next/dist/server/api-utils";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { ISchoolResp } from "@/interfaces/ISchoolResp.interface";
