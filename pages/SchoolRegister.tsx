@@ -10,6 +10,8 @@ import SelectLocation from "@/components/SignUp-Login/SelectLocation";
 import { useCookies } from "react-cookie";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { NextApiRequest, NextApiResponse } from "next";
+import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
+import { UserType } from "@/interfaces/UserType.enum";
 const Cookies = require("cookies");
 const SchoolRegister = () => {
   let MAX_BIO_SIZE = 512;
@@ -142,6 +144,7 @@ export async function getServerSideProps({
   const cookie = new Cookies(req, res);
   const token = cookie.get("token");
 
+  // Check if user already logged in
   if (token === "" || !token)
     return {
       redirect: {
@@ -150,7 +153,32 @@ export async function getServerSideProps({
       },
     };
 
+  // Check validity of token
+  const handlerFactory = new HandlerFactory("get-user");
+  const getUserHandler = handlerFactory.createHandler({
+    token: token,
+  }) as HandleGetUser;
+
+  const resp = await getUserHandler.execute();
+  if (resp.success)
+    if (resp.user.type === UserType.SCHOOL_OWNER)
+      return {
+        props: {},
+      };
+    else
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/home",
+        },
+      };
+
+  cookie.set("token", "");
+
   return {
-    props: {},
+    redirect: {
+      permanent: false,
+      destination: "/login",
+    },
   };
 }

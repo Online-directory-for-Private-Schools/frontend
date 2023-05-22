@@ -4,6 +4,9 @@ import Hero from "@/components/landing/Hero/Hero";
 import dynamic from "next/dynamic";
 import { NextApiRequest, NextApiResponse } from "next";
 import { links } from "@/components/landing/Navbar/links";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { HandleLogin } from "@/requestHandlers/handleLogin";
+import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
 
 const Cookies = require("cookies");
 
@@ -36,9 +39,26 @@ export async function getServerSideProps({
 }) {
   const cookies = new Cookies(req, res);
   const token = cookies.get("token");
+
+  const handlerFactory = new HandlerFactory("get-user");
+  const getUserHandler = handlerFactory.createHandler({
+    token: token,
+  }) as HandleGetUser;
+  const resp = await getUserHandler.execute();
+
   if (!!token) {
+    if (resp.success)
+      return {
+        props: { loggedIn: true },
+      };
+
+    cookies.set("token", "");
+
     return {
-      props: { loggedIn: true },
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
     };
   } else
     return {

@@ -15,11 +15,10 @@ export class HandleGetUser extends RequestHandler {
       const user = jwt.decode(this.token);
 
       const res = await super.get("/user", `/${user.id}`, this.token);
-      console.error(res);
 
       if (!!res.error) return { error: { message: "invalid token" } };
       // @ts-ignore
-      return { success: true, user: res.user };
+      return { success: true, user: res.data.user };
     } catch (e) {
       return { error: { message: "invalid token" } };
     }

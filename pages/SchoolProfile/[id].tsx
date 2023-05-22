@@ -6,6 +6,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { NextApiRequestQuery } from "next/dist/server/api-utils";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { ISchoolResp } from "@/interfaces/ISchoolResp.interface";
+import { HandleGetSchool } from "@/requestHandlers/handleGetSchool";
+import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
 
 const Cookies = require("cookies");
 const Navbar = dynamic(() => import("../../components/landing/Navbar/Navbar"), {
@@ -34,12 +36,36 @@ export async function getServerSideProps({
   const cookie = new Cookies(req, res);
   const token = cookie.get("token");
   const { id } = query;
-  const handlerFactory = new HandlerFactory("get-school");
-  const getSchoolHandler = handlerFactory.createHandler({
+  const schoolHandlerFactory = new HandlerFactory("get-school");
+  const getSchoolHandler = schoolHandlerFactory.createHandler({
     id: id,
     token: token,
-  });
-  // @ts-ignore
+  }) as HandleGetSchool;
+
+  if (token === "" || !token)
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  const userHandlerFactory = new HandlerFactory("get-user");
+  const getUserHandler = userHandlerFactory.createHandler({
+    token: token,
+  }) as HandleGetUser;
+  const resp = await getUserHandler.execute();
+
+  if (!resp.success) {
+    cookie.set("token", "");
+
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  }
+
   const response = await getSchoolHandler.execute();
 
   if (!!response.error) {
@@ -51,7 +77,6 @@ export async function getServerSideProps({
     };
   }
 
-  console.log(response);
   return {
     props: { school: response.res.school as ISchoolResp },
   };

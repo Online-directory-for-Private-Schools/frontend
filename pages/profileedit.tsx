@@ -2,6 +2,8 @@ import React, { MouseEventHandler, useState } from "react";
 import SignUp from "@/components/SignUp-Login/SignUp/SignUp";
 import { NextApiRequest, NextApiResponse } from "next";
 import ChangePasswordComponent from "@/components/SignUp-Login/ProfileEdit/ProfileEditComponent";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
 
 const Cookies = require("cookies");
 
@@ -28,8 +30,23 @@ export async function getServerSideProps({
         destination: "/login",
       },
     };
+  const handlerFactory = new HandlerFactory("get-user");
+  const getUserHandler = handlerFactory.createHandler({
+    token: token,
+  }) as HandleGetUser;
+  const resp = await getUserHandler.execute();
+
+  if (resp.success)
+    return {
+      props: {},
+    };
+
+  cookie.set("token", "");
 
   return {
-    props: {},
+    redirect: {
+      permanent: false,
+      destination: "/login",
+    },
   };
 }

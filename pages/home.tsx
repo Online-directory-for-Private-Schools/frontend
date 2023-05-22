@@ -4,6 +4,8 @@ import React, { createContext, useContext, useState } from "react";
 import schools from "@/components/Home/Schools";
 import courses from "@/components/Home/Courses";
 import { NextApiRequest, NextApiResponse } from "next";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
 const Cookies = require("cookies");
 
 const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
@@ -46,8 +48,23 @@ export async function getServerSideProps({
         destination: "/login",
       },
     };
+  const handlerFactory = new HandlerFactory("get-user");
+  const getUserHandler = handlerFactory.createHandler({
+    token: token,
+  }) as HandleGetUser;
+  const resp = await getUserHandler.execute();
+
+  if (resp.success)
+    return {
+      props: {},
+    };
+
+  cookie.set("token", "");
 
   return {
-    props: {},
+    redirect: {
+      permanent: false,
+      destination: "/login",
+    },
   };
 }
