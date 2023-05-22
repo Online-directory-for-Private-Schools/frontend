@@ -6,6 +6,8 @@ import {
   ISchool,
 } from "@/requestHandlers/handleSchoolRegiser";
 import { HandleGetSchool } from "@/requestHandlers/handleGetSchool";
+import { IChangePassword } from "./handlePasswordChange";
+import { handleChangePassword } from "./handlePasswordChange";
 
 export class HandlerFactory {
   type: string;
@@ -27,6 +29,10 @@ export class HandlerFactory {
     } else if (this.type === "get-school") {
       if (!body) throw Error("Body not provided");
       return new HandleGetSchool(<{ id: string; token: string }>body);
+    }
+    else if (this.type === "change-password"){
+      if(!body) throw Error("Body not provided");
+      return new handleChangePassword(<IChangePassword>body);
     } else {
       throw Error("Undefined Type of Request Handler");
     }

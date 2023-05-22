@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import Form from "../form";
 import Input from "../input";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { handleChangePassword } from "@/requestHandlers/handlePasswordChange";
+import cookies from "js-cookie";
+
 
 export default function ChangePassword() {
   const [currentPasswd, setCurrentPasswd] = useState("");
@@ -20,33 +23,31 @@ export default function ChangePassword() {
   // error message
   let [message, setErrorMessage] = useState("");
   const router = useRouter();
-  const handleSubmit: MouseEventHandler = (e) => {
+
+  // handle submition
+  const handleSubmitPassword: MouseEventHandler = (e) => {
     e.preventDefault();
-    const handlerFactory = new HandlerFactory("signup");
     if (newPasswd !== confirmPasswd) {
       setErrorMessage("New password and Confirm password do not match.");
       return;
     }
-    const body = {
-      current_password: currentPasswd,
-      new_password: newPasswd,
-      name: name,
-      city: city,
-      province: province,
-      country: country,
-      current_passwrd: currentPasswd,
-      new_email: newEmail,
-      confirm_email: confirmEmail,
-    };
-    //   apiPostRequestHandler(
-    //     "/auth/changepassword",
-    //     body,
-    //     setErrorMessage,
-    //     true
-    //   ).then((success: boolean) => {
-    //     console.log(success);
-    //     if (success) router.push("/");
-    //   });
+
+    const handlerFactory = new HandlerFactory("change-password");
+    const token = cookies.get("token");
+
+    console.log(token)
+
+
+    const changePasswordHandler = handlerFactory.createHandler({
+      oldPassword: currentPasswd,
+      newPassword: newPasswd,
+      newPasswordConfirmation: confirmEmail,
+      token: token
+    }) as handleChangePassword;
+
+    changePasswordHandler.execute({ setErrorMessage });
+
+
   };
   return (
     <>
@@ -55,7 +56,7 @@ export default function ChangePassword() {
         <Form
           title={"Change Email"}
           errorMessage={message}
-          onSubmit={handleSubmit}
+          onSubmit={() => { }}
           submitMessage={"Validate"}
         >
           <>
@@ -105,7 +106,8 @@ export default function ChangePassword() {
         <Form
           title={"Change Password"}
           errorMessage={message}
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmitPassword}
+          submitMessage={"Submit"}
         >
           <>
             <Input
@@ -131,7 +133,7 @@ export default function ChangePassword() {
         <Form
           title={"Edit User Info"}
           errorMessage={message}
-          onSubmit={handleSubmit}
+          onSubmit={() => { }}
           submitMessage={"Submit"}
         >
           <>
