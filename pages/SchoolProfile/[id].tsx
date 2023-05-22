@@ -14,7 +14,6 @@ const Navbar = dynamic(() => import("../../components/landing/Navbar/Navbar"), {
 });
 
 export default function Id(props: { school: ISchoolResp }) {
-  const router = useRouter();
   return (
     <>
       <Navbar loggedIn />

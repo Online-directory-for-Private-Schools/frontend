@@ -1,11 +1,6 @@
 import React from "react";
 import CourseCard from "./CourseCard";
-import { SchoolCardProps } from "@/interfaces/SchoolCard";
-import TabBar from "../Home/TabBar";
-import { Box, Modal, IconButton } from "@mui/material";
-import { useState } from "react";
 import { AiTwotoneStar, AiFillCloseCircle } from "react-icons/ai";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
 import Logo from "@/public/School_Logo.svg";
 import SchoolCover from "@/public/school-cover.png";
@@ -16,8 +11,6 @@ import { AiOutlineGlobal } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { FaMapMarkedAlt } from "react-icons/fa";
-
-import SchoolCard from "./SchoolCard";
 
 export const CourseCardList = () => {
   const courses: Array<CourseCardProps> = [
