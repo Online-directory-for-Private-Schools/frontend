@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { AiTwotoneStar, AiFillCloseCircle } from "react-icons/ai";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { BiMap } from "react-icons/bi";
 import { SchoolCardProps } from "@/interfaces/SchoolCard";
 import Image from "next/image";
 import Logo from "@/public/School_Logo.svg";
 import Link from "next/link";
 import { Box, Modal, IconButton } from "@mui/material";
-
+import Spinner from "@/components/Utils/Spinner";
 export const renderStars = (rating: number) => {
   const stars = [];
   for (let i = 1; i <= 5; i++) {
@@ -155,7 +154,7 @@ const SchoolCard = ({
               </h1>
             </div>
             <div className="mx-auto h-[100px] m-2 mt-0 w-full border-[1px] rounded-b border-dark-blue">
-              Courses //
+              <Spinner />
             </div>
 
             <IconButton
