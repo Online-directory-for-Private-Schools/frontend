@@ -32,11 +32,11 @@ const SchoolCard = ({
 }: {
   SchoolProps: SchoolCardProps;
 }) => {
-  const [favorite, setFavorite] = useState(initialFavorite);
-  const toggleFavorite = (e: any) => {
-    e.stopPropagation();
-    setFavorite(!favorite);
-  };
+  // const [favorite, setFavorite] = useState(initialFavorite);
+  // const toggleFavorite = (e: any) => {
+  //   e.stopPropagation();
+  //   setFavorite(!favorite);
+  // };
 
   const cutoff = `.cutoff-text{
     display: -webkit-box;
@@ -107,29 +107,29 @@ const SchoolCard = ({
                   </Link>
                 </div>
                 <div className=" w-max ">
-                  <div className="stars-text flex flex-row pb-[20px]">
-                    <div className="flex whitespace-nowrap flex-row justify-start pt-2 ">
-                      {renderStars(rating)}
-                    </div>
-                    <div className="pl-[5px] text-dark-blue pt-[4px]">
-                      (x ratings)
-                    </div>
-                  </div>
+                  {/*<div className="stars-text flex flex-row pb-[20px]">*/}
+                  {/*  <div className="flex whitespace-nowrap flex-row justify-start pt-2 ">*/}
+                  {/*    {renderStars(rating)}*/}
+                  {/*  </div>*/}
+                  {/*  <div className="pl-[5px] text-dark-blue pt-[4px]">*/}
+                  {/*    (x ratings)*/}
+                  {/*  </div>*/}
+                  {/*</div>*/}
 
-                  <button
-                    className="flex flex-row mt-[5px] justify-self-stretch"
-                    onClick={toggleFavorite}
-                  >
-                    {!favorite ? (
-                      <BsBookmark className="w-[25%] my-auto fill-green" />
-                    ) : (
-                      <BsBookmarkFill className="w-[25%] my-auto fill-green" />
-                    )}
+                  {/*<button*/}
+                  {/*  className="flex flex-row mt-[5px] justify-self-stretch"*/}
+                  {/*  onClick={toggleFavorite}*/}
+                  {/*>*/}
+                  {/*  {!favorite ? (*/}
+                  {/*    <BsBookmark className="w-[25%] my-auto fill-green" />*/}
+                  {/*  ) : (*/}
+                  {/*    <BsBookmarkFill className="w-[25%] my-auto fill-green" />*/}
+                  {/*  )}*/}
 
-                    <p className={"text-sm pl-1 text-m whitespace-nowrap"}>
-                      Add to favourites
-                    </p>
-                  </button>
+                  {/*  <p className={"text-sm pl-1 text-m whitespace-nowrap"}>*/}
+                  {/*    Add to favourites*/}
+                  {/*  </p>*/}
+                  {/*</button>*/}
                 </div>
               </div>
               <div className="h-[80px] items-center w-[25%] my-auto p-0 m-0 mr-[50px] flex flex-row">
@@ -217,7 +217,6 @@ const SchoolCard = ({
         </div>
       </div>
       <div>
-        <style>{cutoff}</style>
         <p className={"cutoff-text"}>{description}</p>
       </div>
     </div>

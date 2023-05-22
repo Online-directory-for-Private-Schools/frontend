@@ -21,8 +21,8 @@ const TopSchools = ({ topSchools }: { topSchools: Array<SchoolCardProps> }) => {
         </Link>
       </div>
       <div className={"flex flex-col gap-3 items-center"}>
-        {topSchools.map((school) => (
-          <SchoolCard key={school.schoolName} SchoolProps={school} />
+        {topSchools.map((school, index) => (
+          <SchoolCard key={index} SchoolProps={school} />
         ))}
       </div>
     </div>
