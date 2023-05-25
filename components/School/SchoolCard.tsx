@@ -7,6 +7,7 @@ import Logo from "@/public/School_Logo.svg";
 import Link from "next/link";
 import { Box, Modal, IconButton } from "@mui/material";
 import Spinner from "@/components/Utils/Spinner";
+import { router } from "next/client";
 export const renderStars = (rating: number) => {
   const stars = [];
   for (let i = 1; i <= 5; i++) {
@@ -21,6 +22,7 @@ export const renderStars = (rating: number) => {
 };
 const SchoolCard = ({
   SchoolProps: {
+    id,
     name,
     streetAddress,
     lng,
@@ -178,6 +180,9 @@ const SchoolCard = ({
         </div>
         <div className="w-[85%] pl-6">
           <h2 className="font-bold ">{name}</h2>
+          <Link href={`/SchoolProfile/${id}`} className={"underline text-sm"}>
+            Check School Profile
+          </Link>
           <div className="pt-2 grid-cols-[50%_50%] grid">
             <div>
               <Link

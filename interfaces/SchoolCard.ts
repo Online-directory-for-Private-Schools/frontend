@@ -1,4 +1,5 @@
 export interface SchoolCardProps {
+  id: string;
   name: string;
   streetAddress: IStreet;
   lng: string;
