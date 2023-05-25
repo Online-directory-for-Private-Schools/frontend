@@ -21,12 +21,13 @@ export const renderStars = (rating: number) => {
 };
 const SchoolCard = ({
   SchoolProps: {
-    schoolName,
-    schoolCity,
-    googleMapLocation,
+    name,
+    streetAddress,
+    lng,
+    lat,
     // initialFavorite,
     // rating,
-    description,
+    bio,
   },
 }: {
   SchoolProps: SchoolCardProps;
@@ -73,7 +74,7 @@ const SchoolCard = ({
           open={open}
           onBlur={handleClose}
           aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+          aria-describedby="modal-modal-bio"
           BackdropProps={{
             style: {
               backgroundColor: "rgba(170,170,170,0.3)",
@@ -86,16 +87,16 @@ const SchoolCard = ({
               <div className="pt-3 grid-cols-[50%_50%] grid ">
                 <div className="mr-[40px]">
                   <div className="my-auto pb-[20px] font-bold text-2xl">
-                    {schoolName}
+                    {name}
                   </div>
                   <Link
                     className="flex flex-row my-auto text-left justify-start"
-                    href={`https://www.google.com/maps?q=${googleMapLocation}`}
+                    href={`https://www.google.com/maps?q=${lng + "," + lat}`}
                     target="_blank"
                     rel="noreferrer"
                   >
                     <BiMap className="my-auto mr-1 fill-green hover:scale-[130%] duration-200 translate-y-[-2px] scale-[115%] " />
-                    <h2 className={"my-auto text-m"}>{schoolCity}</h2>
+                    <h2 className={"my-auto text-m"}></h2>
                   </Link>
                 </div>
                 <div className=" w-max ">
@@ -138,7 +139,7 @@ const SchoolCard = ({
             </div>
 
             <p className="w-full mx-auto italic m-2 p-0 pb-[15px] border-b-2 border-[#07136B]">
-              {description}
+              {bio}
             </p>
 
             <div className="mx-auto w-full m-2 mb-0 flex justify-center rounded-t-[15px] bg-gradient-to-br from-dark-blue to-[#07133B]">
@@ -176,17 +177,17 @@ const SchoolCard = ({
           />
         </div>
         <div className="w-[85%] pl-6">
-          <h2 className="font-bold ">{schoolName}</h2>
+          <h2 className="font-bold ">{name}</h2>
           <div className="pt-2 grid-cols-[50%_50%] grid">
             <div>
               <Link
                 className="flex flex-row text-left justify-start"
-                href={`https://www.google.com/maps?q=${googleMapLocation}`}
+                href={`https://www.google.com/maps?q=${lng + ", " + lat}`}
                 target="_blank"
                 rel="noreferrer"
               >
                 <BiMap className="my-auto mr-2 fill-green" />
-                <h2 className={"my-auto"}>{schoolCity}</h2>
+                <h2 className={"my-auto"}></h2>
               </Link>
             </div>
             {/*<div className="flex flex-row justify-end ">*/}
@@ -209,7 +210,7 @@ const SchoolCard = ({
         </div>
       </div>
       <div>
-        <p className={"cutoff-text"}>{description}</p>
+        <p className={"cutoff-text"}>{bio}</p>
       </div>
     </div>
   );

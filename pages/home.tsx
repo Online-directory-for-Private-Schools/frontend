@@ -1,8 +1,6 @@
 import HomeScreenDashBoard from "@/components/Home/HomeScreenDashBoard";
 import dynamic from "next/dynamic";
-import React, { createContext, useContext, useState } from "react";
-import schools from "@/components/Home/Schools";
-import courses from "@/components/Home/Courses";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { NextApiRequest, NextApiResponse } from "next";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
@@ -16,17 +14,15 @@ export const CourseContext = createContext({
   course: false,
   setCourse: (value: boolean) => null,
 });
-export default function home() {
+
+export default function Home() {
   let [course, setCourse] = useState(false);
+
   return (
     // @ts-ignore
     <CourseContext.Provider value={{ course: course, setCourse: setCourse }}>
       <Navbar home loggedIn />
-      <HomeScreenDashBoard
-        schools={schools}
-        courses={courses}
-        course={course}
-      />
+      <HomeScreenDashBoard course={course} />
     </CourseContext.Provider>
   );
 }

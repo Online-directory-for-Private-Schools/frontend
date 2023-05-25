@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillFilter } from "react-icons/ai";
 import TabBar from "./TabBar";
 import SchoolCard from "@/components/School/SchoolCard";
@@ -7,6 +7,10 @@ import { CourseCardProps } from "@/interfaces/CourseCardProps";
 import CourseCard from "@/components/School/CourseCard";
 import CourseAccordion from "@/components/Home/Accordeon/CourseAccordion";
 import SchoolAccordion from "@/components/Home/Accordeon/SchoolAccordion";
+import Spinner from "@/components/Utils/Spinner";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { HandleSchoolSearch } from "@/requestHandlers/handleSchoolSearch";
+import cookie from "js-cookie";
 const createBooleanArray = (number: number): Array<boolean> => {
   let ratingArray: Array<boolean> = [];
   for (let i = 0; i < number; i++) ratingArray.push(false);
@@ -14,15 +18,14 @@ const createBooleanArray = (number: number): Array<boolean> => {
 };
 
 export default function HomeScreenDashBoard({
-  schools,
-  courses,
   course,
 }: // courses,
 {
-  schools?: Array<SchoolCardProps>;
-  courses?: Array<CourseCardProps>;
   course: boolean;
 }) {
+  let [courses, setCourses] = useState({ available: false, array: [] });
+  let [schools, setSchools] = useState({ available: false, array: [] });
+
   let [ratingArray, setRatingArray] = useState(createBooleanArray(6));
   let [priceArray, setPriceArray] = useState(createBooleanArray(5));
   let [primaryValues, setPrimaryValues] = useState(createBooleanArray(5));
@@ -74,6 +77,21 @@ export default function HomeScreenDashBoard({
       onChange: setSecondaryValues,
     },
   ];
+  const token = cookie.get("token");
+  const handlerFactory = new HandlerFactory("search-school");
+  const searchHandler = handlerFactory.createHandler({
+    cityId: city === "" ? undefined : city,
+    countryId: country === "" ? undefined : country,
+    provinceId: province === "" ? undefined : province,
+    token: token,
+  }) as HandleSchoolSearch;
+
+  useEffect(() => {
+    searchHandler.execute().then((res) => {
+      console.error(res.res.data.schools);
+      setSchools({ available: true, array: res.res.data.schools });
+    });
+  }, [course]);
   return (
     <div className="pt-20 flex flex-row">
       <div className="flex flex-col w-[25%] ">
@@ -112,14 +130,18 @@ export default function HomeScreenDashBoard({
             "m-5 p-5 rounded-xl [&>*]:m-3 flex flex-col justify-items-center flex-wrap"
           }
         >
+          {((courses === undefined && course) ||
+            (schools === undefined && !course)) && <Spinner />}
           {!course &&
-            schools!.map((School) => (
-              <div key={School.schoolName} className={"m-auto"}>
+            schools.available &&
+            schools.array.map((School: SchoolCardProps, index) => (
+              <div key={index} className={"m-auto"}>
                 <SchoolCard SchoolProps={School} />
               </div>
             ))}
           {course &&
-            courses!.map((Course, index) => (
+            courses.available &&
+            courses.array.map((Course: CourseCardProps, index: number) => (
               <CourseCard key={index} courseCardProps={Course} />
             ))}
         </div>

@@ -33,7 +33,6 @@ export default function Input({
             "w-full p-[10px] rounded-xl border border-solid border-gray-400 outline-none focus:border-green focus:shadow-[2px_2px_3px_#1ACD77] duration-300"
           }
           type={showPassword ? "text" : type}
-          id={value}
           value={value}
           onChange={onChange}
           onBlur={onBlur}

@@ -86,7 +86,6 @@ function SignUp() {
       name: "Province",
       value: province,
       onChange: (e: any) => {
-        console.log(e.target.value);
         setProvince(e.target.value);
       },
     },

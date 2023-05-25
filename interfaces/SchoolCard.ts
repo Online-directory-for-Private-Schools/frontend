@@ -1,8 +1,9 @@
 export interface SchoolCardProps {
-  schoolName: string;
-  schoolCity: string;
-  googleMapLocation: string;
+  name: string;
+  streetAddress: IStreet;
+  lng: string;
+  lat: string;
   initialFavorite: boolean;
   rating: number;
-  description: string;
+  bio: string;
 }
