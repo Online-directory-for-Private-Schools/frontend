@@ -95,11 +95,13 @@ export default function HomeScreenDashBoard({
   return (
     <div className="pt-20 flex flex-row">
       <div className="flex flex-col w-[25%] ">
-        <div className="flex flex-row justify-between mx-4">
-          <p className="p-4 pl-0 text-xl font-semibold">Filters</p>
-          <AiFillFilter className="my-auto" />
+        <div className={"fixed  w-[25%]"}>
+          <div className="flex flex-row justify-between mx-4 ">
+            <p className="p-4 pl-0 text-xl font-semibold">Filters</p>
+            <AiFillFilter className="my-auto" />
+          </div>
+          <hr className="h-2 w-full border-dark-blue" />
         </div>
-        <hr className="h-2 w-full border-dark-blue" />
       </div>
       <div className={"sidebar w-[25%] h-full fixed overflow-y-scroll mt-20"}>
         {!course && (
