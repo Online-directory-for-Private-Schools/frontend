@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { AiFillFilter } from "react-icons/ai";
 import TabBar from "./TabBar";
 import SchoolCard from "@/components/School/SchoolCard";
@@ -11,6 +11,7 @@ import Spinner from "@/components/Utils/Spinner";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { HandleSchoolSearch } from "@/requestHandlers/handleSchoolSearch";
 import cookie from "js-cookie";
+import { SearchSubmitContext } from "@/pages/home";
 const createBooleanArray = (number: number): Array<boolean> => {
   let ratingArray: Array<boolean> = [];
   for (let i = 0; i < number; i++) ratingArray.push(false);
@@ -18,9 +19,11 @@ const createBooleanArray = (number: number): Array<boolean> => {
 };
 
 export default function HomeScreenDashBoard({
+  search,
   course,
 }: // courses,
 {
+  search: string;
   course: boolean;
 }) {
   let [courses, setCourses] = useState({ available: false, array: [] });
@@ -80,6 +83,7 @@ export default function HomeScreenDashBoard({
   const token = cookie.get("token");
   const schoolHandlerFactory = new HandlerFactory("search-school");
   const searchSchoolHandler = schoolHandlerFactory.createHandler({
+    name: search,
     cityId: city === "" ? undefined : city,
     countryId: country === "" ? undefined : country,
     provinceId: province === "" ? undefined : province,
@@ -88,24 +92,40 @@ export default function HomeScreenDashBoard({
 
   const CourseHandlerFactory = new HandlerFactory("search-course");
   const searchCourseHandler = CourseHandlerFactory.createHandler({
+    title: search,
     cityId: city === "" ? undefined : city,
     countryId: country === "" ? undefined : country,
     provinceId: province === "" ? undefined : province,
     token: token,
   }) as HandleSchoolSearch;
 
+  let { submit } = useContext(SearchSubmitContext);
+
   useEffect(() => {
     if (!course) {
-      searchSchoolHandler.execute().then((res) => {
-        setSchools({ available: true, array: res.res.data.schools });
-      });
+      searchSchoolHandler
+        .execute()
+        .then((res) => {
+          setSchools({ available: true, array: res.res.data.schools });
+        })
+        .catch((e) => {
+          console.error(e);
+          setSchools({ available: false, array: [] });
+        });
     } else {
-      searchCourseHandler.execute().then((res) => {
-        setCourses({ available: true, array: res.res.data.courses });
-      });
+      searchCourseHandler
+        .execute()
+        .then((res) => {
+          setCourses({ available: true, array: res.res.data.courses });
+        })
+        .catch((e) => {
+          console.error(e);
+
+          setCourses({ available: false, array: [] });
+        });
+      // eslint-disable-next-line
     }
-    // eslint-disable-next-line
-  }, [course]);
+  }, [course, submit]);
   return (
     <div className="pt-20 flex flex-row">
       <div className="flex flex-col w-[25%] ">
@@ -150,20 +170,28 @@ export default function HomeScreenDashBoard({
             (!schools.available && !course)) && <Spinner />}
           {!course &&
             schools.available &&
-            schools.array.map((School: SchoolCardProps, index) => (
-              <div key={index} className={"m-auto"}>
-                <SchoolCard SchoolProps={School} />
-              </div>
+            (schools.array.length === 0 ? (
+              <p className={"p-4 text-center text-xl font-bold"}>
+                No matching Schools
+              </p>
+            ) : (
+              schools.array.map((School: SchoolCardProps, index) => (
+                <div key={index} className={"m-auto"}>
+                  <SchoolCard SchoolProps={School} />
+                </div>
+              ))
             ))}
-          {course && courses.available && courses.array.length === 0 ? (
-            <p className={"p-4 text-center text-xl font-bold"}>
-              No courses provided yet
-            </p>
-          ) : (
-            courses.array.map((Course: CourseCardProps, index: number) => (
-              <CourseCard key={index} courseCardProps={Course} />
-            ))
-          )}
+          {course &&
+            courses.available &&
+            (courses.array.length === 0 ? (
+              <p className={"p-4 text-center text-xl font-bold"}>
+                No matching Courses
+              </p>
+            ) : (
+              courses.array.map((Course: CourseCardProps, index: number) => (
+                <CourseCard key={index} courseCardProps={Course} />
+              ))
+            ))}
         </div>
       </div>
     </div>

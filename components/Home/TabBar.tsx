@@ -3,7 +3,6 @@ import { CourseContext } from "@/pages/home";
 
 export default function TabBar() {
   const { course, setCourse } = useContext(CourseContext);
-
   const notSelectedLeft =
     "align-center font-bold text-2xl w-[50%] text-center  p-5 bg-cyan-600/20 rounded-l-[14px] cursor-pointer";
 

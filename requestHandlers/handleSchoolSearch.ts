@@ -1,24 +1,24 @@
 import { RequestHandler } from "@/requestHandlers/REST-Handler/RequestHandler";
 export interface ISearchSchoolsRequest {
   name?: string;
-  cityId?: number;
-  countryId?: number;
-  provinceId?: number;
-  isHiring?: boolean;
-  limit?: number;
-  page?: number;
+  cityId?: string;
+  countryId?: string;
+  provinceId?: string;
+  isHiring?: string;
+  limit?: string;
+  page?: string;
   token: string;
 }
 
 export class HandleSchoolSearch extends RequestHandler {
   token: string;
   name?: string;
-  cityId?: number;
-  countryId?: number;
-  provinceId?: number;
-  isHiring?: boolean;
-  page?: number;
-  limit?: number;
+  cityId?: string;
+  countryId?: string;
+  provinceId?: string;
+  isHiring?: string;
+  page?: string;
+  limit?: string;
   constructor({
     name,
     cityId,
@@ -31,16 +31,20 @@ export class HandleSchoolSearch extends RequestHandler {
   }: ISearchSchoolsRequest) {
     super();
     (this.name = name),
-      (this.cityId = cityId),
-      (this.countryId = countryId),
-      (this.provinceId = provinceId),
-      (this.isHiring = isHiring),
-      (this.page = page),
-      (this.limit = limit),
+      (this.cityId = cityId === undefined ? "" : cityId),
+      (this.countryId = countryId === undefined ? "" : countryId),
+      (this.provinceId = provinceId === undefined ? "" : provinceId),
+      (this.isHiring = isHiring === undefined ? "" : isHiring),
+      (this.page = page === undefined ? "" : page),
+      (this.limit = limit === undefined ? "" : limit),
       (this.token = token);
   }
   async execute() {
-    const res: any = await super.get("/schools/", "", this.token);
+    const res: any = await super.get(
+      `/schools/?name=${this.name}&cityId=${this.cityId}&countryId=${this.countryId}&provinceId=${this.provinceId}&isHiring=&${this.isHiring}&page=${this.page}&limit=${this.limit}`,
+      "",
+      this.token
+    );
     // if an error occurred
     if (!!res.error)
       return {

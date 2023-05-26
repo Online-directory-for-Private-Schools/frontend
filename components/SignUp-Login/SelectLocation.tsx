@@ -14,9 +14,10 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
     requestHandler
       .get("/addresses/countries", "", cookie.get("token") as string)
       .then((res: any) => {
+        if (res.error || !res.data) setCountries([]);
         setCountries(res.data);
       })
-      .catch((e: Error) => console.error(e));
+      .catch(() => setCountries([]));
   }, []);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
         cookie.get("token") as string
       )
       .then((res: any) => {
+        if (res.error || !res.data) setProvinces([]);
         setProvinces(res.data);
       })
       .catch(() => setProvinces([]));
@@ -47,10 +49,16 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
         cookie.get("token") as string
       )
       .then((res: any) => {
+        if (res.error || !res.data) setCities([]);
         setCities(res.data);
       })
       .catch(() => setCities([]));
   };
+
+  console.log("counts", countries);
+  console.log("provinces", provinces);
+  console.log("cities", cities);
+
   return (
     <>
       <div className="flex flex-col md:flex-row justify-between gap-5">
@@ -63,7 +71,7 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
               inputs[0].onChange(e);
             }}
             // @ts-ignore
-            options={countries}
+            options={countries === undefined ? [] : countries}
           />
           <Select
             // @ts-ignore

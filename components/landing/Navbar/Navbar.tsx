@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, MutableRefObject, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import hamburger from "@/public/bars-solid.svg";
@@ -11,11 +11,13 @@ import { useRouter } from "next/router";
 const cookieCutter = require("cookie-cutter");
 
 export default function Navbar({
+  search,
   home,
   landing,
   loggedIn,
   links,
 }: {
+  search: MutableRefObject<any>;
   home?: boolean;
   landing?: boolean;
   loggedIn?: boolean;
@@ -165,7 +167,7 @@ export default function Navbar({
                 : "flex flex-row gap-2 justify-end w-[25%]"
             }
           >
-            {home && <SearchBar />}
+            {home && <SearchBar search={search} />}
             <div className={"flex flex-col"}>
               <div className={"flex flex-col items-center"}>
                 <button

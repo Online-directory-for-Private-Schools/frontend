@@ -1,6 +1,13 @@
 import HomeScreenDashBoard from "@/components/Home/HomeScreenDashBoard";
 import dynamic from "next/dynamic";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  MutableRefObject,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { NextApiRequest, NextApiResponse } from "next";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
@@ -15,15 +22,31 @@ export const CourseContext = createContext({
   setCourse: (value: boolean) => null,
 });
 
+export const SearchSubmitContext = createContext({
+  submit: false,
+  setSubmit: (value: boolean) => null,
+  value: "",
+});
 export default function Home() {
   let [course, setCourse] = useState(false);
+  let [submit, setSubmit] = useState(false);
+  const search = useRef({ value: "" }) as MutableRefObject<any>;
 
   return (
-    // @ts-ignore
-    <CourseContext.Provider value={{ course: course, setCourse: setCourse }}>
-      <Navbar home loggedIn />
-      <HomeScreenDashBoard course={course} />
-    </CourseContext.Provider>
+    <SearchSubmitContext.Provider
+      value={{
+        submit: submit,
+        /* @ts-ignore */
+        setSubmit: setSubmit,
+        value: search.current.value,
+      }}
+    >
+      {/* @ts-ignore */}
+      <CourseContext.Provider value={{ course: course, setCourse: setCourse }}>
+        <Navbar home loggedIn search={search} />
+        <HomeScreenDashBoard course={course} search={search.current.value} />
+      </CourseContext.Provider>
+    </SearchSubmitContext.Provider>
   );
 }
 

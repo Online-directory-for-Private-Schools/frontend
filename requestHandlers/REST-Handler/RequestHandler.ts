@@ -12,7 +12,7 @@ export class RequestHandler {
         body: JSON.stringify(body),
       }).then((res) => res.json());
     } catch (e: any) {
-      return { error: { message: e.message } };
+      return { error: { message: "Server is down" } };
     }
   }
 
@@ -27,8 +27,7 @@ export class RequestHandler {
             Authorization: "Bearer " + token,
           },
         }
-      ).catch((e) => console.log(e));
-
+      );
       // @ts-ignore
       if ("json" in res) {
         res = await res.json();
