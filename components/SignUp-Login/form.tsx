@@ -54,20 +54,17 @@ export default function Form({
               {errorMessage}
             </p>
           )}
-              {SuccessMessage !== "" && (
+          {SuccessMessage !== "" && (
             <p
               className={
-                "bg-green-500 p-2 mt-10 rounded-2xl text-white font-bold text-center"
-        }
-      >
-        {SuccessMessage}
-      </p>
-    )}
-
-          
-
+                "bg-green p-2 mt-10 rounded-2xl text-white font-bold text-center"
+              }
+            >
+              {SuccessMessage}
+            </p>
+          )}
+          {/* {SuccessMessage} */}
         </div>
-        
       </form>
     </div>
   );

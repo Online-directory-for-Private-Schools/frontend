@@ -87,9 +87,6 @@ export default function ChangePassword() {
                 Unmatching Email
               </div>
             )}
-            {
-              SuccessMessage
-            }
           </>
         </Form>
 
