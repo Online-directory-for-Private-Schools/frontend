@@ -167,6 +167,7 @@ export default function Navbar({
                 : "flex flex-row gap-2 justify-end w-[25%]"
             }
           >
+            {/* @ts-ignore */}
             {home && <SearchBar search={search} />}
             <div className={"flex flex-col"}>
               <div className={"flex flex-col items-center"}>
