@@ -15,7 +15,6 @@ const CourseCard = ({
     Year,
     description,
     pricePerSession,
-    monthlyPrice,
   },
 }: {
   courseCardProps: CourseCardProps;

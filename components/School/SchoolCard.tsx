@@ -7,7 +7,6 @@ import Logo from "@/public/School_Logo.svg";
 import Link from "next/link";
 import { Box, Modal, IconButton } from "@mui/material";
 import Spinner from "@/components/Utils/Spinner";
-import { router } from "next/client";
 export const renderStars = (rating: number) => {
   const stars = [];
   for (let i = 1; i <= 5; i++) {
@@ -24,7 +23,6 @@ const SchoolCard = ({
   SchoolProps: {
     id,
     name,
-    streetAddress,
     lng,
     lat,
     // initialFavorite,

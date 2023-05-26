@@ -104,6 +104,7 @@ export default function HomeScreenDashBoard({
         setCourses({ available: true, array: res.res.data.courses });
       });
     }
+    // eslint-disable-next-line
   }, [course]);
   return (
     <div className="pt-20 flex flex-row">
