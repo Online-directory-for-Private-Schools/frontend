@@ -6,6 +6,7 @@ import {
   ISchool,
 } from "@/requestHandlers/handleSchoolRegiser";
 import { HandleGetSchool } from "@/requestHandlers/handleGetSchool";
+import { HandleChangeEmail, IChangeEmail } from "./handleChangeEmail";
 
 export class HandlerFactory {
   type: string;
@@ -27,6 +28,9 @@ export class HandlerFactory {
     } else if (this.type === "get-school") {
       if (!body) throw Error("Body not provided");
       return new HandleGetSchool(<{ id: string; token: string }>body);
+    } else if (this.type === "change-email") {
+      if (!body) throw Error("Body not provided");
+      return new HandleChangeEmail(<IChangeEmail>body);
     } else {
       throw Error("Undefined Type of Request Handler");
     }

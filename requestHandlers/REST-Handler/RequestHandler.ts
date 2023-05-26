@@ -98,10 +98,21 @@ export class RequestHandler {
     }
   }
 
-  async put(route: string, id: string, body: object) {
+  async put(route: string, body: object, token: string, id?:string) {
     try {
-      return await fetch(
+      if(!!id) return fetch(
         process.env.NEXT_PUBLIC_BACKEND_URL + route + "/" + id,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify(body),
+        }
+      ).then((res) => res.json());
+      return  fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + route + "/",
         {
           method: "PUT",
           headers: {
@@ -110,7 +121,7 @@ export class RequestHandler {
           },
           body: JSON.stringify(body),
         }
-      ).then((res) => res.json());
+      ).then((res) => res.json()); 
     } catch (e: any) {
       return { error: { message: e.message } };
     }

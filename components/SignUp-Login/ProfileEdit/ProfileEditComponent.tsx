@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import Form from "../form";
 import Input from "../input";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { HandleChangeEmail } from "@/requestHandlers/handleChangeEmail";
+import Cookies from "js-cookie";
 
 export default function ChangePassword() {
   const [currentPasswd, setCurrentPasswd] = useState("");
@@ -18,43 +20,29 @@ export default function ChangePassword() {
   const [confirmEmail, setConfirmEmail] = useState("");
 
   // error message
-  let [message, setErrorMessage] = useState("");
+  let [ErrorMessage, setErrorMessage] = useState("");  
+  let [SuccessMessage, setSuccessMessage] = useState("");  
+ 
   const router = useRouter();
   const handleSubmit: MouseEventHandler = (e) => {
     e.preventDefault();
-    const handlerFactory = new HandlerFactory("signup");
-    if (newPasswd !== confirmPasswd) {
-      setErrorMessage("New password and Confirm password do not match.");
-      return;
-    }
-    const body = {
-      current_password: currentPasswd,
-      new_password: newPasswd,
-      name: name,
-      city: city,
-      province: province,
-      country: country,
-      current_passwrd: currentPasswd,
-      new_email: newEmail,
-      confirm_email: confirmEmail,
-    };
-    //   apiPostRequestHandler(
-    //     "/auth/changepassword",
-    //     body,
-    //     setErrorMessage,
-    //     true
-    //   ).then((success: boolean) => {
-    //     console.log(success);
-    //     if (success) router.push("/");
-    //   });
+    const token = Cookies.get("token") as string;
+    const handlerFactory = new HandlerFactory("change-email");
+    const changeEmailHandler = handlerFactory.createHandler({
+      confirmEmail, currentPasswd, token
+    }) as HandleChangeEmail;
+   
+    changeEmailHandler.execute({ setErrorMessage, setSuccessMessage});
   };
+  
   return (
     <>
       <Navbar />
       <div className={"flex flex-row flex-wrap"}>
         <Form
           title={"Change Email"}
-          errorMessage={message}
+          errorMessage={ErrorMessage}
+          SuccessMessage={SuccessMessage}
           onSubmit={handleSubmit}
           submitMessage={"Validate"}
         >
@@ -99,13 +87,17 @@ export default function ChangePassword() {
                 Unmatching Email
               </div>
             )}
+            {
+              SuccessMessage
+            }
           </>
         </Form>
 
         <Form
           title={"Change Password"}
-          errorMessage={message}
+          errorMessage={ErrorMessage}
           onSubmit={handleSubmit}
+          SuccessMessage=""
         >
           <>
             <Input
@@ -130,9 +122,10 @@ export default function ChangePassword() {
         </Form>
         <Form
           title={"Edit User Info"}
-          errorMessage={message}
+          errorMessage={ErrorMessage}
           onSubmit={handleSubmit}
           submitMessage={"Submit"}
+          SuccessMessage=""
         >
           <>
             <Input

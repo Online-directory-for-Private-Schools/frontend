@@ -6,7 +6,7 @@ import ChangePasswordComponent from "@/components/SignUp-Login/ProfileEdit/Profi
 const Cookies = require("cookies");
 
 function ChangePassword() {
-  return <ChangePasswordComponent />;
+  return <ChangePasswordComponent/>;
 }
 
 export default ChangePassword;
