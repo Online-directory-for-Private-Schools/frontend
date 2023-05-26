@@ -8,13 +8,14 @@ import { FaChalkboardTeacher, FaSchool } from "react-icons/fa";
 const CourseCard = ({
   courseCardProps: {
     SchoolName,
-    CourseName,
+    title,
     Module,
-    TeacherName,
+    teacher_name,
     Level,
     Year,
-    Description,
-    price,
+    description,
+    pricePerSession,
+    monthlyPrice,
   },
 }: {
   courseCardProps: CourseCardProps;
@@ -33,11 +34,11 @@ const CourseCard = ({
           <div className="[&>*]:p-3 w-[50%]">
             <div className={"flex gap-3"}>
               <MdTitle className={"m-auto w-1/4"} />
-              <p className="course-name l w-3/4">{CourseName}</p>
+              <p className="course-name l w-3/4">{title}</p>
             </div>
             <div className={"flex gap-3"}>
               <FaChalkboardTeacher className={"m-auto w-1/4"} />
-              <p className="teacher-name l w-3/4">{TeacherName}</p>
+              <p className="teacher-name l w-3/4">{teacher_name}</p>
             </div>
             <div className={"flex gap-3 justify-center"}>
               <p className="level l">{Level}</p>
@@ -60,12 +61,12 @@ const CourseCard = ({
 
         <div className={"pb-8"}>
           <p className="py-3" id="course-description">
-            {Description}
+            {description}
           </p>
           <div className={"flex gap-3 absolute right-5 text-xl"}>
             <GiMoneyStack className={"m-auto w-1/4"} />
             <span className="w-3/4">
-              {price}
+              {pricePerSession}
               <span className={"text-[10px]"}> DZD</span>
             </span>
           </div>

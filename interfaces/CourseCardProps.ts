@@ -1,10 +1,11 @@
 export interface CourseCardProps {
   SchoolName: string;
-  CourseName: string;
+  title: string;
   Module: string;
-  TeacherName: string;
+  teacher_name: string;
   Level: string;
   Year: string;
-  Description: string;
-  price: number;
+  description: string;
+  monthlyPrice: number;
+  pricePerSession: number;
 }

@@ -12,8 +12,8 @@ const SearchBar = () => {
     <div
       className={
         searching
-          ? "m-auto h-8 flex border-green border-2 rounded-3xl shadow-xl scale-105 duration-300"
-          : "m-auto h-8 flex border-green border-2 rounded-3xl hover:border-2 duration-300"
+          ? "m-auto h-8 flex border-green border-2 rounded-3xl shadow-xl scale-105 duration-[1000ms] w-[70%]"
+          : "m-auto h-8 flex border-green border-2 rounded-3xl hover:border-2 duration-300 w-[40%] "
       }
     >
       <button className={"ml-2 p-2 flex-shrink-0 my-auto"}>
@@ -21,7 +21,7 @@ const SearchBar = () => {
       </button>
       <input
         className={
-          "my-2 mx-1 pl-4 border-l border-grey-500 outline-none w-max rounded-r-2xl bg-transparent"
+          "mx-1 pl-1 outline-none w-full rounded-r-2xl bg-transparent p-2"
         }
         type={"search"}
         onBlur={unFocus}

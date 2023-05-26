@@ -78,8 +78,16 @@ export default function HomeScreenDashBoard({
     },
   ];
   const token = cookie.get("token");
-  const handlerFactory = new HandlerFactory("search-school");
-  const searchHandler = handlerFactory.createHandler({
+  const schoolHandlerFactory = new HandlerFactory("search-school");
+  const searchSchoolHandler = schoolHandlerFactory.createHandler({
+    cityId: city === "" ? undefined : city,
+    countryId: country === "" ? undefined : country,
+    provinceId: province === "" ? undefined : province,
+    token: token,
+  }) as HandleSchoolSearch;
+
+  const CourseHandlerFactory = new HandlerFactory("search-course");
+  const searchCourseHandler = CourseHandlerFactory.createHandler({
     cityId: city === "" ? undefined : city,
     countryId: country === "" ? undefined : country,
     provinceId: province === "" ? undefined : province,
@@ -87,10 +95,15 @@ export default function HomeScreenDashBoard({
   }) as HandleSchoolSearch;
 
   useEffect(() => {
-    searchHandler.execute().then((res) => {
-      console.error(res.res.data.schools);
-      setSchools({ available: true, array: res.res.data.schools });
-    });
+    if (!course) {
+      searchSchoolHandler.execute().then((res) => {
+        setSchools({ available: true, array: res.res.data.schools });
+      });
+    } else {
+      searchCourseHandler.execute().then((res) => {
+        setCourses({ available: true, array: res.res.data.courses });
+      });
+    }
   }, [course]);
   return (
     <div className="pt-20 flex flex-row">
@@ -132,8 +145,8 @@ export default function HomeScreenDashBoard({
             "m-5 p-5 rounded-xl [&>*]:m-3 flex flex-col justify-items-center flex-wrap"
           }
         >
-          {((courses === undefined && course) ||
-            (schools === undefined && !course)) && <Spinner />}
+          {((!courses.available && course) ||
+            (!schools.available && !course)) && <Spinner />}
           {!course &&
             schools.available &&
             schools.array.map((School: SchoolCardProps, index) => (
@@ -141,11 +154,15 @@ export default function HomeScreenDashBoard({
                 <SchoolCard SchoolProps={School} />
               </div>
             ))}
-          {course &&
-            courses.available &&
+          {course && courses.available && courses.array.length === 0 ? (
+            <p className={"p-4 text-center text-xl font-bold"}>
+              No courses provided yet
+            </p>
+          ) : (
             courses.array.map((Course: CourseCardProps, index: number) => (
               <CourseCard key={index} courseCardProps={Course} />
-            ))}
+            ))
+          )}
         </div>
       </div>
     </div>

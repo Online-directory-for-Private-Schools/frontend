@@ -2,6 +2,7 @@
 import * as React from "react";
 import TopSchools from "@/components/landing/Hero/TopSchool";
 import schools from "@/components/landing/Hero/topSchools";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -18,7 +19,19 @@ export default function Hero() {
           schools and teachers in the country
         </h2>
       </div>
-      <TopSchools topSchools={schools} />
+      <div className={"text-center m-auto [&>*]:m-10"}>
+        <h1 className={"text-4xl font-bold"}>
+          Click here to search for schools{" "}
+        </h1>
+        <Link
+          className={
+            "text-white bg-green p-4 rounded-xl w-40 m-auto duration-300 hover:shadow-[2px_2px_3px] hover:shadow-gray-800/40"
+          }
+          href={"/home"}
+        >
+          Browse All
+        </Link>
+      </div>
     </div>
   );
 }

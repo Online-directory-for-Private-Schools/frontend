@@ -80,10 +80,16 @@ export default function Navbar({
             : "z-50 h-12 fixed bg-transparent flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 rounded-2xl  transform duration-300 whitespace-nowrap"
         }
       >
-        <div className={"w-[10%] lg:w-[25%] flex justify-left pl-2"}>
+        <div
+          className={
+            landing
+              ? "w-[10%] lg:w-[25%] flex justify-left"
+              : "lg:w-[15%]  flex justify-left pl-2"
+          }
+        >
           <Image
             className={
-              "cursor-pointers hidden lg:block bg-dark-blue p-1 rounded-xl"
+              "cursor-pointer hidden sm:block bg-dark-blue p-1 rounded-xl"
             }
             src={logo.src}
             alt={"logo"}
@@ -91,32 +97,38 @@ export default function Navbar({
             height={36}
             onClick={Redirect}
           />
-          <Image
-            className={"lg:hidden block cursor-pointer "}
-            src={clicked ? closeIcon.src : hamburger.src}
-            alt={"X"}
-            width={20}
-            height={15}
-            onClick={toggleLinks}
-          />
+          {landing && (
+            <Image
+              className={"lg:hidden block cursor-pointer "}
+              src={clicked ? closeIcon.src : hamburger.src}
+              alt={"X"}
+              width={20}
+              height={15}
+              onClick={toggleLinks}
+            />
+          )}
         </div>
-        <ul
-          className={"lg:flex flex-row justify-center gap-20 hidden lg:w-[50%]"}
-        >
-          {!!links &&
-            links.map((link, index) => (
-              <li
-                className={"link"}
-                key={index}
-                onClick={(e: any) => e.stopPropagation()}
-              >
-                <Link href={link.route} draggable={"false"}>
-                  {link.title}
-                </Link>
-              </li>
-            ))}
-        </ul>
-        {clicked && (
+        {!home && (
+          <ul
+            className={
+              "lg:flex flex-row justify-center gap-20 hidden lg:w-[50%]"
+            }
+          >
+            {!!links &&
+              links.map((link, index) => (
+                <li
+                  className={"link"}
+                  key={index}
+                  onClick={(e: any) => e.stopPropagation()}
+                >
+                  <Link href={link.route} draggable={"false"}>
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        )}
+        {!home && clicked && (
           <div className={"fixed w-[100%] flex justify-center top-28 left-0"}>
             <div
               className={
@@ -147,9 +159,13 @@ export default function Navbar({
         )}
         {loggedIn ? (
           <div
-            className={"flex flex-row gap-2 justify-center w-full lg:w-[25%] "}
+            className={
+              home
+                ? "flex flex-row gap-2 justify-end w-full"
+                : "flex flex-row gap-2 justify-end w-[25%]"
+            }
           >
-            <SearchBar />
+            {home && <SearchBar />}
             <div className={"flex flex-col"}>
               <div className={"flex flex-col items-center"}>
                 <button
@@ -158,7 +174,7 @@ export default function Navbar({
                   }
                   onClick={() => setProfileMenu(!profileMenu)}
                 >
-                  <p className={""}>Profile</p>
+                  <p className={"mr-auto"}>Profile</p>
                 </button>
               </div>
 

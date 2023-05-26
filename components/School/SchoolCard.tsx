@@ -64,7 +64,7 @@ const SchoolCard = ({
   return (
     <div
       className={
-        "z-40 flex flex-col gap-4 w-[100%] bg-white" +
+        "z-40 flex flex-col gap-4 w-full bg-white" +
         " h-44 rounded-xl border-2 p-3 shadow-[0_5px_10px] " +
         "shadow-gray-900/20 overflow-hidden " +
         "duration-300 hover:-translate-y-[5px] transform text-xl"
