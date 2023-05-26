@@ -4,31 +4,26 @@ import cookieCutter from "cookie-cutter";
 import { RequestHandler } from "@/requestHandlers/REST-Handler/RequestHandler";
 
 export interface IChangePassword {
-  currentPasswd : string;
-  newPasswd : string;
-  confirmPasswd : string;
-  token : string;
+  oldPassword: string;
+  newPassword: string;
+  newPasswordConfirmation: string;
+  token: string;
 }
 export class handleChangePassword extends RequestHandler {
-  currentPasswd : string;
-  newPasswd : string;
-  confirmPasswd : string;
-  token : string;
+  oldPassword: string;
+  newPasswd: string;
+  newPasswordConfirmation: string;
+  token: string;
   constructor({
-    currentPasswd,
-    newPasswd,
-    confirmPasswd,
+    oldPassword,
+    newPassword,
+    newPasswordConfirmation,
     token
-  }: {
-    currentPasswd : string;
-    newPasswd : string;
-    confirmPasswd : string;
-    token : string;
-  }) {
+  }: IChangePassword) {
     super();
-    this.currentPasswd = currentPasswd;
-    this.newPasswd = newPasswd;
-    this.confirmPasswd = confirmPasswd;
+    this.oldPassword = oldPassword;
+    this.newPasswd = newPassword;
+    this.newPasswordConfirmation = newPasswordConfirmation;
     this.token = token;
   }
 
@@ -38,16 +33,16 @@ export class handleChangePassword extends RequestHandler {
     setErrorMessage: Function;
   }) {
     const body = {
-      currentPasswd: this.currentPasswd,
-      newPasswd: this.newPasswd,
-      confirmPasswd: this.confirmPasswd
+      oldPassword: this.oldPassword,
+      newPassword: this.newPasswd,
+      newPasswordConfirmation: this.newPasswordConfirmation
     };
 
     super.put("/auth/change/password", body, this.token).then((res: any) => {
-      if (!!res.error) setErrorMessage(res.error.message);
+      if (!!res.error) setErrorMessage(res.error.errors[0]);
       else {
         setErrorMessage("");
-      // set succes message
+        // set succes message
       }
     });
   }

@@ -8,7 +8,8 @@ import { handleChangePassword } from "@/requestHandlers/handlePasswordChange";
 import cookies from "js-cookie";
 
 
-export default function ChangePassword() {
+export default function ChangeProfileInfoComponent() {
+  
   const [currentPasswd, setCurrentPasswd] = useState("");
   const [newPasswd, setNewPasswd] = useState("");
   const [confirmPasswd, setConfirmPasswd] = useState("");
@@ -35,13 +36,12 @@ export default function ChangePassword() {
     const handlerFactory = new HandlerFactory("change-password");
     const token = cookies.get("token");
 
-    console.log(token)
 
 
     const changePasswordHandler = handlerFactory.createHandler({
       oldPassword: currentPasswd,
       newPassword: newPasswd,
-      newPasswordConfirmation: confirmEmail,
+      newPasswordConfirmation: confirmPasswd,
       token: token
     }) as handleChangePassword;
 

@@ -8,6 +8,7 @@ import { InputInterface } from "@/interfaces/Input";
 import { categoryOptions } from "./categoryOptions";
 import SelectLocation from "@/components/SignUp-Login/SelectLocation";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { HandleSignUp } from "@/requestHandlers/handleSignUp";
 
 function SignUp() {
   // Shared Info between School and Educator
@@ -42,8 +43,8 @@ function SignUp() {
       passwd,
       category,
       city,
-    });
-    // @ts-ignore
+    }) as HandleSignUp;
+    
     signupHandler.execute({ setErrorMessage: setErrorMessage, router: router });
   };
 
@@ -77,7 +78,6 @@ function SignUp() {
       name: "Province",
       value: province,
       onChange: (e: any) => {
-        console.log(e.target.value);
         setProvince(e.target.value);
       },
     },
