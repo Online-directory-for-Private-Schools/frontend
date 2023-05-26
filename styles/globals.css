@@ -6,6 +6,7 @@
 
 body {
     background: linear-gradient(to right, #8a99ba, #FFFFFF);
+
     @apply text-dark-blue
 }
 
