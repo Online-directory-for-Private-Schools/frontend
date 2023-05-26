@@ -17,7 +17,7 @@ export default function Navbar({
   loggedIn,
   links,
 }: {
-  search: MutableRefObject<any>;
+  search?: MutableRefObject<any>;
   home?: boolean;
   landing?: boolean;
   loggedIn?: boolean;
