@@ -6,8 +6,13 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import React, { ReactComponentElement, useState } from "react";
+import React, {
+  ChangeEventHandler,
+  ReactComponentElement,
+  useState,
+} from "react";
 import FormControl from "./FormControl";
+import Input from "@/components/SignUp-Login/input";
 
 const generatePriceRange = (number: number) => {
   if (number === 0) {
@@ -60,11 +65,13 @@ const generatePriceRanges = () => {
 };
 
 export default function PriceSection({
+  title,
   values,
   onChange,
 }: {
-  values: Array<boolean>;
-  onChange: Function;
+  title: string;
+  values: Array<number>;
+  onChange: Array<ChangeEventHandler>;
 }) {
   return (
     <Accordion
@@ -78,19 +85,22 @@ export default function PriceSection({
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <p className="text-dark-blue">Prices</p>
+        <p className="text-dark-blue">{title}</p>
       </AccordionSummary>
       <AccordionDetails>
         <FormGroup>
-          {generatePriceRanges().map((price) => (
-            <FormControl
-              key={price.number}
-              number={price.number}
-              element={price.element}
-              values={values}
-              onChange={onChange}
-            />
-          ))}
+          <Input
+            type={"number"}
+            label={"Minimum"}
+            value={values[0]}
+            onChange={onChange[0]}
+          />
+          <Input
+            type={"number"}
+            label={"Maximum"}
+            value={values[1]}
+            onChange={onChange[1]}
+          />
         </FormGroup>
       </AccordionDetails>
     </Accordion>

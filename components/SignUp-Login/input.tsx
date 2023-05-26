@@ -9,7 +9,7 @@ export default function Input({
 }: {
   type: string;
   label: string;
-  value: string;
+  value: string | number;
   onChange: ChangeEventHandler;
   onBlur?: FocusEventHandler;
 }) {
@@ -21,10 +21,7 @@ export default function Input({
 
   return (
     <div className="py-2 w-full">
-      <label
-        className={"text-[18px] text-dark-blue block  mb-[3px] w-full"}
-        htmlFor={value}
-      >
+      <label className={"text-[18px] text-dark-blue block  mb-[3px] w-full"}>
         {label}
       </label>
       <div className="relative">

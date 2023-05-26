@@ -30,7 +30,12 @@ export default function HomeScreenDashBoard({
   let [schools, setSchools] = useState({ available: false, array: [] });
 
   let [ratingArray, setRatingArray] = useState(createBooleanArray(6));
-  let [priceArray, setPriceArray] = useState(createBooleanArray(5));
+  let [mpriceMin, setMPriceMin] = useState(1000);
+  let [mpriceMax, setMPriceMax] = useState(3000);
+
+  let [spriceMin, setSPriceMin] = useState(500);
+  let [spriceMax, setSPriceMax] = useState(1500);
+
   let [primaryValues, setPrimaryValues] = useState(createBooleanArray(5));
   let [middleValues, setMiddleValues] = useState(createBooleanArray(4));
   let [secondaryValues, setSecondaryValues] = useState(createBooleanArray(3));
@@ -49,7 +54,6 @@ export default function HomeScreenDashBoard({
       name: "Province",
       value: province,
       onChange: (e: any) => {
-        console.log(e.target.value);
         setProvince(e.target.value);
       },
     },
@@ -60,26 +64,6 @@ export default function HomeScreenDashBoard({
     },
   ];
 
-  const phases = [
-    {
-      name: "Primary",
-      number: 5,
-      values: primaryValues,
-      onChange: setPrimaryValues,
-    },
-    {
-      name: "Middle",
-      number: 4,
-      values: middleValues,
-      onChange: setMiddleValues,
-    },
-    {
-      name: "Secondary",
-      number: 3,
-      values: secondaryValues,
-      onChange: setSecondaryValues,
-    },
-  ];
   const token = cookie.get("token");
   const schoolHandlerFactory = new HandlerFactory("search-school");
   const searchSchoolHandler = schoolHandlerFactory.createHandler({
@@ -93,35 +77,41 @@ export default function HomeScreenDashBoard({
   const CourseHandlerFactory = new HandlerFactory("search-course");
   const searchCourseHandler = CourseHandlerFactory.createHandler({
     title: search,
+    monthlyPriceEnd: mpriceMax,
+    monthlyPriceStart: mpriceMin,
+    pricePerSessionEnd: spriceMax,
+    pricePerSessionStart: spriceMin,
     cityId: city === "" ? undefined : city,
     countryId: country === "" ? undefined : country,
     provinceId: province === "" ? undefined : province,
     token: token,
   }) as HandleSchoolSearch;
 
-  let { submit } = useContext(SearchSubmitContext);
+  let { submit, setSubmit } = useContext(SearchSubmitContext);
 
   useEffect(() => {
     if (!course) {
       searchSchoolHandler
         .execute()
         .then((res) => {
-          setSchools({ available: true, array: res.res.data.schools });
+          if (res.error) setSchools({ available: true, array: [] });
+          else setSchools({ available: true, array: res.res.data.schools });
         })
         .catch((e) => {
           console.error(e);
-          setSchools({ available: false, array: [] });
+          setSchools({ available: true, array: [] });
         });
     } else {
       searchCourseHandler
         .execute()
         .then((res) => {
-          setCourses({ available: true, array: res.res.data.courses });
+          if (res.error) {
+            setCourses({ available: true, array: [] });
+          } else setCourses({ available: true, array: res.res.data.courses });
         })
         .catch((e) => {
           console.error(e);
-
-          setCourses({ available: false, array: [] });
+          setCourses({ available: true, array: [] });
         });
       // eslint-disable-next-line
     }
@@ -140,7 +130,6 @@ export default function HomeScreenDashBoard({
       <div className={"sidebar w-[25%] h-full fixed overflow-y-scroll mt-20"}>
         {!course && (
           <SchoolAccordion
-            phases={phases}
             rating={{
               values: ratingArray,
               onChange: setRatingArray,
@@ -150,10 +139,32 @@ export default function HomeScreenDashBoard({
         )}
         {course && (
           <CourseAccordion
-            phases={phases}
-            prices={{
-              values: priceArray,
-              onChange: setPriceArray,
+            Mprices={{
+              values: [mpriceMin, mpriceMax],
+              onChange: [
+                (e: any) => {
+                  setSubmit(!submit);
+                  setMPriceMin(e.target.value);
+                },
+                (e: any) => {
+                  setSubmit(!submit);
+                  setMPriceMax(e.target.value);
+                },
+              ],
+            }}
+            Sprices={{
+              values: [spriceMin, spriceMax],
+              onChange: [
+                (e: any) => {
+                  setSubmit(!submit);
+                  setSPriceMin(e.target.value);
+                },
+                (e: any) => {
+                  setSubmit(!submit);
+
+                  setSPriceMax(e.target.value);
+                },
+              ],
             }}
             address={address}
           />

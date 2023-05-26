@@ -41,8 +41,8 @@ export class HandleSchoolSearch extends RequestHandler {
   }
   async execute() {
     const res: any = await super.get(
-      `/schools/?name=${this.name}&cityId=${this.cityId}&countryId=${this.countryId}&provinceId=${this.provinceId}&isHiring=&${this.isHiring}&page=${this.page}&limit=${this.limit}`,
-      "",
+      `/schools/`,
+      `?name=${this.name}&cityId=${this.cityId}&countryId=${this.countryId}&provinceId=${this.provinceId}&isHiring=&${this.isHiring}&page=${this.page}&limit=${this.limit}`,
       this.token
     );
     // if an error occurred

@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Select from "@/components/SignUp-Login/Select";
 import { SelectInterface } from "@/interfaces/Select.interface";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import cookie from "js-cookie";
+import { SearchSubmitContext } from "@/pages/home";
+import { Simulate } from "react-dom/test-utils";
 const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
+  let { submit, setSubmit } = useContext(SearchSubmitContext);
   let [countries, setCountries] = useState([]);
   let [provinces, setProvinces] = useState([]);
   let [cities, setCities] = useState([]);
@@ -60,23 +63,25 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
       <div className="flex flex-col md:flex-row justify-between gap-5">
         <>
           <Select
-            // @ts-ignore
             name={inputs[0].name}
             value={inputs[0].value}
             onChange={(e) => {
+              if (cities.length === 0 || inputs[1].value === "")
+                if (setSubmit !== undefined) setSubmit(!submit);
               inputs[0].onChange(e);
             }}
-            // @ts-ignore
             options={countries === undefined ? [] : countries}
           />
           <Select
-            // @ts-ignore
             name={inputs[1].name}
             value={inputs[1].value}
             onChange={(e) => {
+              if (setSubmit !== undefined) {
+                // @ts-ignore
+                setSubmit(!submit);
+              }
               inputs[1].onChange(e);
             }}
-            // @ts-ignore
             options={provinces}
             disabled={provinces.length === 0 || inputs[0].value === ""}
           />
@@ -87,7 +92,10 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
         value={inputs[2].value}
         disabled={cities.length === 0 || inputs[1].value === ""}
         options={cities}
-        onChange={(e: any) => inputs[2].onChange(e)}
+        onChange={(e: any) => {
+          if (setSubmit !== undefined) setSubmit(!submit);
+          inputs[2].onChange(e);
+        }}
       />
     </>
   );

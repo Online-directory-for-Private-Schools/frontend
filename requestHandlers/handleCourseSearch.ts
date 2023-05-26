@@ -4,16 +4,16 @@ export interface ISearchCoursesRequest {
   title?: string;
   teacher_name?: string;
   description?: string;
-  schoolId?: number;
-  pricePerSessionStart?: number;
-  pricePerSessionEnd?: number;
-  monthlyPriceStart?: number;
-  monthlyPriceEnd?: number;
-  moduleId?: number;
-  nonAcademicTypeId?: number;
-  cityId?: number;
-  provinceId?: number;
-  countryId?: number;
+  schoolId?: string;
+  pricePerSessionStart?: string;
+  pricePerSessionEnd?: string;
+  monthlyPriceStart?: string;
+  monthlyPriceEnd?: string;
+  moduleId?: string;
+  nonAcademicTypeId?: string;
+  cityId?: string;
+  provinceId?: string;
+  countryId?: string;
 }
 
 export class HandleCourseSearch extends RequestHandler {
@@ -21,16 +21,16 @@ export class HandleCourseSearch extends RequestHandler {
   title?: string;
   teacher_name?: string;
   description?: string;
-  schoolId?: number;
-  pricePerSessionStart?: number;
-  pricePerSessionEnd?: number;
-  monthlyPriceStart?: number;
-  monthlyPriceEnd?: number;
-  moduleId?: number;
-  nonAcademicTypeId?: number;
-  cityId?: number;
-  provinceId?: number;
-  countryId?: number;
+  schoolId?: string;
+  pricePerSessionStart?: string;
+  pricePerSessionEnd?: string;
+  monthlyPriceStart?: string;
+  monthlyPriceEnd?: string;
+  moduleId?: string;
+  nonAcademicTypeId?: string;
+  cityId?: string;
+  provinceId?: string;
+  countryId?: string;
   constructor({
     token: token,
     title: title,
@@ -46,18 +46,25 @@ export class HandleCourseSearch extends RequestHandler {
   }: ISearchCoursesRequest) {
     super();
     this.token = token;
-    this.title = title;
-    this.description = description;
-    this.pricePerSessionEnd = pricePerSessionEnd;
-    this.pricePerSessionStart = pricePerSessionStart;
-    this.monthlyPriceEnd = monthlyPriceEnd;
-    this.monthlyPriceStart = monthlyPriceStart;
-    this.cityId = cityId;
-    this.provinceId = provinceId;
-    this.countryId = countryId;
+    this.title = title === undefined ? "" : title;
+    this.description = description === undefined ? "" : description;
+    this.pricePerSessionEnd =
+      pricePerSessionEnd === undefined ? "" : pricePerSessionEnd;
+    this.pricePerSessionStart =
+      pricePerSessionStart === undefined ? "" : pricePerSessionStart;
+    this.monthlyPriceEnd = monthlyPriceEnd === undefined ? "" : monthlyPriceEnd;
+    this.monthlyPriceStart =
+      monthlyPriceStart === undefined ? "" : monthlyPriceStart;
+    this.cityId = cityId === undefined ? "" : cityId;
+    this.provinceId = provinceId === undefined ? "" : provinceId;
+    this.countryId = countryId === undefined ? "" : countryId;
   }
   async execute() {
-    const res: any = await super.get("/courses/", "", this.token);
+    const res: any = await super.get(
+      `/courses/`,
+      `?title=${this.title}&description=${this.description}&pricePerSessionEnd=${this.pricePerSessionEnd}&pricePerSessionStart=${this.pricePerSessionStart}&monthlyPriceEnd=${this.monthlyPriceEnd}&monthlyPriceStart=${this.monthlyPriceStart}&cityId=${this.cityId}&provinceId=${this.provinceId}&countryId=${this.countryId}`,
+      this.token
+    );
     // if an error occurred
     if (!!res.error)
       return {

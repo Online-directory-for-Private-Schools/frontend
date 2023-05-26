@@ -7,35 +7,28 @@ import { SelectInterface } from "@/interfaces/Select.interface";
 
 export default function SchoolAccordion({
   rating: rating,
-  phases: phases,
   address: address,
 }: {
   rating: { values: Array<boolean>; onChange: Function };
-  phases: Array<{
-    name: string;
-    number: number;
-    values: Array<boolean>;
-    onChange: Function;
-  }>;
   address: Array<SelectInterface>;
 }) {
   return (
     <div className="flex flex-col">
       <AddressSection values={address} />
-      <RatingSection values={rating.values} onChange={rating.onChange} />
-      <LevelSection>
-        <>
-          {phases.map((phase) => (
-            <PhaseSection
-              key={phase.name}
-              name={phase.name}
-              numberOfGrades={phase.number}
-              values={phase.values}
-              onChange={phase.onChange}
-            />
-          ))}
-        </>
-      </LevelSection>
+      {/*<RatingSection values={rating.values} onChange={rating.onChange} />*/}
+      {/*<LevelSection>*/}
+      {/*  <>*/}
+      {/*    {phases.map((phase) => (*/}
+      {/*      <PhaseSection*/}
+      {/*        key={phase.name}*/}
+      {/*        name={phase.name}*/}
+      {/*        numberOfGrades={phase.number}*/}
+      {/*        values={phase.values}*/}
+      {/*        onChange={phase.onChange}*/}
+      {/*      />*/}
+      {/*    ))}*/}
+      {/*  </>*/}
+      {/*</LevelSection>*/}
     </div>
   );
 }
