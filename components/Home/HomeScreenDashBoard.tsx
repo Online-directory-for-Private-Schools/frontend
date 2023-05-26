@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiFillFilter } from "react-icons/ai";
 import TabBar from "./TabBar";
 import SchoolCard from "@/components/School/SchoolCard";

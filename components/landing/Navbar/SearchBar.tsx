@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useContext, useRef, useState } from "react";
+import React, { MutableRefObject, useContext, useState } from "react";
 import Image from "next/image";
 import SearchImage from "@/public/search.svg";
 import { SearchSubmitContext } from "@/pages/home";

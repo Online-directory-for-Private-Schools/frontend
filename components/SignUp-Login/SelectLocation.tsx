@@ -55,10 +55,6 @@ const SelectLocation = ({ inputs }: { inputs: Array<SelectInterface> }) => {
       .catch(() => setCities([]));
   };
 
-  console.log("counts", countries);
-  console.log("provinces", provinces);
-  console.log("cities", cities);
-
   return (
     <>
       <div className="flex flex-col md:flex-row justify-between gap-5">

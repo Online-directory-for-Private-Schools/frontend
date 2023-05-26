@@ -30,14 +30,14 @@ export class HandleSchoolSearch extends RequestHandler {
     token,
   }: ISearchSchoolsRequest) {
     super();
-    (this.name = name),
-      (this.cityId = cityId === undefined ? "" : cityId),
-      (this.countryId = countryId === undefined ? "" : countryId),
-      (this.provinceId = provinceId === undefined ? "" : provinceId),
-      (this.isHiring = isHiring === undefined ? "" : isHiring),
-      (this.page = page === undefined ? "" : page),
-      (this.limit = limit === undefined ? "" : limit),
-      (this.token = token);
+    this.name = name;
+    this.cityId = cityId === undefined ? "" : cityId;
+    this.countryId = countryId === undefined ? "" : countryId;
+    this.provinceId = provinceId === undefined ? "" : provinceId;
+    this.isHiring = isHiring === undefined ? "" : isHiring;
+    this.page = page === undefined ? "" : page;
+    this.limit = limit === undefined ? "" : limit;
+    this.token = token;
   }
   async execute() {
     const res: any = await super.get(

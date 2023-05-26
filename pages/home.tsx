@@ -3,8 +3,6 @@ import dynamic from "next/dynamic";
 import React, {
   createContext,
   MutableRefObject,
-  useContext,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -19,12 +17,12 @@ const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
 
 export const CourseContext = createContext({
   course: false,
-  setCourse: (value: boolean) => null,
+  setCourse: (value: boolean) => value,
 });
 
 export const SearchSubmitContext = createContext({
   submit: false,
-  setSubmit: (value: boolean) => null,
+  setSubmit: (value: boolean) => value,
   value: "",
 });
 export default function Home() {
