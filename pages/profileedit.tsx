@@ -1,5 +1,4 @@
-import React, { MouseEventHandler, useState } from "react";
-import SignUp from "@/components/SignUp-Login/SignUp/SignUp";
+import React from "react";
 import { NextApiRequest, NextApiResponse } from "next";
 import ChangePasswordComponent from "@/components/SignUp-Login/ProfileEdit/ProfileEditComponent";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";

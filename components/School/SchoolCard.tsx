@@ -2,7 +2,6 @@ import React from "react";
 import { AiTwotoneStar, AiFillCloseCircle } from "react-icons/ai";
 import { BiMap } from "react-icons/bi";
 import { SchoolCardProps } from "@/interfaces/SchoolCard";
-import Image from "next/image";
 import Logo from "@/public/School_Logo.svg";
 import Link from "next/link";
 import { Box, Modal, IconButton } from "@mui/material";

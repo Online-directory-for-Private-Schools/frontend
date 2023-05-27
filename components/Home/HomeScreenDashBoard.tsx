@@ -36,10 +36,6 @@ export default function HomeScreenDashBoard({
   let [spriceMin, setSPriceMin] = useState(500);
   let [spriceMax, setSPriceMax] = useState(1500);
 
-  let [primaryValues, setPrimaryValues] = useState(createBooleanArray(5));
-  let [middleValues, setMiddleValues] = useState(createBooleanArray(4));
-  let [secondaryValues, setSecondaryValues] = useState(createBooleanArray(3));
-
   let [country, setCountry] = useState("");
   let [province, setProvince] = useState("");
   let [city, setCityName] = useState("");

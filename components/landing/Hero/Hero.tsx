@@ -1,6 +1,5 @@
 // @flow
 import * as React from "react";
-import Link from "next/link";
 import TopSchools from "@/components/landing/Hero/TopSchool";
 import { topShools } from "@/components/landing/Hero/topShools";
 
