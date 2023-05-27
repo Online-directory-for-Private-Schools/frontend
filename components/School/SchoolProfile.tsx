@@ -114,9 +114,11 @@ export const renderStars = (rating: number) => {
 // Should have added a parameter to check the School
 
 export function SchoolProfile({
+  isOwner,
   school,
   courses,
 }: {
+  isOwner: boolean;
   school: ISchoolResp;
   courses: Array<CourseCardProps>;
 }) {
@@ -151,7 +153,7 @@ export function SchoolProfile({
       "linear-gradient(to bottom right, rgba(07, 16, 59, 0.8), rgba(07, 16, 59, 1))",
   };
 
-  //inititalize parameters to old values
+  //initialize parameters to old values
   const [schoolName, setSchoolName] = useState(school.name);
   const [schoolBio, setSchoolBio] = useState(school.bio);
   const [website, setWebsite] = useState(school.website);
@@ -189,16 +191,18 @@ export function SchoolProfile({
                 src={Logo.src}
                 width={200}
                 height={100}
-                alt="School"
+                alt={"image"}
               />
             </div>
             <div className="w-[85%] relative pl-7 pt-2">
-              <button
-                className="absolute mr-5 mt-2 top-0 right-0 bg-green p-2 rounded-xl hover:scale-[103%] hover:font-extrabold transition-[0.2s] "
-                onClick={handleOpen}
-              >
-                Edit Profile
-              </button>
+              {isOwner && (
+                <button
+                  className="absolute mr-5 mt-2 top-0 right-0 bg-green p-2 rounded-xl hover:scale-[103%] hover:font-extrabold transition-[0.2s] "
+                  onClick={handleOpen}
+                >
+                  Edit Profile
+                </button>
+              )}
 
               <Modal
                 open={open}
@@ -216,7 +220,7 @@ export function SchoolProfile({
                 <Box sx={style}>
                   <div className="relative h-full w-full flex-column ">
                     <div className="pt-[20px] pb-[15px] text-white text-[20px] w-[70%] mx-auto flex justify-center italic border-white border-b-2 ">
-                      Edit Your School's Information
+                      Edit Your Profile
                     </div>
 
                     <div className=" px-8 mt-[14px] h-[100%] text-white ">
@@ -259,7 +263,7 @@ export function SchoolProfile({
                           <input
                             className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
                             type="text"
-                            value={website}
+                            value={website === null ? "missing" : website}
                             onChange={(e) => setWebsite(e.target.value)}
                           />
                         </label>
