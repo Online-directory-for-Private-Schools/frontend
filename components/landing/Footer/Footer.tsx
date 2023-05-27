@@ -40,19 +40,19 @@ const Footer = () => {
 
         <div className="">
           <div className="social-icons flex flex-row">
-            <Link href="#">
+            <Link href="https://instagram.com/courseseeker3?igshid=NTc4MTIwNjQ2YQ==">
               {" "}
               <FaInstagram className="Fa" />
             </Link>
-            <Link href="#">
+            <Link href=" https://instagram.com/courseseeker3?igshid=NTc4MTIwNjQ2YQ==">
               {" "}
               <FaTwitter className="Fa" />
             </Link>
-            <Link href="#">
+            <Link href="https://www.facebook.com/profile.php?id=100093258450482&mibextid=ZbWKwL">
               {" "}
               <FaFacebook className="Fa" />
             </Link>
-            <Link href="#">
+            <Link href=" linkedin.com/in/course-seeker-4067a9278">
               {" "}
               <FaLinkedinIn className="Fa" />
             </Link>

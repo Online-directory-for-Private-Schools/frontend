@@ -17,9 +17,9 @@ function EditUserProfile() {
       <ChangePassword />;
       <EditUserInfo />
       <ChangeEmail />
-      <VerificationForm onSubmit={function (e: React.MouseEvent<Element, MouseEvent>, setSpinner: Function): void {
+      {/* <VerificationForm onSubmit={function (e: React.MouseEvent<Element, MouseEvent>, setSpinner: Function): void {
         throw new Error("Function not implemented.");
-      } } errorMessage={""} />
+      } } errorMessage={""} /> */}
     </>
   );
 }
