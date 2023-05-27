@@ -103,4 +103,7 @@ export async function getServerSideProps({
       };
     }
   }
+  return {
+    props: { isOwner: false, school: response.res.school as ISchoolResp },
+  };
 }

@@ -33,6 +33,13 @@ export const CourseCardList = ({
 import { CourseCardProps } from "@/interfaces/CourseCardProps";
 import { ISchoolResp } from "@/interfaces/ISchoolResp.interface";
 import Form from "../SignUp-Login/form";
+// import jwt from "jsonwebtoken";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { HandleEditSchoolProfile } from "@/requestHandlers/HandleEditSchoolProfile";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
+import SelectLocation from "@/components/SignUp-Login/SelectLocation";
+import Spinner from "@/components/Utils/Spinner";
 
 export default function TabBarProfile({
   course,
@@ -122,12 +129,20 @@ export function SchoolProfile({
   school: ISchoolResp;
   courses: Array<CourseCardProps>;
 }) {
-  const [open, setOpen] = useState(false);
+  let [errorMessage, setErrorMessage] = useState("");
+  let [spinner, setSpinner] = useState(false);
+
+  let [successMessage, setSuccess] = useState("");
+
+  let [open, setOpen] = useState(false);
+  const [cookie, setUserToken] = useCookies(["token"]);
 
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
+    setSuccess("");
+    setErrorMessage("");
     setOpen(false);
   };
 
@@ -160,13 +175,61 @@ export function SchoolProfile({
   const [phoneNumber, setPhoneNumber] = useState(school.phone_number);
   const [schoolEmail, setSchoolEmail] = useState(school.email);
   const [isHiring, setIsHiring] = useState(school.isHiring);
+  const [city, setCity] = useState(school.street.city.id);
+  // @ts-ignore
+  const [province, setProvince] = useState(school.street.city.province.id);
+  // @ts-ignore
+  const [country, setCountry] = useState(
+    school.street.city.province.country.id
+  );
 
-  const handleSubmit = (e: any) => {
+  const address = [
+    {
+      name: "Country",
+      value: country,
+      onChange: (e: any) => setCountry(e.target.value),
+    },
+    {
+      name: "Province",
+      value: province,
+      onChange: (e: any) => {
+        setProvince(e.target.value);
+      },
+    },
+    {
+      name: "City",
+      value: city,
+      onChange: (e: any) => setCity(e.target.value),
+    },
+  ];
+  const handleSubmit = async (e: any, id: string) => {
     e.preventDefault();
+    setSpinner(true);
+    const handlerFactory = new HandlerFactory("edit-school");
+    console.log(city);
+    const schoolRegisterHandler = handlerFactory.createHandler({
+      name: schoolName,
+      bio: schoolBio,
+      isHiring: isHiring,
+      cityId: city,
+      website: website,
+      phone_number: phoneNumber,
+      email: schoolEmail,
+      // lat: this.lat,
+      // lng: this.lng,
+      token: cookie.token,
+      id: id,
+    }) as HandleEditSchoolProfile;
 
-    /// Backend
+    const res = await schoolRegisterHandler.execute({
+      setErrorMessage,
+      setSuccess,
+      setSpinner,
+    });
   };
 
+  const router = useRouter();
+  const { id } = router.query;
   return (
     <div className="mt-[6rem] oveflow-hidden">
       <div className=" w-[97vw] px-[50px] md:grid text-white md:grid-cols-[2fr,1fr] md:grid-rows-[1fr,120px,95px] gap-[20px] flex-col flex">
@@ -226,7 +289,9 @@ export function SchoolProfile({
                     <div className=" px-8 mt-[14px] h-[100%] text-white ">
                       <form
                         className="flex flex-col w-full"
-                        onSubmit={handleSubmit}
+                        onSubmit={(e) => {
+                          handleSubmit(e, id as string);
+                        }}
                       >
                         <label className="relative py-2 flex flex-row">
                           School Name:
@@ -277,7 +342,7 @@ export function SchoolProfile({
                             onChange={(e) => setPhoneNumber(e.target.value)}
                           />
                         </label>
-
+                        <SelectLocation styled inputs={address} />
                         <label className="mt-4 flex">
                           Is the school hiring?
                           <div className="px-8">
@@ -303,6 +368,29 @@ export function SchoolProfile({
                             Save Changes
                           </button>
                         </div>
+                        {spinner && (
+                          <div className={"m-8"}>
+                            <Spinner />
+                          </div>
+                        )}
+                        {errorMessage !== "" && (
+                          <p
+                            className={
+                              "bg-red-500 p-2 mt-10 rounded-2xl text-white font-bold text-center"
+                            }
+                          >
+                            {errorMessage}
+                          </p>
+                        )}
+                        {successMessage !== "" && (
+                          <p
+                            className={
+                              "bg-green p-2 mt-10 rounded-2xl text-white font-bold text-center"
+                            }
+                          >
+                            {successMessage}
+                          </p>
+                        )}
                       </form>
                     </div>
                   </div>
@@ -372,13 +460,13 @@ export function SchoolProfile({
           <div className="w-full flex items-center md:h-1/2 h-3/4 md:justify-around md:flex-row flex-col">
             <div className="flex flex-row my-auto">
               <BsFillTelephoneFill className="fill-green scale-[120%] m-auto " />
-              <span className="px-2">missing</span>
+              <span className="px-2">{school.phone_number}</span>
             </div>
             <div className=" md:w-[1px] w-[70%] bg-white md:h-[70%] h-[1px] "></div>
 
             <div className="flex flex-row my-auto ">
               <MdEmail className="fill-green scale-[120%] m-auto " />
-              <span className="px-2">missing</span>
+              <span className="px-2">{school.email}</span>
             </div>
             <div className=" md:w-[1px] w-[80%] bg-white md:h-[70%] h-[1px] "></div>
 

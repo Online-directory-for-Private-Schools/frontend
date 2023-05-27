@@ -52,7 +52,7 @@ export default function Navbar({
 
   const logoutHandler: MouseEventHandler = (e) => {
     e.stopPropagation();
-    cookieCutter.set("token", "");
+    cookieCutter.set("token", "", { path: "/" });
     router.push("/login").catch((e) => console.error(e));
   };
 
