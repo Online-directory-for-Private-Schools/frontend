@@ -6,22 +6,22 @@ export interface IAddCourse {
   teacher_name: string;
   description: string;
   isActive: string;
-  schoolId: string;
+  schoolId: number;
   pricePerSession: string;
   monthlyPrice: string;
-  moduleId: string;
-  nonAcademicTypeId: string;
+  moduleId: number;
+  
 }
 export class handleAddCourse extends RequestHandler {
   title: string;
   teacher_name: string;
   description: string;
   isActive: boolean;
-  schoolId: string;
+  schoolId: number;
   pricePerSession: string;
   monthlyPrice: string;
-  moduleId: string;
-  nonAcademicTypeId: string;
+  moduleId: number;
+  
 
   constructor({
     title,
@@ -32,7 +32,7 @@ export class handleAddCourse extends RequestHandler {
     pricePerSession,
     monthlyPrice,
     moduleId,
-    nonAcademicTypeId,
+    
   }: IAddCourse) {
     super();
     this.title = title;
@@ -42,8 +42,8 @@ export class handleAddCourse extends RequestHandler {
     this.schoolId = schoolId;
     this.pricePerSession = pricePerSession;
     this.monthlyPrice = monthlyPrice;
-    this.moduleId = moduleId;
-    this.nonAcademicTypeId = nonAcademicTypeId;
+    this.moduleId = 7;
+    
   }
 
   execute({
@@ -64,7 +64,6 @@ export class handleAddCourse extends RequestHandler {
       pricePerSession: this.pricePerSession,
       monthlyPrice: this.monthlyPrice,
       moduleId: this.moduleId,
-      nonAcademicTypeId: this.nonAcademicTypeId,
     };
 
     super.post("/courses", body).then((res: any) => {

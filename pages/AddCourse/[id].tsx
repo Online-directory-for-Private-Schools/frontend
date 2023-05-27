@@ -3,12 +3,16 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
 import { UserType } from "@/interfaces/UserType.enum";
+import { useRouter } from "next/router";
 
 const Cookies = require("cookies");
-export default function add_course() {
+
+export default function Add_course() {
+    const router = useRouter();
+    const {id} = router.query;
   return (
     <>
-      <AddCourse />
+      <AddCourse id={Number(id)}/>
     </>
   );
 }

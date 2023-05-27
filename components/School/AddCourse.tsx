@@ -8,7 +8,7 @@ import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { handleAddCourse } from "@/requestHandlers/handleAddCourse";
 import { Modules } from "@/components/Utils/Modules";
 
-function AddCourse() {
+function AddCourse({id} : {id : number}) {
   // Shared Info between School and Educator
 
   const [title, setTitle] = useState("");
@@ -20,6 +20,10 @@ function AddCourse() {
   const [level, setLevel] = useState("");
   const [year, setYear] = useState("");
   const [school_module, setSchoolModule] = useState("");
+  const [moduleId, setModuleId] = useState("");
+  const [nonAcademicTypeId, setNonAcademicTypeId] = useState("");
+
+  
 
   // error message
   let [message, setErrorMessage] = useState("");
@@ -34,11 +38,11 @@ function AddCourse() {
       teacher_name,
       description,
       isActive,
-      //schoolId,
+      schoolId : id,
       pricePerSession,
       monthlyPrice,
-      //moduleId,
-      //nonAcademicTypeId,
+      moduleId,
+      nonAcademicTypeId,
     }) as handleAddCourse;
 
     addCourseHandler.execute({
@@ -72,6 +76,8 @@ function AddCourse() {
       onChange: (e: any) => setSchoolModule(e.target.value),
     },
   ];
+
+
   return (
     <div>
       <Form
