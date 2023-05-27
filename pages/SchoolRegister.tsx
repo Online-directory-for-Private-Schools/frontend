@@ -66,6 +66,7 @@ const SchoolRegister = () => {
   // error message
   let [message, setErrorMessage] = useState("");
   const router = useRouter();
+  /*@ts-ignore*/
   const [cookie, setUserToken] = useCookies(["token"]);
   const schoolRegisterHandler: Function = (e: any, setSpinner: any) => {
     e.preventDefault();
