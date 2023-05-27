@@ -31,18 +31,24 @@ export class HandleSchoolSearch extends RequestHandler {
   }: ISearchSchoolsRequest) {
     super();
     this.name = name;
-    this.cityId = cityId === undefined ? "" : cityId;
-    this.countryId = countryId === undefined ? "" : countryId;
-    this.provinceId = provinceId === undefined ? "" : provinceId;
-    this.isHiring = isHiring === undefined ? "" : isHiring;
-    this.page = page === undefined ? "" : page;
-    this.limit = limit === undefined ? "" : limit;
+    this.cityId = cityId;
+    this.countryId = countryId;
+    this.provinceId = provinceId;
+    this.isHiring = isHiring;
+    this.page = page;
+    this.limit = limit;
     this.token = token;
   }
   async execute() {
     const res: any = await super.get(
       `/schools/`,
-      `?name=${this.name}&cityId=${this.cityId}&countryId=${this.countryId}&provinceId=${this.provinceId}&isHiring=&${this.isHiring}&page=${this.page}&limit=${this.limit}`,
+      `?${this.name === undefined ? "" : `name=${this.name}`}${
+        this.cityId === undefined ? "" : `&cityId=${this.cityId}`
+      }${this.countryId === undefined ? "" : `&countryId=${this.countryId}`}${
+        this.provinceId === undefined ? "" : `&provinceId=${this.provinceId}`
+      }${this.isHiring === undefined ? "" : `&isHiring=${this.isHiring}`}${
+        this.page === undefined ? "" : `&page=${this.page}`
+      }${this.limit === undefined ? "" : `&limit=${this.limit}`}`,
       this.token
     );
     // if an error occurred
