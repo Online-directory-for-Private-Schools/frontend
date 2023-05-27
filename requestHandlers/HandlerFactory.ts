@@ -22,6 +22,8 @@ import {
 import { HandleChangeEmail, IChangeEmail } from "./handleChangeEmail";
 import { IChangePassword, handleChangePassword } from "./handleChangePassowrd";
 import { handleEditUserInfo, IEditUserInfo } from "./handleEditUserInfo";
+import { HandleSendVerificationCode } from "./handleSendVerificationCode";
+import { HandleVerifyEmail, IVerifyEmail } from "./handleVerifyEmail";
 
 export class HandlerFactory {
   type: string;
@@ -66,7 +68,14 @@ export class HandlerFactory {
     } else if (this.type === "edit-school") {
       if (!body) throw Error("Body not provided");
       return new HandleEditSchoolProfile(<IEditSchoolRequest>body);
-    } else {
+    } else if (this.type === "verify-email") {
+      if (!body) throw Error("Body not provided");
+      return new HandleVerifyEmail(<IVerifyEmail>body);
+    }
+    else if (this.type === "send-email") {
+      return new HandleSendVerificationCode();
+    }
+    else {
       throw Error("Undefined Type of Request Handler");
     }
   }
