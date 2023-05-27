@@ -6,6 +6,7 @@ export default function Form({
   Login,
   CreateSchool,
   errorMessage,
+  CreateCourse,
   onSubmit,
   children,
   submitMessage = "Create Account",
@@ -14,6 +15,7 @@ export default function Form({
   SignUp?: boolean;
   Login?: boolean;
   CreateSchool?: boolean;
+  CreateCourse? : boolean;
   errorMessage: String;
   onSubmit: Function;
   children?: ReactComponentElement<any>;
@@ -32,6 +34,7 @@ export default function Form({
         {SignUp && "Sign Up"}
         {Login && "Login"}
         {CreateSchool && "Create School"}
+        {CreateCourse && "Create Course"}
       </div>
 
       <form>
