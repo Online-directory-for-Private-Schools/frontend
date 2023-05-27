@@ -6,6 +6,7 @@ import Radio from "@/components/SignUp-Login/radio";
 import { activenessOptions } from "./activenessOptions";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { handleAddCourse } from "@/requestHandlers/handleAddCourse";
+import { Modules } from "@/components/Utils/Modules";
 
 function AddCourse() {
   // Shared Info between School and Educator
@@ -16,6 +17,9 @@ function AddCourse() {
   const [isActive, setIsActive] = useState("active");
   const [pricePerSession, setPricePerSession] = useState("");
   const [monthlyPrice, setMonthlyPrice] = useState("");
+  const [level, setLevel] = useState("");
+  const [year, setYear] = useState("");
+  const [school_module, setSchoolModule] = useState("");
 
   // error message
   let [message, setErrorMessage] = useState("");
@@ -48,6 +52,26 @@ function AddCourse() {
     (option: any) =>
       (option.onChange = (event: any) => setIsActive(event.target.value))
   );
+
+  const modules = [
+    {
+      name: "Level",
+      value: level,
+      onChange: (e: any) => setLevel(e.target.value),
+    },
+    {
+      name: "Year",
+      value: year,
+      onChange: (e: any) => {
+        setYear(e.target.value);
+      },
+    },
+    {
+      name: "Module",
+      value: school_module,
+      onChange: (e: any) => setSchoolModule(e.target.value),
+    },
+  ];
   return (
     <div>
       <Form
@@ -103,7 +127,7 @@ function AddCourse() {
                 setMonthlyPrice(e.target.value);
             }}
           />
-
+          <Modules inputs={modules} />
           <Radio
             label="Is the course Active?"
             value={isActive}
