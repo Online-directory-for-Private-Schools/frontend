@@ -22,6 +22,7 @@ import {
 import { HandleChangeEmail, IChangeEmail } from "./handleChangeEmail";
 import { IChangePassword, handleChangePassword } from "./handleChangePassowrd";
 import { handleEditUserInfo, IEditUserInfo } from "./handleEditUserInfo";
+import { handleAddCourse, IAddCourse } from "@/requestHandlers/handleAddCourse";
 
 export class HandlerFactory {
   type: string;
@@ -30,7 +31,14 @@ export class HandlerFactory {
   }
   createHandler(
     body?: object
-  ): HandleSchoolSearch | HandleLogin | HandleSignUp | RequestHandler | HandleChangeEmail| handleChangePassword | handleEditUserInfo {
+  ):
+    | HandleSchoolSearch
+    | HandleLogin
+    | HandleSignUp
+    | RequestHandler
+    | HandleChangeEmail
+    | handleChangePassword
+    | handleEditUserInfo {
     if (this.type === "login") {
       if (!body) throw Error("Body not provided");
       return new HandleLogin(<ILogin>body);
@@ -66,6 +74,9 @@ export class HandlerFactory {
     } else if (this.type === "edit-school") {
       if (!body) throw Error("Body not provided");
       return new HandleEditSchoolProfile(<IEditSchoolRequest>body);
+    } else if (this.type === "add-course") {
+      if (!body) throw Error("Body not provided");
+      return new handleAddCourse(<IAddCourse>body);
     } else {
       throw Error("Undefined Type of Request Handler");
     }
