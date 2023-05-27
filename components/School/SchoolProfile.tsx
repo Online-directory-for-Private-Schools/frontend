@@ -137,6 +137,7 @@ export function SchoolProfile({
   const [cookie, setUserToken] = useCookies(["token"]);
 
   const handleOpen = () => {
+    setDisabled(true);
     setOpen(true);
   };
   const handleClose = () => {
@@ -167,6 +168,9 @@ export function SchoolProfile({
       "linear-gradient(to bottom right, rgba(07, 16, 59, 0.8), rgba(07, 16, 59, 1))",
   };
 
+  // Modal submit button disabled
+  let [disabled, setDisabled] = useState(true);
+
   //initialize parameters to old values
   const [schoolName, setSchoolName] = useState(school.name);
   const [schoolBio, setSchoolBio] = useState(school.bio);
@@ -186,26 +190,32 @@ export function SchoolProfile({
     {
       name: "Country",
       value: country,
-      onChange: (e: any) => setCountry(e.target.value),
+      onChange: (e: any) => {
+        setDisabled(false);
+        setCountry(e.target.value);
+      },
     },
     {
       name: "Province",
       value: province,
       onChange: (e: any) => {
+        setDisabled(false);
         setProvince(e.target.value);
       },
     },
     {
       name: "City",
       value: city,
-      onChange: (e: any) => setCity(e.target.value),
+      onChange: (e: any) => {
+        setDisabled(false);
+        setCity(e.target.value);
+      },
     },
   ];
   const handleSubmit = async (e: any, id: string) => {
     e.preventDefault();
     setSpinner(true);
     const handlerFactory = new HandlerFactory("edit-school");
-    console.log(city);
     const schoolRegisterHandler = handlerFactory.createHandler({
       name: schoolName,
       bio: schoolBio,
@@ -298,7 +308,10 @@ export function SchoolProfile({
                             className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
                             type="text"
                             value={schoolName}
-                            onChange={(e) => setSchoolName(e.target.value)}
+                            onChange={(e) => {
+                              setDisabled(false);
+                              setSchoolName(e.target.value);
+                            }}
                           />
                         </label>
 
@@ -307,8 +320,15 @@ export function SchoolProfile({
                           <input
                             className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
                             type="text"
-                            value={schoolBio}
-                            onChange={(e) => setSchoolBio(e.target.value)}
+                            value={
+                              schoolBio === null || schoolBio === undefined
+                                ? ""
+                                : schoolBio
+                            }
+                            onChange={(e) => {
+                              setDisabled(false);
+                              setSchoolBio(e.target.value);
+                            }}
                           />
                         </label>
 
@@ -317,8 +337,15 @@ export function SchoolProfile({
                           <input
                             className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
                             type="text"
-                            value={schoolEmail}
-                            onChange={(e) => setSchoolEmail(e.target.value)}
+                            value={
+                              schoolEmail === null || schoolEmail === undefined
+                                ? ""
+                                : schoolEmail
+                            }
+                            onChange={(e) => {
+                              setDisabled(false);
+                              setSchoolEmail(e.target.value);
+                            }}
                           />
                         </label>
 
@@ -327,8 +354,15 @@ export function SchoolProfile({
                           <input
                             className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
                             type="text"
-                            value={website === null ? "missing" : website}
-                            onChange={(e) => setWebsite(e.target.value)}
+                            value={
+                              website === null || website === undefined
+                                ? ""
+                                : website
+                            }
+                            onChange={(e) => {
+                              setDisabled(false);
+                              setWebsite(e.target.value);
+                            }}
                           />
                         </label>
 
@@ -337,8 +371,15 @@ export function SchoolProfile({
                           <input
                             className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
                             type="text"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            value={
+                              phoneNumber === null || phoneNumber === undefined
+                                ? ""
+                                : phoneNumber
+                            }
+                            onChange={(e) => {
+                              setDisabled(false);
+                              setPhoneNumber(e.target.value);
+                            }}
                           />
                         </label>
                         <SelectLocation styled inputs={address} />
@@ -348,8 +389,15 @@ export function SchoolProfile({
                             <input
                               className="w-4 h-4 text-green bg-red-500 border-gray-300 rounded  dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
                               type="checkbox"
-                              checked={isHiring}
-                              onChange={(e) => setIsHiring(e.target.checked)}
+                              checked={
+                                isHiring === null || isHiring === undefined
+                                  ? false
+                                  : isHiring
+                              }
+                              onChange={(e) => {
+                                setDisabled(false);
+                                setIsHiring(e.target.checked);
+                              }}
                             />
                           </div>
                         </label>
@@ -362,7 +410,8 @@ export function SchoolProfile({
                           </button>
                           <button
                             type="submit"
-                            className="rounded-xl px-4 py-2 bg-green hover:font-extrabold hover-scale-[105%] transition-[0.1s] "
+                            disabled={disabled}
+                            className="disabled:bg-gray-400 rounded-xl px-4 py-2 bg-green disabled:hover:font-normal hover:font-extrabold hover-scale-[105%] transition-[0.1s] "
                           >
                             Save Changes
                           </button>

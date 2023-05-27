@@ -80,7 +80,6 @@ export class HandleEditSchoolProfile extends RequestHandler {
       id: this.id,
     };
     const res: any = await super.put("/schools", body.id, body, this.token);
-    console.log(res);
     if (!!res.error) {
       setSpinner(false);
       // if an error occurred
