@@ -41,23 +41,22 @@ export async function getServerSideProps({
     id: id,
     token: token,
   }) as HandleGetSchool;
-
+  
   if (token === "" || !token)
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/login",
-      },
-    };
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/login",
+    },
+  };
   const userHandlerFactory = new HandlerFactory("get-user");
   const getUserHandler = userHandlerFactory.createHandler({
     token: token,
   }) as HandleGetUser;
   const resp = await getUserHandler.execute();
-
   if (!resp.success) {
     cookie.set("token", "");
-
+    
     return {
       redirect: {
         permanent: false,
@@ -65,7 +64,7 @@ export async function getServerSideProps({
       },
     };
   }
-
+  
   const response = await getSchoolHandler.execute();
 
   if (!!response.error) {

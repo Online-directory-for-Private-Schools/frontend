@@ -7,4 +7,8 @@ export interface ISchoolResp {
   lng: string;
   lat: string;
   street: IStreet;
+   //new
+  website: string;
+  phone_number:string;
+  email: string;
 }

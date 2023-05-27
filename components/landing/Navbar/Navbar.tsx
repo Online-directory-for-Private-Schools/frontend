@@ -78,7 +78,7 @@ export default function Navbar({
       <div
         className={
           scrolled
-            ? "z-50 h-12 fixed  shadow flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 bg-white rounded-2xl hover:shadow-md transform duration-300 whitespace-nowrap"
+            ? "z-50 h-12 fixed  shadow flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 bg-white/[80%] backdrop-blur-[6px] rounded-2xl hover:shadow-md transform duration-300 whitespace-nowrap"
             : "z-50 h-12 fixed bg-transparent flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 rounded-2xl  transform duration-300 whitespace-nowrap"
         }
       >
