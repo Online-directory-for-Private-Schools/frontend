@@ -138,12 +138,6 @@ const SchoolRegister = () => {
 
           <Input
             type="text"
-            label="Street"
-            value={street}
-            onChange={(e: any) => setStreet(e.target.value)}
-          />
-          <Input
-            type="text"
             label="Website (optional)"
             value={website}
             onChange={(e: any) => setWebsite(e.target.value)}
@@ -160,6 +154,12 @@ const SchoolRegister = () => {
             </>
           </TextArea>
           <SelectLocation inputs={address} />
+          <Input
+            type="text"
+            label="Street"
+            value={street}
+            onChange={(e: any) => setStreet(e.target.value)}
+          />
           <Radio
             label={"Are you hiring?"}
             name="hiring"

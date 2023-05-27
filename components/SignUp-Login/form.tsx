@@ -6,7 +6,7 @@ export default function Form({
   Login,
   CreateSchool,
   errorMessage,
-  SuccessMessage,
+  SuccessMessage = "",
   onSubmit,
   children,
   submitMessage = "Create Account",
@@ -17,7 +17,7 @@ export default function Form({
   CreateSchool?: boolean;
   errorMessage: String;
   onSubmit: Function;
-  SuccessMessage: string;
+  SuccessMessage?: string;
   children?: ReactComponentElement<any>;
   submitMessage?: String;
   title?: String;

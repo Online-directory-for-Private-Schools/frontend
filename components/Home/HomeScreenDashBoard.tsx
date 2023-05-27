@@ -64,6 +64,7 @@ export default function HomeScreenDashBoard({
   const schoolHandlerFactory = new HandlerFactory("search-school");
   const searchSchoolHandler = schoolHandlerFactory.createHandler({
     name: search,
+    page: 1,
     cityId: city === "" ? undefined : city,
     countryId: country === "" ? undefined : country,
     provinceId: province === "" ? undefined : province,
@@ -73,6 +74,7 @@ export default function HomeScreenDashBoard({
   const CourseHandlerFactory = new HandlerFactory("search-course");
   const searchCourseHandler = CourseHandlerFactory.createHandler({
     title: search,
+    page: 1,
     monthlyPriceEnd: mpriceMax,
     monthlyPriceStart: mpriceMin,
     pricePerSessionEnd: spriceMax,

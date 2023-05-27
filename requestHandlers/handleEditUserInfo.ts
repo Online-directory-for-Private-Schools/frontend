@@ -27,9 +27,11 @@ export class handleEditUserInfo extends RequestHandler {
   execute({
     setErrorMessage,
     setSuccessMessage,
+    setSpinner,
   }: {
     setErrorMessage: Function;
     setSuccessMessage: Function;
+    setSpinner: Function;
   }) {
     const body = {
       name: this.name,
@@ -40,12 +42,14 @@ export class handleEditUserInfo extends RequestHandler {
 
     const { id } = jwt.decode(this.token);
     super.put(`/user/${id}`, body, this.token).then((res: any) => {
-    console.log(res);
-      if (!!res.error) setErrorMessage(res.error.message);
-      else {
-        console.log("hello world")
+      if (!!res.error) {
+        setSpinner(false);
+        setSuccessMessage("");
+        setErrorMessage(res.error.message);
+      } else {
+        setSpinner(false);
         setErrorMessage("");
-        setSuccessMessage("Infromation changed !");
+        setSuccessMessage("Information changed !");
       }
     });
   }

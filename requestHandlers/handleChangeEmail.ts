@@ -21,7 +21,9 @@ export class HandleChangeEmail extends RequestHandler {
   execute({
     setErrorMessage,
     setSuccessMessage,
+    setSpinner,
   }: {
+    setSpinner: Function;
     setErrorMessage: Function;
     setSuccessMessage: Function;
   }) {
@@ -31,16 +33,14 @@ export class HandleChangeEmail extends RequestHandler {
     };
 
     super.put("/auth/change/email", body, this.token).then((res: any) => {
-      console.log(res);
       if (!!res.error) {
-        // if an error occurred
+        setSpinner(false);
+        setSuccessMessage("");
         setErrorMessage(res.error.message);
-        setSuccessMessage(res.info);
       } else {
-        // reset error message
+        setSpinner(false);
         setErrorMessage("");
-        setSuccessMessage(res.info);
-        console.log(res.info)
+        setSuccessMessage("Information changed !");
       }
     });
   }

@@ -20,7 +20,7 @@ export function ChangePassword() {
 
   const router = useRouter();
   // handle submition
-  const handleSubmitPassword: MouseEventHandler = (e) => {
+  const handleSubmitPassword: Function = (e: any, setSpinner: any) => {
     e.preventDefault();
     if (newPasswd !== confirmPasswd) {
       setErrorMessage("New password and Confirm password do not match.");
@@ -37,7 +37,11 @@ export function ChangePassword() {
       token: token,
     }) as handleChangePassword;
 
-    changePasswordHandler.execute({ setErrorMessage, setSuccessMessage });
+    changePasswordHandler.execute({
+      setErrorMessage,
+      setSuccessMessage,
+      setSpinner,
+    });
   };
 
   return (
@@ -46,7 +50,6 @@ export function ChangePassword() {
         <Form
           title={"Change Password"}
           errorMessage={ErrorMessage}
-          
           onSubmit={handleSubmitPassword}
           SuccessMessage={SuccessMessage}
         >
@@ -86,7 +89,7 @@ export function ChangeEmail() {
   let [SuccessMessage, setSuccessMessage] = useState("");
 
   const router = useRouter();
-  const handleSubmit: MouseEventHandler = (e) => {
+  const handleSubmit: Function = (e: any, setSpinner: any) => {
     e.preventDefault();
     const token = Cookies.get("token") as string;
     const handlerFactory = new HandlerFactory("change-email");
@@ -96,7 +99,11 @@ export function ChangeEmail() {
       token,
     }) as HandleChangeEmail;
 
-    changeEmailHandler.execute({ setErrorMessage, setSuccessMessage });
+    changeEmailHandler.execute({
+      setErrorMessage,
+      setSuccessMessage,
+      setSpinner,
+    });
   };
 
   return (
@@ -169,7 +176,7 @@ export function EditUserInfo() {
   let [SuccessMessage, setSuccessMessage] = useState("");
 
   const router = useRouter();
-  const handleSubmit: MouseEventHandler = (e) => {
+  const handleSubmit: Function = (e: any, setSpinner: any) => {
     e.preventDefault();
     const token = Cookies.get("token") as string;
     const handlerFactory = new HandlerFactory("edit-user-info");
@@ -180,7 +187,7 @@ export function EditUserInfo() {
       token,
     }) as handleEditUserInfo;
 
-    EditUserInfo.execute({ setErrorMessage, setSuccessMessage });
+    EditUserInfo.execute({ setErrorMessage, setSuccessMessage, setSpinner });
   };
   const address = [
     {
@@ -219,18 +226,18 @@ export function EditUserInfo() {
               onChange={(e: any) => setName(e.target.value)}
             />
 
-<Input
-            type="text"
-            label="Phone Number"
-            value={phoneNumber}
-            onChange={(e: any) => {
-              if (
-                !isNaN(e.target.value) &&
-                e.target.value[e.target.value.length - 1] !== " "
-              )
-                setPhoneNumber(e.target.value);
-            }}
-          />
+            <Input
+              type="text"
+              label="Phone Number"
+              value={phoneNumber}
+              onChange={(e: any) => {
+                if (
+                  !isNaN(e.target.value) &&
+                  e.target.value[e.target.value.length - 1] !== " "
+                )
+                  setPhoneNumber(e.target.value);
+              }}
+            />
 
             <SelectLocation inputs={address} />
           </>

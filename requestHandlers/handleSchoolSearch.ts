@@ -1,23 +1,23 @@
 import { RequestHandler } from "@/requestHandlers/REST-Handler/RequestHandler";
 export interface ISearchSchoolsRequest {
+  page: string;
   name?: string;
   cityId?: string;
   countryId?: string;
   provinceId?: string;
   isHiring?: string;
   limit?: string;
-  page?: string;
   token: string;
 }
 
 export class HandleSchoolSearch extends RequestHandler {
   token: string;
+  page: string;
   name?: string;
   cityId?: string;
   countryId?: string;
   provinceId?: string;
   isHiring?: string;
-  page?: string;
   limit?: string;
   constructor({
     name,

@@ -18,7 +18,7 @@ export class handleChangePassword extends RequestHandler {
     oldPassword,
     newPassword,
     newPasswordConfirmation,
-    token
+    token,
   }: IChangePassword) {
     super();
     this.oldPassword = oldPassword;
@@ -29,26 +29,28 @@ export class handleChangePassword extends RequestHandler {
 
   execute({
     setErrorMessage,
-    setSuccessMessage
+    setSuccessMessage,
+    setSpinner,
   }: {
+    setSpinner: Function;
     setErrorMessage: Function;
     setSuccessMessage: Function;
   }) {
     const body = {
       oldPassword: this.oldPassword,
       newPassword: this.newPasswd,
-      newPasswordConfirmation: this.newPasswordConfirmation
+      newPasswordConfirmation: this.newPasswordConfirmation,
     };
 
     super.put("/auth/change/password", body, this.token).then((res: any) => {
-      if (!!res.error){
-       setErrorMessage(res.error.message);
-       setSuccessMessage("");
-      }
-
-      else {
+      if (!!res.error) {
+        setSpinner(false);
+        setErrorMessage(res.error.message);
+        setSuccessMessage("");
+      } else {
+        setSpinner(false);
         setErrorMessage("");
-        setSuccessMessage(res.info)
+        setSuccessMessage("Information changed !");
       }
     });
   }
