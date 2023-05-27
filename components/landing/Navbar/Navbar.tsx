@@ -15,12 +15,14 @@ export default function Navbar({
   home,
   landing,
   loggedIn,
+  schoolOwner,
   links,
 }: {
   search?: MutableRefObject<any>;
   home?: boolean;
   landing?: boolean;
   loggedIn?: boolean;
+  schoolOwner?: boolean;
   links?: Array<{ title: string; route: string }>;
 }) {
   let [clicked, setClicked] = useState(false);
@@ -56,9 +58,10 @@ export default function Navbar({
     router.push("/login").catch((e) => console.error(e));
   };
 
-  const login: String = "login";
+  const login: String = "Login";
   const signUp: String = "Sign Up";
   const Profile: String = "Edit Profile";
+  const SchoolProfile : String = "My School";
   const logout: String = "logout";
 
   let [scrolled, setScrolled] = useState(false);
@@ -205,10 +208,29 @@ export default function Navbar({
                 >
                   <p className="my-auto whitespace-nowrap">{Profile}</p>
                 </Link>
+
+                {schoolOwner && <Link
+                  href={"/SchoolProfile"}
+                  className={
+                    "btn hover:text-green flex flex-col justify-center"
+                  }
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <p className="my-auto whitespace-nowrap">{SchoolProfile}</p>
+                </Link>}
+                
               </div>
             </div>
           </div>
-        ) : (
+
+
+
+                  
+                  
+            
+
+        ) 
+        : (
           <div className="w-[25%] flex flex-row justify-end">
             <Link
               href={"/login"}
