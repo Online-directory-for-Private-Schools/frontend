@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { CourseCardProps } from "@/interfaces/CourseCardProps";
-import placeHolder from "@/public/placeHolder.png";
+import placeHolder from "@/public/school-cover.png";
 import { GiOpenBook, GiMoneyStack } from "react-icons/gi";
 import { MdTitle } from "react-icons/md";
 import { FaChalkboardTeacher, FaSchool } from "react-icons/fa";

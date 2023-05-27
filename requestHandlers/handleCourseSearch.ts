@@ -46,23 +46,42 @@ export class HandleCourseSearch extends RequestHandler {
   }: ISearchCoursesRequest) {
     super();
     this.token = token;
-    this.title = title === undefined ? "" : title;
-    this.description = description === undefined ? "" : description;
-    this.pricePerSessionEnd =
-      pricePerSessionEnd === undefined ? "" : pricePerSessionEnd;
-    this.pricePerSessionStart =
-      pricePerSessionStart === undefined ? "" : pricePerSessionStart;
-    this.monthlyPriceEnd = monthlyPriceEnd === undefined ? "" : monthlyPriceEnd;
-    this.monthlyPriceStart =
-      monthlyPriceStart === undefined ? "" : monthlyPriceStart;
-    this.cityId = cityId === undefined ? "" : cityId;
-    this.provinceId = provinceId === undefined ? "" : provinceId;
-    this.countryId = countryId === undefined ? "" : countryId;
+    this.title = title;
+    this.description = description;
+    this.pricePerSessionEnd = pricePerSessionEnd;
+    this.pricePerSessionStart = pricePerSessionStart;
+    this.monthlyPriceEnd = monthlyPriceEnd;
+    this.monthlyPriceStart = monthlyPriceStart;
+    this.cityId = cityId;
+    this.provinceId = provinceId;
+    this.countryId = countryId;
   }
   async execute() {
     const res: any = await super.get(
       `/courses/`,
-      `?title=${this.title}&description=${this.description}&pricePerSessionEnd=${this.pricePerSessionEnd}&pricePerSessionStart=${this.pricePerSessionStart}&monthlyPriceEnd=${this.monthlyPriceEnd}&monthlyPriceStart=${this.monthlyPriceStart}&cityId=${this.cityId}&provinceId=${this.provinceId}&countryId=${this.countryId}`,
+      `?${this.title === undefined ? "" : `title=${this.title}`}${
+        this.description === undefined ? "" : `&description=${this.description}`
+      }${
+        this.pricePerSessionEnd === undefined
+          ? ""
+          : `&pricePerSessionEnd=${this.pricePerSessionEnd}`
+      }${
+        this.pricePerSessionStart === undefined
+          ? ""
+          : `&pricePerSessionStart=${this.pricePerSessionStart}`
+      }${
+        this.monthlyPriceEnd === undefined
+          ? ""
+          : `&monthlyPriceEnd=${this.monthlyPriceEnd}`
+      }${
+        this.monthlyPriceStart === undefined
+          ? ""
+          : `&monthlyPriceStart=${this.monthlyPriceStart}`
+      }${this.cityId === undefined ? "" : `&cityId=${this.cityId}`}${
+        this.provinceId === undefined
+          ? ""
+          : `&provinceId=${(this, this.provinceId)}`
+      }${this.countryId === undefined ? "" : `&countryId=${this.countryId}`}`,
       this.token
     );
     // if an error occurred
