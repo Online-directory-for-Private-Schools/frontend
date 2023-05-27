@@ -501,7 +501,7 @@ export function SchoolProfile({
           className="bg-gradient-to-tl from-dark-blue to-[#07135F] text-white p-[20px] rounded-[10px] flex md:h-auto h-[300px] "
           style={{ gridRow: "1/3" }}
         >
-          <h2 className="m-auto italic">Feature not implemented</h2>
+          <h2 className="m-auto italic">Coming Soon</h2>
         </div>
 
         <div className="bg-gradient-to-bl from-dark-blue to-[#07135F] flex flex-col rounded-[15px] items-center justify-center overflow-hidden md:h-auto h-[250px] ">

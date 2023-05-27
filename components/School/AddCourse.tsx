@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { MouseEventHandler, useState } from "react";
+import React, { useState } from "react";
 import Form from "@/components/SignUp-Login/form";
 import Input from "@/components/SignUp-Login/input";
 import Radio from "@/components/SignUp-Login/radio";
