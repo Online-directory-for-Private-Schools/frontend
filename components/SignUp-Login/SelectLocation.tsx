@@ -4,7 +4,6 @@ import { SelectInterface } from "@/interfaces/Select.interface";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import cookie from "js-cookie";
 import { SearchSubmitContext } from "@/pages/home";
-import { Simulate } from "react-dom/test-utils";
 const SelectLocation = ({
   inputs,
   styled,

@@ -32,7 +32,6 @@ export const CourseCardList = ({
 
 import { CourseCardProps } from "@/interfaces/CourseCardProps";
 import { ISchoolResp } from "@/interfaces/ISchoolResp.interface";
-import Form from "../SignUp-Login/form";
 // import jwt from "jsonwebtoken";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { HandleEditSchoolProfile } from "@/requestHandlers/HandleEditSchoolProfile";
@@ -221,7 +220,7 @@ export function SchoolProfile({
       id: id,
     }) as HandleEditSchoolProfile;
 
-    const res = await schoolRegisterHandler.execute({
+    await schoolRegisterHandler.execute({
       setErrorMessage,
       setSuccess,
       setSpinner,

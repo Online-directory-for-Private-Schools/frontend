@@ -1,7 +1,5 @@
 import { RequestHandler } from "@/requestHandlers/REST-Handler/RequestHandler";
 
-const jwt = require("jsonwebtoken");
-
 export interface IEditSchoolRequest {
   name?: string;
   bio?: string;
