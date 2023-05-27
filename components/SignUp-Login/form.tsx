@@ -39,7 +39,7 @@ export default function Form({
           {children}
           <div className="flex justify-center">
             <button
-              className="mt-[20px] items-center w-[55%] rounded-xl text-[15px] font-bold bg-green p-2 border-none text-white cursor-pointer duration-300 shadow-sm hover:p-[11px] hover:shadow-[5px_5px_10px_#504f4f]"
+              className="outline-none mt-[20px] items-center w-[55%] rounded-xl text-[15px] font-bold bg-green p-2 border-none text-white cursor-pointer duration-300 shadow-sm hover:p-[11px] hover:shadow-[5px_5px_10px_#504f4f]"
               onClick={(e) => {
                 setSpinner(true);
                 onSubmit(e, setSpinner);

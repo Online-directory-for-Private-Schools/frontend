@@ -12,6 +12,7 @@ import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { NextApiRequest, NextApiResponse } from "next";
 import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
 import { UserType } from "@/interfaces/UserType.enum";
+import { HandleSchoolRegister } from "@/requestHandlers/handleSchoolRegiser";
 const Cookies = require("cookies");
 const SchoolRegister = () => {
   let MAX_BIO_SIZE = 512;
@@ -24,6 +25,9 @@ const SchoolRegister = () => {
   const [cityId, setCityName] = useState("");
   const [province, setProvince] = useState("");
   const [country, setCountry] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
 
   const address = [
     {
@@ -63,13 +67,17 @@ const SchoolRegister = () => {
   let [message, setErrorMessage] = useState("");
   const router = useRouter();
   const [cookie, setUserToken] = useCookies(["token"]);
-  const schoolRegisterHandler: MouseEventHandler = (e) => {
+  let [spinner, setSpinner] = useState(false);
+  const schoolRegisterHandler: Function = (e: any, setSpinner: any) => {
     e.preventDefault();
     const jwt = require("jsonwebtoken");
     const user = jwt.decode(cookie.token);
     const handlerFactory = new HandlerFactory("school-register");
     const schoolRegisterHandler = handlerFactory.createHandler({
       schoolName,
+      phoneNumber,
+      email,
+      website,
       bio,
       isHiring,
       cityId,
@@ -77,9 +85,10 @@ const SchoolRegister = () => {
       userId: user.id,
       lng: 0,
       lat: 0,
-    });
-    // @ts-ignore
+    }) as HandleSchoolRegister;
+
     schoolRegisterHandler.execute({
+      setSpinner: setSpinner,
       setErrorMessage: setErrorMessage,
       router: router,
     });
@@ -101,12 +110,36 @@ const SchoolRegister = () => {
             onChange={(e: any) => setSchoolName(e.target.value)}
           />
 
-          <SelectLocation inputs={address} />
+          <Input
+            type="text"
+            label="Phone Number"
+            value={phoneNumber}
+            onChange={(e: any) => {
+              if (
+                !isNaN(e.target.value) &&
+                e.target.value[e.target.value.length - 1] !== " "
+              )
+                setPhoneNumber(e.target.value);
+            }}
+          />
+          <Input
+            type="text"
+            label="E-mail"
+            value={email}
+            onChange={(e: any) => setEmail(e.target.value)}
+          />
+
           <Input
             type="text"
             label="Street"
             value={street}
             onChange={(e: any) => setStreet(e.target.value)}
+          />
+          <Input
+            type="text"
+            label="Website (optional)"
+            value={website}
+            onChange={(e: any) => setWebsite(e.target.value)}
           />
 
           <TextArea
@@ -119,6 +152,7 @@ const SchoolRegister = () => {
               School Bio <span className="text-[14px]">(optional)</span>
             </>
           </TextArea>
+          <SelectLocation inputs={address} />
           <Radio
             label={"Are you hiring?"}
             name="hiring"
