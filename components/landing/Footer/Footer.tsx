@@ -25,49 +25,21 @@ const Footer = () => {
             height={80}
           ></Image>
           <p className="desc">
-            put small desc put small desc put small desc put small desc put
-            small desc put small desc put small desc put small{" "}
+            Our first of a kind platform joins you with best institutes, schools
+            and teachers in the country
           </p>
         </div>
         <div className="col">
           <h3>Office</h3>
           <p>Sidi Abdellah</p>
           <p>Algiers</p>
-          <p>Whitefield</p>
           <p>PIN 5600-54, Algeria</p>
-          <p className="email-id">courseSeeker@ensia.edu.dz</p>
-          <h3>+231- 036839398</h3>
+          <p className="email-id">course.seeker.dz@gmail.com</p>
+          <h3>+2135 53 28 65 04</h3>
         </div>
-        <div className="col">
-          <h3>Links</h3>
-          <ul>
-            <li>
-              <a href="#">home</a>
-            </li>
-            <li>
-              <a href="#">Services</a>
-            </li>
-            <li>
-              <a href="#">About Us</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
-            </li>
-            <li>
-              <a href="#">Features</a>
-            </li>
-          </ul>
-        </div>
-        <div className="col">
-          <h3>Newsletter</h3>
-          <form>
-            <BsFillEnvelopeFill className="far enevelope" />
-            <input type="email" placeholder="Enter your email" required></input>
-            <button type="submit">
-              <BiSend className="send" />
-            </button>
-          </form>
-          <div className="social-icons">
+
+        <div className="">
+          <div className="social-icons flex flex-row">
             <Link href="#">
               {" "}
               <FaInstagram className="Fa" />
