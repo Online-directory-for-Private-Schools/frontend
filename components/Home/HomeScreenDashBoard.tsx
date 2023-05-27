@@ -40,6 +40,10 @@ export default function HomeScreenDashBoard({
   let [province, setProvince] = useState("");
   let [city, setCityName] = useState("");
 
+  let [page, setPage] = useState(2);
+  let [limit, setLimit] = useState(20);
+
+  let [maxPage, setMaxPage] = useState(false);
   const address = [
     {
       name: "Country",
@@ -64,7 +68,7 @@ export default function HomeScreenDashBoard({
   const schoolHandlerFactory = new HandlerFactory("search-school");
   const searchSchoolHandler = schoolHandlerFactory.createHandler({
     name: search,
-    page: 1,
+    limit: limit,
     cityId: city === "" ? undefined : city,
     countryId: country === "" ? undefined : country,
     provinceId: province === "" ? undefined : province,
@@ -74,7 +78,7 @@ export default function HomeScreenDashBoard({
   const CourseHandlerFactory = new HandlerFactory("search-course");
   const searchCourseHandler = CourseHandlerFactory.createHandler({
     title: search,
-    page: 1,
+    limit: limit,
     monthlyPriceEnd: mpriceMax,
     monthlyPriceStart: mpriceMin,
     pricePerSessionEnd: spriceMax,
@@ -93,7 +97,11 @@ export default function HomeScreenDashBoard({
         .execute()
         .then((res) => {
           if (res.error) setSchools({ available: true, array: [] });
-          else setSchools({ available: true, array: res.res.data.schools });
+          else {
+            if (res.res.data.currentPage === res.res.data.totalPages)
+              setMaxPage(true);
+            setSchools({ available: true, array: res.res.data.schools });
+          }
         })
         .catch((e) => {
           console.error(e);
@@ -105,7 +113,11 @@ export default function HomeScreenDashBoard({
         .then((res) => {
           if (res.error) {
             setCourses({ available: true, array: [] });
-          } else setCourses({ available: true, array: res.res.data.courses });
+          } else {
+            if (res.res.data.currentPage === res.res.data.totalPages)
+              setMaxPage(true);
+            setCourses({ available: true, array: res.res.data.courses });
+          }
         })
         .catch((e) => {
           console.error(e);
@@ -114,6 +126,58 @@ export default function HomeScreenDashBoard({
       // eslint-disable-next-line
     }
   }, [course, submit]);
+
+  const handleFetchNew = () => {
+    let fetchHandler: HandleSchoolSearch | HandleSchoolSearch;
+    if (!course) {
+      let schoolHandlerFactory = new HandlerFactory("search-school");
+      fetchHandler = schoolHandlerFactory.createHandler({
+        name: search,
+        page: page,
+        limit: limit,
+
+        cityId: city === "" ? undefined : city,
+        countryId: country === "" ? undefined : country,
+        provinceId: province === "" ? undefined : province,
+        token: token,
+      }) as HandleSchoolSearch;
+    } else {
+      let CourseHandlerFactory = new HandlerFactory("search-course");
+      fetchHandler = CourseHandlerFactory.createHandler({
+        title: search,
+        page: page,
+        limit: limit,
+        monthlyPriceEnd: mpriceMax,
+        monthlyPriceStart: mpriceMin,
+        pricePerSessionEnd: spriceMax,
+        pricePerSessionStart: spriceMin,
+        cityId: city === "" ? undefined : city,
+        countryId: country === "" ? undefined : country,
+        provinceId: province === "" ? undefined : province,
+        token: token,
+      }) as HandleSchoolSearch;
+    }
+
+    fetchHandler
+      .execute()
+      .then((res) => {
+        if (res.error)
+          setSchools({ available: true, array: [...schools.array] });
+        else {
+          if (res.res.data.currentPage === res.res.data.totalPages)
+            setMaxPage(true);
+          setSchools({
+            available: true,
+            array: [...schools.array, ...res.res.data.schools] as any,
+          });
+          setPage(page + 1);
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+        setSchools({ available: true, array: [...schools.array] });
+      });
+  };
   return (
     <div className="pt-20 flex flex-row">
       <div className="flex flex-col w-[25%] ">
@@ -201,6 +265,16 @@ export default function HomeScreenDashBoard({
                 <CourseCard key={index} courseCardProps={Course} />
               ))
             ))}
+        </div>
+        <div className={"w-full text-center"}>
+          {!maxPage && (
+            <button
+              className={"btn hover:bg-green hover:text-white outline-none"}
+              onClick={handleFetchNew}
+            >
+              load more
+            </button>
+          )}
         </div>
       </div>
     </div>
