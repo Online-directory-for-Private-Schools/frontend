@@ -16,13 +16,11 @@ function getLevels(
 
   return output;
 }
-function getYears(
-  years: Array<{ id: number; level: number; years: Array<any> }>
-) {
+function getYears(years: Array<{ id: number; year: number }>) {
   let output: Array<{ id: string; name: string }> = [];
 
   // @ts-ignore
-  years.years.forEach((elem: any) => {
+  years.forEach((elem: any) => {
     output.push({ id: elem.year.toString(), name: elem.year.toString() });
   });
 
@@ -88,16 +86,24 @@ export const Modules = ({ inputs }: { inputs: Array<SelectInterface> }) => {
     if (inputs[1].value !== "") loadModules();
   }, [inputs[1].value]);
   const loadYears = () => {
-    let index = Number(inputs[0].value) - 1;
-    setYears(getYears(resp.levels[index]));
+    resp.levels.forEach((level: any) => {
+      if (Number(level.level) === Number(inputs[0].value)) {
+        setYears(getYears(level.years));
+      }
+    });
   };
 
   const loadModules = () => {
-    let levelIndex = Number(inputs[0].value) - 1;
-    let yearIndex =
-      levelIndex === 0 ? Number(inputs[1].value) : Number(inputs[1].value) - 1;
-
-    setModules(getModules(resp.levels[levelIndex].years[yearIndex].modules));
+    resp.levels.forEach((level: any) => {
+      if (Number(level.level) === Number(inputs[0].value)) {
+        level.years.forEach((year: any) => {
+          if (Number(year.year) === Number(inputs[1].value)) {
+            setModules(getModules(year.modules));
+            return;
+          }
+        });
+      }
+    });
   };
 
   return (
