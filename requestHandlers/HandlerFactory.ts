@@ -19,6 +19,9 @@ import {
   HandleEditSchoolProfile,
   IEditSchoolRequest,
 } from "@/requestHandlers/HandleEditSchoolProfile";
+import { HandleChangeEmail, IChangeEmail } from "./handleChangeEmail";
+import { IChangePassword, handleChangePassword } from "./handleChangePassowrd";
+import { handleEditUserInfo, IEditUserInfo } from "./handleEditUserInfo";
 
 export class HandlerFactory {
   type: string;
@@ -27,7 +30,7 @@ export class HandlerFactory {
   }
   createHandler(
     body?: object
-  ): HandleSchoolSearch | HandleLogin | HandleSignUp | RequestHandler {
+  ): HandleSchoolSearch | HandleLogin | HandleSignUp | RequestHandler | HandleChangeEmail| handleChangePassword | handleEditUserInfo {
     if (this.type === "login") {
       if (!body) throw Error("Body not provided");
       return new HandleLogin(<ILogin>body);
@@ -42,6 +45,15 @@ export class HandlerFactory {
     } else if (this.type === "get-school") {
       if (!body) throw Error("Body not provided");
       return new HandleGetSchool(<{ id: string; token: string }>body);
+    } else if (this.type === "change-email") {
+      if (!body) throw Error("Body not provided");
+      return new HandleChangeEmail(<IChangeEmail>body);
+    } else if (this.type === "change-password") {
+      if (!body) throw Error("Body not provided");
+      return new handleChangePassword(<IChangePassword>body);
+    } else if (this.type === "edit-user-info") {
+      if (!body) throw Error("Body not provided");
+      return new handleEditUserInfo(<IEditUserInfo>body);
     } else if (this.type === "get-user") {
       if (!body) throw Error("Body not provided");
       return new HandleGetUser(<{ token: string }>body);

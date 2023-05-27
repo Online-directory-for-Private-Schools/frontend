@@ -6,6 +6,7 @@ export default function Form({
   Login,
   CreateSchool,
   errorMessage,
+  SuccessMessage,
   onSubmit,
   children,
   submitMessage = "Create Account",
@@ -16,6 +17,7 @@ export default function Form({
   CreateSchool?: boolean;
   errorMessage: String;
   onSubmit: Function;
+  SuccessMessage: string;
   children?: ReactComponentElement<any>;
   submitMessage?: String;
   title?: String;
@@ -60,6 +62,15 @@ export default function Form({
               }
             >
               {errorMessage}
+            </p>
+          )}
+          {SuccessMessage !== "" && (
+            <p
+              className={
+                "bg-green p-2 mt-10 rounded-2xl text-white font-bold text-center"
+              }
+            >
+              {SuccessMessage}
             </p>
           )}
         </div>
