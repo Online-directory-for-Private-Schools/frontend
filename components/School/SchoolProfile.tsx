@@ -268,12 +268,20 @@ export function SchoolProfile({
             </div>
             <div className="w-[85%] relative pl-7 pt-2">
               {isOwner && (
-                <button
-                  className="absolute mr-5 mt-2 top-0 right-0 bg-green p-2 rounded-xl hover:scale-[103%] hover:font-extrabold transition-[0.2s] "
-                  onClick={handleOpen}
-                >
-                  Edit Profile
-                </button>
+                <div className={"flex flex-row"}>
+                  <button
+                    className="absolute mr-5 mt-2 top-0 right-0 bg-green p-2 rounded-xl hover:scale-[103%] hover:font-extrabold transition-[0.2s] "
+                    onClick={handleOpen}
+                  >
+                    Edit Profile
+                  </button>
+                  <Link
+                    className="absolute mr-5 mt-2 top-[4rem] right-0 bg-green p-2 rounded-xl hover:scale-[103%] hover:font-extrabold transition-[0.2s] "
+                    href={`/AddCourse/${id}`}
+                  >
+                    Add Course
+                  </Link>
+                </div>
               )}
 
               <Modal
