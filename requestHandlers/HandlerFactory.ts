@@ -15,6 +15,7 @@ import {
   HandleCourseSearch,
   ISearchCoursesRequest,
 } from "@/requestHandlers/handleCourseSearch";
+import { IAddCourse, handleAddCourse } from "./handleAddCourse";
 
 export class HandlerFactory {
   type: string;
@@ -47,7 +48,10 @@ export class HandlerFactory {
     } else if (this.type === "search-course") {
       if (!body) throw Error("Body not provided");
       return new HandleCourseSearch(<ISearchCoursesRequest>body);
-    } else {
+    }else if (this.type === "add-course") {
+      if (!body) throw Error("Body not provided");
+      return new handleAddCourse(<IAddCourse>body);
+    }else {
       throw Error("Undefined Type of Request Handler");
     }
   }

@@ -1,6 +1,4 @@
 import { NextRouter } from "next/router";
-// @ts-ignore
-import cookieCutter from "cookie-cutter";
 import { RequestHandler } from "@/requestHandlers/REST-Handler/RequestHandler";
 
 export interface IAddCourse {
@@ -18,7 +16,7 @@ export class handleAddCourse extends RequestHandler {
     title: string;
     teacher_name: string;
     description: string;
-    isActive: string;
+    isActive: boolean;
     schoolId: string;
     pricePerSession: string;
     monthlyPrice: string;
@@ -41,7 +39,7 @@ export class handleAddCourse extends RequestHandler {
         this.title = title;
         this.teacher_name = teacher_name;
         this.description = description;
-        this.isActive = isActive;
+        this.isActive = (isActive === "active");
         this.schoolId = schoolId;
         this.pricePerSession = pricePerSession;
         this.monthlyPrice = monthlyPrice;

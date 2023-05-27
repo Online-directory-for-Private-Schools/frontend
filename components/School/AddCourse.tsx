@@ -1,12 +1,9 @@
 import { useRouter } from "next/router";
 import React, { MouseEventHandler, useState } from "react";
 import Form from "@/components/SignUp-Login/form";
-import InputGrp from "@/components/SignUp-Login/InputGrp";
 import Input from "@/components/SignUp-Login/input";
 import Radio from "@/components/SignUp-Login/radio";
-import { InputInterface } from "@/interfaces/Input";
 import { activenessOptions } from "./activenessOptions";
-import SelectLocation from "@/components/SignUp-Login/SelectLocation";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { handleAddCourse } from "@/requestHandlers/handleAddCourse";
 
@@ -17,7 +14,6 @@ function AddCourse() {
   const [description, setDescription] = useState("");
   const [teacher_name, setTeacher_name] = useState("");
   const [isActive, setIsActive] = useState("active");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [pricePerSession, setPricePerSession] = useState("");
   const [monthlyPrice, setMonthlyPrice] = useState("");
 
