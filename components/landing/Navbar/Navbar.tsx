@@ -101,7 +101,7 @@ export default function Navbar({
           />
           {landing && (
             <Image
-              className={"lg:hidden block cursor-pointer "}
+              className={"sm:hidden block cursor-pointer "}
               src={clicked ? closeIcon.src : hamburger.src}
               alt={"X"}
               width={20}
