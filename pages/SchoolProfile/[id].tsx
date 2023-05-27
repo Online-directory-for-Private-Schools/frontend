@@ -9,19 +9,24 @@ import { ISchoolResp } from "@/interfaces/ISchoolResp.interface";
 import { HandleGetSchool } from "@/requestHandlers/handleGetSchool";
 import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
 import { UserType } from "@/interfaces/UserType.enum";
+import { HandleSchoolSearch } from "@/requestHandlers/handleSchoolSearch";
 
 const Cookies = require("cookies");
 const Navbar = dynamic(() => import("../../components/landing/Navbar/Navbar"), {
   ssr: false,
 });
 
-export default function Id(props: { school: ISchoolResp; isOwner: boolean }) {
+export default function Id(props: {
+  school: ISchoolResp;
+  isOwner: boolean;
+  courses: any;
+}) {
   return (
     <>
-      <Navbar loggedIn />
+      <Navbar loggedIn schoolOwner={props.isOwner} />
       <SchoolProfile
         school={props.school}
-        courses={[]}
+        courses={props.courses}
         isOwner={props.isOwner}
       />
       <Footer />
@@ -89,21 +94,43 @@ export async function getServerSideProps({
     };
   }
 
+  const CourseHandlerFactory = new HandlerFactory("search-course");
+  const searchCourseHandler = CourseHandlerFactory.createHandler({
+    schoolId: id,
+    token: token,
+  }) as HandleSchoolSearch;
+
+  const schools = await searchCourseHandler.execute();
+
+  console.log();
+
   // If user is School owner, give edit access
   if (resp.user.type === UserType.SCHOOL_OWNER) {
     // Check if the user owner is the owner of this SchoolProfile
 
     if (response.res.school.owner.id === resp.user.id) {
       return {
-        props: { isOwner: true, school: response.res.school as ISchoolResp },
+        props: {
+          isOwner: true,
+          school: response.res.school as ISchoolResp,
+          courses: schools.res.data.courses,
+        },
       };
     } else {
       return {
-        props: { isOwner: false, school: response.res.school as ISchoolResp },
+        props: {
+          isOwner: false,
+          school: response.res.school as ISchoolResp,
+          courses: schools.res.data.courses,
+        },
       };
     }
   }
   return {
-    props: { isOwner: false, school: response.res.school as ISchoolResp },
+    props: {
+      isOwner: false,
+      school: response.res.school as ISchoolResp,
+      courses: schools.res.data.courses,
+    },
   };
 }
