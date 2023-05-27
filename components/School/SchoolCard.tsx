@@ -62,7 +62,7 @@ const SchoolCard = ({
   return (
     <div
       className={
-        "z-40 flex flex-col gap-4 w-full bg-white" +
+        "z-40 flex flex-col gap-4 w-full bg-gray-300" +
         " h-44 rounded-xl border-2 p-3 shadow-[0_5px_10px] " +
         "shadow-gray-900/20 overflow-hidden " +
         "duration-300 hover:-translate-y-[5px] transform text-xl"
@@ -125,17 +125,17 @@ const SchoolCard = ({
                   {/*</button>*/}
                 </div>
               </div>
-              <div className="h-[80px] items-center w-[25%] my-auto p-0 m-0 mr-[50px] flex flex-row">
-                <Image
-                  className={
-                    "w-[100%] min-h-full items-center rounded-xl bg-green mr-[30px] p-2 my-auto"
-                  }
-                  src={Logo.src}
-                  width={200}
-                  height={200}
-                  alt="School"
-                />
-              </div>
+              {/*<div className="h-[80px] items-center w-[25%] my-auto p-0 m-0 mr-[50px] flex flex-row">*/}
+              {/*<Image*/}
+              {/*  className={*/}
+              {/*    "w-[100%] min-h-full items-center rounded-xl bg-green mr-[30px] p-2 my-auto"*/}
+              {/*  }*/}
+              {/*  src={Logo.src}*/}
+              {/*  width={200}*/}
+              {/*  height={200}*/}
+              {/*  alt="School"*/}
+              {/*/>*/}
+              {/*</div>*/}
             </div>
 
             <p className="w-full mx-auto italic m-2 p-0 pb-[15px] border-b-2 border-[#07136B]">
@@ -167,16 +167,16 @@ const SchoolCard = ({
           </Box>
         </Modal>
 
-        <div className="w-[15%]">
-          <Image
-            className={"w-full h-full rounded-xl bg-gray-400 p-2"}
-            src={Logo.src}
-            width={200}
-            height={100}
-            alt="School"
-          />
-        </div>
-        <div className="w-[85%] pl-6">
+        {/*<div className="w-[15%]">*/}
+        {/*  <Image*/}
+        {/*    className={"w-full h-full rounded-xl bg-gray-400 p-2"}*/}
+        {/*    src={Logo.src}*/}
+        {/*    width={200}*/}
+        {/*    height={100}*/}
+        {/*    alt="School"*/}
+        {/*  />*/}
+        {/*</div>*/}
+        <div className="w-[100%] pl-6">
           <h2 className="font-bold ">{name}</h2>
           <Link href={`/SchoolProfile/${id}`} className={"underline text-sm"}>
             Check School Profile
@@ -185,7 +185,8 @@ const SchoolCard = ({
             <div>
               <Link
                 className="flex flex-row text-left justify-start"
-                href={`https://www.google.com/maps?q=${lng + ", " + lat}`}
+                // href={`https://www.google.com/maps?q=${lng + ", " + lat}`}
+                href={""}
                 target="_blank"
                 rel="noreferrer"
               >

@@ -174,7 +174,7 @@ export default function HomeScreenDashBoard({
         <TabBar />
         <div
           className={
-            "m-5 p-5 rounded-xl [&>*]:m-3 flex flex-col justify-items-center flex-wrap"
+            "m-5 p-5 rounded-xl [&>*]:m-3 [&>*]:w-72 flex flex-row justify-items-center flex-wrap"
           }
         >
           {((!courses.available && course) ||
@@ -195,7 +195,7 @@ export default function HomeScreenDashBoard({
           {course &&
             courses.available &&
             (courses.array.length === 0 ? (
-              <p className={"p-4 text-center text-xl font-bold"}>
+              <p className={"p-4 m-text-center text-xl font-bold"}>
                 No matching Courses
               </p>
             ) : (
