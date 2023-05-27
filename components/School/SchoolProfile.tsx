@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEventHandler, useState } from "react";
 import CourseCard from "./CourseCard";
 import { AiTwotoneStar, AiFillCloseCircle } from "react-icons/ai";
 import Image from "next/image";

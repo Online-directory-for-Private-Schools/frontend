@@ -70,7 +70,7 @@ const SelectLocation = ({
           <Select
             styled={styled}
             name={inputs[0].name}
-            value={inputs[0].value}
+            value={inputs[0].value as string}
             onChange={(e) => {
               if (cities.length === 0 || inputs[1].value === "")
                 if (setSubmit !== undefined) setSubmit(!submit);
@@ -81,7 +81,7 @@ const SelectLocation = ({
           <Select
             styled={styled}
             name={inputs[1].name}
-            value={inputs[1].value}
+            value={inputs[1].value as string}
             onChange={(e) => {
               if (setSubmit !== undefined) {
                 // @ts-ignore
@@ -97,7 +97,7 @@ const SelectLocation = ({
       <Select
         styled={styled}
         name={inputs[2].name}
-        value={inputs[2].value}
+        value={inputs[2].value as string}
         disabled={cities.length === 0 || inputs[1].value === ""}
         options={cities}
         onChange={(e: any) => {
