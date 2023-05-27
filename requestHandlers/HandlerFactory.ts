@@ -7,6 +7,8 @@ import {
 } from "@/requestHandlers/handleSchoolRegiser";
 import { HandleGetSchool } from "@/requestHandlers/handleGetSchool";
 import { HandleChangeEmail, IChangeEmail } from "./handleChangeEmail";
+import { IChangePassword, handleChangePassword } from "./handleChangePassowrd";
+import { handleEditUserInfo, IEditUserInfo } from "./handleEditUserInfo";
 
 export class HandlerFactory {
   type: string;
@@ -31,6 +33,12 @@ export class HandlerFactory {
     } else if (this.type === "change-email") {
       if (!body) throw Error("Body not provided");
       return new HandleChangeEmail(<IChangeEmail>body);
+    } else if (this.type === "change-password") {
+      if (!body) throw Error("Body not provided");
+      return new handleChangePassword(<IChangePassword>body);
+    } else if (this.type === "edit-user-info") {
+      if (!body) throw Error("Body not provided");
+      return new handleEditUserInfo(<IEditUserInfo>body);
     } else {
       throw Error("Undefined Type of Request Handler");
     }

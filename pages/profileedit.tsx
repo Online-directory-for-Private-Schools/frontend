@@ -1,15 +1,24 @@
 import React, { MouseEventHandler, useState } from "react";
 import SignUp from "@/components/SignUp-Login/SignUp/SignUp";
 import { NextApiRequest, NextApiResponse } from "next";
-import ChangePasswordComponent from "@/components/SignUp-Login/ProfileEdit/ProfileEditComponent";
-
+import { ChangePassword } from "@/components/SignUp-Login/ProfileEdit/ProfileEditComponent";
+import { EditUserInfo } from "@/components/SignUp-Login/ProfileEdit/ProfileEditComponent";
+import { ChangeEmail } from "@/components/SignUp-Login/ProfileEdit/ProfileEditComponent";
+import Navbar from "@/components/SignUp-Login/navbar";
 const Cookies = require("cookies");
 
-function ChangePassword() {
-  return <ChangePasswordComponent/>;
+function EditUserProfile() {
+  return (
+    <>
+      <Navbar />
+      <ChangePassword />;
+      <EditUserInfo />
+      <ChangeEmail />
+    </>
+  );
 }
 
-export default ChangePassword;
+export default EditUserProfile;
 
 export async function getServerSideProps({
   req,

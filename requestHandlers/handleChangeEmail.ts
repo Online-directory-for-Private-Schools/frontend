@@ -34,7 +34,7 @@ export class HandleChangeEmail extends RequestHandler {
       console.log(res);
       if (!!res.error) {
         // if an error occurred
-        setErrorMessage(res.error.errors[0]);
+        setErrorMessage(res.error.message);
         setSuccessMessage(res.info);
       } else {
         // reset error message

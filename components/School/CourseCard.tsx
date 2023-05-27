@@ -5,6 +5,7 @@ import placeHolder from "@/public/placeHolder.png";
 import { GiOpenBook, GiMoneyStack } from "react-icons/gi";
 import { MdTitle } from "react-icons/md";
 import { FaChalkboardTeacher, FaSchool } from "react-icons/fa";
+
 const CourseCard = ({
   courseCardProps: {
     SchoolName,
@@ -20,53 +21,52 @@ const CourseCard = ({
   courseCardProps: CourseCardProps;
 }) => {
   return (
-    <div className="relative flex flex-col w-[350px] h-[500px] bg-dark-blue text-white border-2 rounded-xl ">
+    <div className="relative flex flex-col items-start w-80 h-96 bg-dark-blue text-white border-2 rounded-xl overflow-hidden shadow-lg ">
       <Image
-        className="w-full h-[150px] "
+        className="w-full object-cover"
         src={placeHolder.src}
         alt="Course Image"
         width={350}
         height={200}
       />
-      <div className="p-[1rem]">
-        <div className="flex justify-between px-[1rem] pt-0 pb-[1px] gap-[1rem]">
-          <div className="[&>*]:p-3 w-[50%]">
-            <div className={"flex gap-3"}>
-              <MdTitle className={"m-auto w-1/4"} />
-              <p className="course-name l w-3/4">{CourseName}</p>
+      <div className="p-4">
+        <div className="flex flex-col sm:flex-row justify-between w-full">
+          <div className="flex flex-col gap-2 w-full sm:w-1/2">
+            <div className="flex items-center gap-2">
+              <MdTitle />
+              <p className="font-bold">{CourseName}</p>
             </div>
-            <div className={"flex gap-3"}>
-              <FaChalkboardTeacher className={"m-auto w-1/4"} />
-              <p className="teacher-name l w-3/4">{TeacherName}</p>
+            <div className="flex items-center gap-2">
+              <FaChalkboardTeacher />
+              <p>{TeacherName}</p>
             </div>
-            <div className={"flex gap-3 justify-center"}>
-              <p className="level l">{Level}</p>
+            <div className="mt-2">
+              <p>{Level}</p>
             </div>
           </div>
-          <div className="[&>*]:p-3 w-[50%]">
-            <div className={"flex gap-3"}>
-              <GiOpenBook className={"m-auto w-1/4"} />
-              <p className="module r w-3/4">{Module}</p>
+          <div className="flex flex-col gap-2 w-full sm:w-1/2">
+            <div className="flex items-center gap-2">
+              <GiOpenBook />
+              <p>{Module}</p>
             </div>
-            <div className={"flex gap-3"}>
-              <FaSchool className={"m-auto w-1/4"} />
-              <p className="school-name w-3/4 r">{SchoolName}</p>
+            <div className="flex items-center gap-2">
+              <FaSchool />
+              <p>{SchoolName}</p>
             </div>
-            <div className={"flex justify-center gap-3"}>
-              <p className="year r">{Year}</p>
+            <div className="mt-2">
+              <p>{Year}</p>
             </div>
           </div>
         </div>
-
-        <div className={"pb-8"}>
-          <p className="py-3" id="course-description">
+        <div className="mt-4">
+          <p className="py-2 text-sm" id="course-description">
             {Description}
           </p>
-          <div className={"flex gap-3 absolute right-5 text-xl"}>
-            <GiMoneyStack className={"m-auto w-1/4"} />
-            <span className="w-3/4">
+          <div className="flex gap-3 mt-2 text-xl">
+            <GiMoneyStack />
+            <span>
               {price}
-              <span className={"text-[10px]"}> DZD</span>
+              <span className="text-xs ml-1">DZD</span>
             </span>
           </div>
         </div>
