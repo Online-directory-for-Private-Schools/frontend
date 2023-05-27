@@ -33,7 +33,7 @@ export default function InputGrp({
               type={input.type}
               // @ts-ignore
               label={input.label}
-              value={input.value}
+              value={input.value as string}
               onChange={input.onChange}
             />
           )}
