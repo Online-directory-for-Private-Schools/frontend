@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { useState } from "react";
 import Input from "@/components/SignUp-Login/input";
 import TextArea from "@/components/SignUp-Login/TextArea";
 import Radio from "@/components/SignUp-Login/radio";
@@ -53,13 +53,13 @@ const SchoolRegister = () => {
       name: "Yes",
       label: "Yes",
       value: "Yes",
-      onChange: (e: any) => setIsHiring(true),
+      onChange: () => setIsHiring(true),
     },
     {
       name: "No",
       label: "No",
       value: "No",
-      onChange: (e: any) => setIsHiring(false),
+      onChange: () => setIsHiring(false),
     },
   ];
 
@@ -67,7 +67,6 @@ const SchoolRegister = () => {
   let [message, setErrorMessage] = useState("");
   const router = useRouter();
   const [cookie, setUserToken] = useCookies(["token"]);
-  let [spinner, setSpinner] = useState(false);
   const schoolRegisterHandler: Function = (e: any, setSpinner: any) => {
     e.preventDefault();
     const jwt = require("jsonwebtoken");
