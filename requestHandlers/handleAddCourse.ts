@@ -42,7 +42,7 @@ export class handleAddCourse extends RequestHandler {
     this.schoolId = schoolId;
     this.pricePerSession = pricePerSession;
     this.monthlyPrice = monthlyPrice;
-    this.moduleId = 7;
+    this.moduleId = moduleId;
     
   }
 
@@ -65,7 +65,7 @@ export class handleAddCourse extends RequestHandler {
       monthlyPrice: this.monthlyPrice,
       moduleId: this.moduleId,
     };
-
+    console.log(body);
     super.post("/courses", body).then((res: any) => {
       if (!!res.error) {
         setSpinner(false);
@@ -73,7 +73,7 @@ export class handleAddCourse extends RequestHandler {
       } else {
         setSpinner(false);
         setErrorMessage("");
-        router.push("/school").catch((e: Error) => console.error(e));
+        router.push(`/SchoolProfile/${this.schoolId}`).catch((e: Error) => console.error(e));
       }
     });
   }

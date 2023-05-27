@@ -19,8 +19,7 @@ function AddCourse({id} : {id : number}) {
   const [monthlyPrice, setMonthlyPrice] = useState("");
   const [level, setLevel] = useState("");
   const [year, setYear] = useState("");
-  const [school_module, setSchoolModule] = useState("");
-  const [moduleId, setModuleId] = useState("");
+  const [moduleId, setSchoolModule] = useState("");
   const [nonAcademicTypeId, setNonAcademicTypeId] = useState("");
 
   
@@ -33,7 +32,8 @@ function AddCourse({id} : {id : number}) {
     e.preventDefault();
 
     const handlerFactory = new HandlerFactory("add-course");
-    const addCourseHandler = handlerFactory.createHandler({
+
+    let body = {
       title,
       teacher_name,
       description,
@@ -43,7 +43,10 @@ function AddCourse({id} : {id : number}) {
       monthlyPrice,
       moduleId,
       nonAcademicTypeId,
-    }) as handleAddCourse;
+    }
+    const addCourseHandler = handlerFactory.createHandler(body) as handleAddCourse;
+
+    console.log(body)
 
     addCourseHandler.execute({
       setErrorMessage: setErrorMessage,
@@ -72,7 +75,7 @@ function AddCourse({id} : {id : number}) {
     },
     {
       name: "Module",
-      value: school_module,
+      value: moduleId,
       onChange: (e: any) => setSchoolModule(e.target.value),
     },
   ];
