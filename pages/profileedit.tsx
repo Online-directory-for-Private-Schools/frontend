@@ -7,6 +7,7 @@ import { ChangeEmail } from "@/components/SignUp-Login/ProfileEdit/ProfileEditCo
 import Navbar from "@/components/SignUp-Login/navbar";
 import {HandlerFactory} from "@/requestHandlers/HandlerFactory";
 import {HandleGetUser} from "@/requestHandlers/HandleGetUser";
+import VerificationForm from "@/components/verification/VerificationForm";
 const Cookies = require("cookies");
 
 function EditUserProfile() {
@@ -16,6 +17,9 @@ function EditUserProfile() {
       <ChangePassword />;
       <EditUserInfo />
       <ChangeEmail />
+      {/* <VerificationForm onSubmit={function (e: React.MouseEvent<Element, MouseEvent>, setSpinner: Function): void {
+        throw new Error("Function not implemented.");
+      } } errorMessage={""} /> */}
     </>
   );
 }
