@@ -97,7 +97,7 @@ export class RequestHandler {
     }
   }
 
-  async put(route: string, id: string, body: object) {
+  async put(route: string, id: string, body: object, token: string) {
     try {
       return await fetch(
         process.env.NEXT_PUBLIC_BACKEND_URL + route + "/" + id,
@@ -105,7 +105,7 @@ export class RequestHandler {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + cookie.get("token"),
+            Authorization: "Bearer " + token,
           },
           body: JSON.stringify(body),
         }

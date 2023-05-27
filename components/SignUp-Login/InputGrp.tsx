@@ -43,7 +43,7 @@ export default function InputGrp({
               key={input.name}
               // @ts-ignore
               name={input.name}
-              value={input.value}
+              value={input.value as string}
               onChange={input.onChange}
               // @ts-ignore
               options={input.options}

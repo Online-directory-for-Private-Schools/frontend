@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler } from "react";
 
 export default function Select({
+  styled,
   name,
   value,
   onChange,
@@ -12,11 +13,16 @@ export default function Select({
   onChange: ChangeEventHandler;
   options: Array<{ id: string; name: string }>;
   disabled?: boolean;
+  styled?: boolean;
 }) {
   return (
     <div className="py-2 w-full">
       <label
-        className={"text-[18px] text-dark-blue block  mb-[3px] w-full"}
+        className={
+          styled
+            ? "text-[18px] text-white block  mb-[3px] w-full"
+            : "text-[18px] text-dark-blue block  mb-[3px] w-full"
+        }
         htmlFor={name}
       >
         {name}
@@ -27,7 +33,9 @@ export default function Select({
         value={value}
         onChange={onChange}
         className={
-          "w-full p-[10px] rounded-xl border border-solid border-gray-400 outline-none focus:border-green focus:shadow-[2px_2px_3px_#1ACD77] duration-300"
+          styled
+            ? "w-full p-[10px] rounded-xl border bg-dark-blue border-green border-gray-400 outline-none focus:border-green focus:shadow-[2px_2px_3px_#1ACD77] duration-300"
+            : "w-full p-[10px] rounded-xl border border-solid border-gray-400 outline-none focus:border-green focus:shadow-[2px_2px_3px_#1ACD77] duration-300"
         }
       >
         <option defaultChecked value={""}>
