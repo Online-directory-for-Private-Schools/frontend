@@ -16,8 +16,10 @@ export default function Navbar({
   landing,
   loggedIn,
   schoolOwner,
+  schoolId,
   links,
 }: {
+  schoolId?: number;
   search?: MutableRefObject<any>;
   home?: boolean;
   landing?: boolean;
@@ -61,7 +63,7 @@ export default function Navbar({
   const login: String = "Login";
   const signUp: String = "Sign Up";
   const Profile: String = "Edit Profile";
-  const SchoolProfile : String = "My School";
+  const SchoolProfile: String = "My School";
   const logout: String = "logout";
 
   let [scrolled, setScrolled] = useState(false);
@@ -209,28 +211,21 @@ export default function Navbar({
                   <p className="my-auto whitespace-nowrap">{Profile}</p>
                 </Link>
 
-                {schoolOwner && <Link
-                  href={"/SchoolProfile"}
-                  className={
-                    "btn hover:text-green flex flex-col justify-center"
-                  }
-                  onClick={(event) => event.stopPropagation()}
-                >
-                  <p className="my-auto whitespace-nowrap">{SchoolProfile}</p>
-                </Link>}
-                
+                {schoolOwner && (
+                  <Link
+                    href={`/SchoolProfile/${schoolId}`}
+                    className={
+                      "btn hover:text-green flex flex-col justify-center"
+                    }
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <p className="my-auto whitespace-nowrap">{SchoolProfile}</p>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
-
-
-
-                  
-                  
-            
-
-        ) 
-        : (
+        ) : (
           <div className="w-[25%] flex flex-row justify-end">
             <Link
               href={"/login"}
