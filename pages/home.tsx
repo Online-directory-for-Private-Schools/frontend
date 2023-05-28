@@ -104,7 +104,7 @@ export async function getServerSideProps({
     };
   }
 
-  ookies.set("token", "");
+  cookie.set("token", "");
 
   return {
     redirect: {
