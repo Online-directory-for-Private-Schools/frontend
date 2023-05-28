@@ -88,15 +88,23 @@ export async function getServerSideProps({
     const handlerFactory = new HandlerFactory("general");
     const getUserHandler = handlerFactory.createHandler() as RequestHandler;
     const response: any = await getUserHandler.get("/user/schools", "", token);
+
+    if (response.data)
+      return {
+        props: {
+          isSchoolOwner: resp.user.type === UserType.SCHOOL_OWNER,
+          schoolId: response.data.schools[0].id,
+        },
+      };
+
     return {
       props: {
         isSchoolOwner: resp.user.type === UserType.SCHOOL_OWNER,
-        schoolId: response.data.schools[0].id,
       },
     };
   }
 
-  cookie.set("token", "");
+  ookies.set("token", "");
 
   return {
     redirect: {
