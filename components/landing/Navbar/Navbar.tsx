@@ -5,7 +5,7 @@ import Link from "next/link";
 import hamburger from "@/public/bars-solid.svg";
 import closeIcon from "@/public/close.svg";
 import SearchBar from "@/components/landing/Navbar/SearchBar";
-import logo from "@/public/School_Logo.svg";
+import logo from "@/public/School_Logo.png";
 import { useRouter } from "next/router";
 
 const cookieCutter = require("cookie-cutter");
@@ -95,9 +95,7 @@ export default function Navbar({
           }
         >
           <Image
-            className={
-              "cursor-pointer hidden sm:block bg-dark-blue p-1 rounded-xl"
-            }
+            className={"cursor-pointer hidden sm:block p-1 rounded-xl"}
             src={logo.src}
             alt={"logo"}
             width={200}

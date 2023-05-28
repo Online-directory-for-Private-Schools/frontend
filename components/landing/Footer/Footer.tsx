@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import { BiSend } from "react-icons/bi";
 import Image from "next/image";
-import Logo from "@/public/School_Logo.svg";
+import Logo from "@/public/School_Logo.png";
 import Link from "next/link";
 
 const Footer = () => {

@@ -1,16 +1,15 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/public/School_Logo.svg";
+import logo from "@/public/School_Logo.png";
 import { useRouter } from "next/router";
-
 
 export default function Navbar2({
   SignUp,
   Login,
   changePassword,
   ChangeEmail,
-  ChangeInfoComponent
+  ChangeInfoComponent,
 }: {
   SignUp?: boolean;
   Login?: boolean;
@@ -28,9 +27,7 @@ export default function Navbar2({
       >
         <div className={"w-[10%] lg:w-[25%] flex justify-left pl-2"}>
           <Image
-            className={
-              " hidden lg:block bg-dark-blue p-1 cursor-pointer rounded-xl"
-            }
+            className={" hidden lg:block p-1 cursor-pointer rounded-xl"}
             src={logo.src}
             alt={"logo"}
             width={200}
@@ -57,7 +54,7 @@ export default function Navbar2({
           )}
           {!!changePassword && (
             <div className={"font-bold text-xl"}>
-             Return to
+              Return to
               <Link href="/home">
                 <span
                   className={

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CourseCard from "./CourseCard";
 import { AiTwotoneStar, AiFillCloseCircle } from "react-icons/ai";
 import Image from "next/image";
-import Logo from "@/public/School_Logo.svg";
+import Logo from "@/public/School_Logo.png";
 import SchoolCover from "@/public/school-cover.png";
 import Link from "next/link";
 import { Modal, Box, IconButton } from "@mui/material";

@@ -2,7 +2,7 @@ import React from "react";
 import { AiTwotoneStar, AiFillCloseCircle } from "react-icons/ai";
 import { BiMap } from "react-icons/bi";
 import { SchoolCardProps } from "@/interfaces/SchoolCard";
-import Logo from "@/public/School_Logo.svg";
+import Logo from "@/public/School_Logo.png";
 import Link from "next/link";
 import { Box, Modal, IconButton } from "@mui/material";
 import Spinner from "@/components/Utils/Spinner";
