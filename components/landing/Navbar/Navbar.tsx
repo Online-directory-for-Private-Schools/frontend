@@ -5,7 +5,7 @@ import Link from "next/link";
 import hamburger from "@/public/bars-solid.svg";
 import closeIcon from "@/public/close.svg";
 import SearchBar from "@/components/landing/Navbar/SearchBar";
-import logo from "@/public/School_Logo.svg";
+import logo from "@/public/School_Logo.png";
 import { useRouter } from "next/router";
 
 const cookieCutter = require("cookie-cutter");
@@ -15,12 +15,16 @@ export default function Navbar({
   home,
   landing,
   loggedIn,
+  schoolOwner,
+  schoolId,
   links,
 }: {
+  schoolId?: number;
   search?: MutableRefObject<any>;
   home?: boolean;
   landing?: boolean;
   loggedIn?: boolean;
+  schoolOwner?: boolean;
   links?: Array<{ title: string; route: string }>;
 }) {
   let [clicked, setClicked] = useState(false);
@@ -52,13 +56,14 @@ export default function Navbar({
 
   const logoutHandler: MouseEventHandler = (e) => {
     e.stopPropagation();
-    cookieCutter.set("token", "");
+    cookieCutter.set("token", "", { path: "/" });
     router.push("/login").catch((e) => console.error(e));
   };
 
-  const login: String = "login";
+  const login: String = "Login";
   const signUp: String = "Sign Up";
   const Profile: String = "Edit Profile";
+  const SchoolProfile: String = "My School";
   const logout: String = "logout";
 
   let [scrolled, setScrolled] = useState(false);
@@ -78,7 +83,7 @@ export default function Navbar({
       <div
         className={
           scrolled
-            ? "z-50 h-12 fixed  shadow flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 bg-white rounded-2xl hover:shadow-md transform duration-300 whitespace-nowrap"
+            ? "z-50 h-12 fixed  shadow flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 bg-white/[80%] backdrop-blur-[6px] rounded-2xl hover:shadow-md transform duration-300 whitespace-nowrap"
             : "z-50 h-12 fixed bg-transparent flex flex-row justify-between w-[98%] mt-2 p-2 gap-2 rounded-2xl  transform duration-300 whitespace-nowrap"
         }
       >
@@ -90,9 +95,7 @@ export default function Navbar({
           }
         >
           <Image
-            className={
-              "cursor-pointer hidden sm:block bg-dark-blue p-1 rounded-xl"
-            }
+            className={"cursor-pointer hidden sm:block p-1 rounded-xl"}
             src={logo.src}
             alt={"logo"}
             width={200}
@@ -101,7 +104,7 @@ export default function Navbar({
           />
           {landing && (
             <Image
-              className={"lg:hidden block cursor-pointer "}
+              className={"sm:hidden block cursor-pointer "}
               src={clicked ? closeIcon.src : hamburger.src}
               alt={"X"}
               width={20}
@@ -205,6 +208,18 @@ export default function Navbar({
                 >
                   <p className="my-auto whitespace-nowrap">{Profile}</p>
                 </Link>
+
+                {schoolOwner && (
+                  <Link
+                    href={`/SchoolProfile/${schoolId}`}
+                    className={
+                      "btn hover:text-green flex flex-col justify-center"
+                    }
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <p className="my-auto whitespace-nowrap">{SchoolProfile}</p>
+                  </Link>
+                )}
               </div>
             </div>
           </div>

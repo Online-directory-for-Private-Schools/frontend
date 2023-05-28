@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { CourseCardProps } from "@/interfaces/CourseCardProps";
-import placeHolder from "@/public/placeHolder.png";
+import placeHolder from "@/public/school-cover.png";
 import { GiOpenBook, GiMoneyStack } from "react-icons/gi";
 import { MdTitle } from "react-icons/md";
 import { FaChalkboardTeacher, FaSchool } from "react-icons/fa";
@@ -20,9 +20,9 @@ const CourseCard = ({
   courseCardProps: CourseCardProps;
 }) => {
   return (
-    <div className="relative flex flex-col w-[350px] h-[500px] bg-dark-blue text-white border-2 rounded-xl ">
+    <div className="relative flex flex-col items-start w-80 h-96 bg-dark-blue text-white border-2 rounded-xl overflow-hidden shadow-lg ">
       <Image
-        className="w-full h-[150px] "
+        className="w-full object-cover"
         src={placeHolder.src}
         alt="Course Image"
         width={350}

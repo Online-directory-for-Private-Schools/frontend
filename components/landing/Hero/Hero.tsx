@@ -1,6 +1,7 @@
 // @flow
 import * as React from "react";
-import Link from "next/link";
+import TopSchools from "@/components/landing/Hero/TopSchool";
+import { topShools } from "@/components/landing/Hero/topShools";
 
 export default function Hero() {
   return (
@@ -18,17 +19,7 @@ export default function Hero() {
         </h2>
       </div>
       <div className={"text-center m-auto [&>*]:m-10"}>
-        <h1 className={"text-4xl font-bold"}>
-          Click here to search for schools{" "}
-        </h1>
-        <Link
-          className={
-            "text-white bg-green p-4 rounded-xl w-40 m-auto duration-300 hover:shadow-[2px_2px_3px] hover:shadow-gray-800/40"
-          }
-          href={"/home"}
-        >
-          Browse All
-        </Link>
+        <TopSchools topSchools={topShools} />
       </div>
     </div>
   );

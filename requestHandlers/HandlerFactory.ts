@@ -15,6 +15,16 @@ import {
   HandleCourseSearch,
   ISearchCoursesRequest,
 } from "@/requestHandlers/handleCourseSearch";
+import {
+  HandleEditSchoolProfile,
+  IEditSchoolRequest,
+} from "@/requestHandlers/HandleEditSchoolProfile";
+import { HandleChangeEmail, IChangeEmail } from "./handleChangeEmail";
+import { IChangePassword, handleChangePassword } from "./handleChangePassowrd";
+import { handleEditUserInfo, IEditUserInfo } from "./handleEditUserInfo";
+import { HandleSendVerificationCode } from "./handleSendVerificationCode";
+import { HandleVerifyEmail, IVerifyEmail } from "./handleVerifyEmail";
+import { handleAddCourse, IAddCourse } from "@/requestHandlers/handleAddCourse";
 
 export class HandlerFactory {
   type: string;
@@ -23,7 +33,14 @@ export class HandlerFactory {
   }
   createHandler(
     body?: object
-  ): HandleSchoolSearch | HandleLogin | HandleSignUp | RequestHandler {
+  ):
+    | HandleSchoolSearch
+    | HandleLogin
+    | HandleSignUp
+    | RequestHandler
+    | HandleChangeEmail
+    | handleChangePassword
+    | handleEditUserInfo {
     if (this.type === "login") {
       if (!body) throw Error("Body not provided");
       return new HandleLogin(<ILogin>body);
@@ -38,6 +55,15 @@ export class HandlerFactory {
     } else if (this.type === "get-school") {
       if (!body) throw Error("Body not provided");
       return new HandleGetSchool(<{ id: string; token: string }>body);
+    } else if (this.type === "change-email") {
+      if (!body) throw Error("Body not provided");
+      return new HandleChangeEmail(<IChangeEmail>body);
+    } else if (this.type === "change-password") {
+      if (!body) throw Error("Body not provided");
+      return new handleChangePassword(<IChangePassword>body);
+    } else if (this.type === "edit-user-info") {
+      if (!body) throw Error("Body not provided");
+      return new handleEditUserInfo(<IEditUserInfo>body);
     } else if (this.type === "get-user") {
       if (!body) throw Error("Body not provided");
       return new HandleGetUser(<{ token: string }>body);
@@ -47,7 +73,20 @@ export class HandlerFactory {
     } else if (this.type === "search-course") {
       if (!body) throw Error("Body not provided");
       return new HandleCourseSearch(<ISearchCoursesRequest>body);
-    } else {
+    } else if (this.type === "edit-school") {
+      if (!body) throw Error("Body not provided");
+      return new HandleEditSchoolProfile(<IEditSchoolRequest>body);
+    } else if (this.type === "add-course") {
+      if (!body) throw Error("Body not provided");
+      return new handleAddCourse(<IAddCourse>body);
+    } else if (this.type === "verify-email") {
+      if (!body) throw Error("Body not provided");
+      return new HandleVerifyEmail(<IVerifyEmail>body);
+    }
+    else if (this.type === "send-email") {
+      return new HandleSendVerificationCode();
+    }
+    else {
       throw Error("Undefined Type of Request Handler");
     }
   }

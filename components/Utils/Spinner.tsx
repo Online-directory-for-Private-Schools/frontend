@@ -8,7 +8,7 @@ const Spinner = () => {
         "w-full h-full bg-gray-400/0 flex justify-center [&>*]:my-auto"
       }
     >
-      <CircularProgress />
+      <CircularProgress color="success" />
     </div>
   );
 };

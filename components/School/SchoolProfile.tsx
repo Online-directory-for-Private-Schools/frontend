@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import CourseCard from "./CourseCard";
-import { AiTwotoneStar } from "react-icons/ai";
+import { AiTwotoneStar, AiFillCloseCircle } from "react-icons/ai";
 import Image from "next/image";
-import Logo from "@/public/School_Logo.svg";
+import Logo from "@/public/School_Logo.png";
 import SchoolCover from "@/public/school-cover.png";
 import Link from "next/link";
-
+import { Modal, Box, IconButton } from "@mui/material";
 import { BiMap } from "react-icons/bi";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
@@ -32,6 +32,13 @@ export const CourseCardList = ({
 
 import { CourseCardProps } from "@/interfaces/CourseCardProps";
 import { ISchoolResp } from "@/interfaces/ISchoolResp.interface";
+// import jwt from "jsonwebtoken";
+import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
+import { HandleEditSchoolProfile } from "@/requestHandlers/HandleEditSchoolProfile";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
+import SelectLocation from "@/components/SignUp-Login/SelectLocation";
+import Spinner from "@/components/Utils/Spinner";
 
 export default function TabBarProfile({
   course,
@@ -113,17 +120,130 @@ export const renderStars = (rating: number) => {
 // Should have added a parameter to check the School
 
 export function SchoolProfile({
+  isOwner,
   school,
   courses,
 }: {
+  isOwner: boolean;
   school: ISchoolResp;
   courses: Array<CourseCardProps>;
 }) {
+  let [errorMessage, setErrorMessage] = useState("");
+  let [spinner, setSpinner] = useState(false);
+
+  let [successMessage, setSuccess] = useState("");
+
+  let [open, setOpen] = useState(false);
+  const [cookie, setUserToken] = useCookies(["token"]);
+
+  const handleOpen = () => {
+    setDisabled(true);
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setSuccess("");
+    setErrorMessage("");
+    setOpen(false);
+  };
+
+  const style = {
+    overflow: "hidden",
+    color: "dark-blue",
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -70%)",
+    width: 650,
+    bgcolor: "rgba(255,255,255,0.7)",
+    borderRadius: "25px",
+    maxHeight: "90vh",
+    minHeight: "50vh",
+    margin: 0,
+    paddingBottom: "25px",
+    backdropFilter: "blur(6px)",
+    "&:focus": { outline: "none" },
+    display: "flex",
+    flexDirection: "column",
+    backgroundImage:
+      "linear-gradient(to bottom right, rgba(07, 16, 59, 0.8), rgba(07, 16, 59, 1))",
+  };
+
+  // Modal submit button disabled
+  let [disabled, setDisabled] = useState(true);
+
+  //initialize parameters to old values
+  const [schoolName, setSchoolName] = useState(school.name);
+  const [schoolBio, setSchoolBio] = useState(school.bio);
+  const [website, setWebsite] = useState(school.website);
+  const [phoneNumber, setPhoneNumber] = useState(school.phone_number);
+  const [schoolEmail, setSchoolEmail] = useState(school.email);
+  const [isHiring, setIsHiring] = useState(school.isHiring);
+  const [city, setCity] = useState(school.street.city.id);
+  // @ts-ignore
+  const [province, setProvince] = useState(school.street.city.province.id);
+  // @ts-ignore
+  const [country, setCountry] = useState(
+    school.street.city.province.country.id
+  );
+
+  const address = [
+    {
+      name: "Country",
+      value: country,
+      onChange: (e: any) => {
+        setDisabled(false);
+        setCountry(e.target.value);
+      },
+    },
+    {
+      name: "Province",
+      value: province,
+      onChange: (e: any) => {
+        setDisabled(false);
+        setProvince(e.target.value);
+      },
+    },
+    {
+      name: "City",
+      value: city,
+      onChange: (e: any) => {
+        setDisabled(false);
+        setCity(e.target.value);
+      },
+    },
+  ];
+  const handleSubmit = async (e: any, id: string) => {
+    e.preventDefault();
+    setSpinner(true);
+    const handlerFactory = new HandlerFactory("edit-school");
+    const schoolRegisterHandler = handlerFactory.createHandler({
+      name: schoolName,
+      bio: schoolBio,
+      isHiring: isHiring,
+      cityId: city,
+      website: website,
+      phone_number: phoneNumber,
+      email: schoolEmail,
+      // lat: this.lat,
+      // lng: this.lng,
+      token: cookie.token,
+      id: id,
+    }) as HandleEditSchoolProfile;
+
+    await schoolRegisterHandler.execute({
+      setErrorMessage,
+      setSuccess,
+      setSpinner,
+    });
+  };
+
+  const router = useRouter();
+  const { id } = router.query;
   return (
     <div className="mt-[6rem] oveflow-hidden">
       <div className=" w-[97vw] px-[50px] md:grid text-white md:grid-cols-[2fr,1fr] md:grid-rows-[1fr,120px,95px] gap-[20px] flex-col flex">
         <div
-          className="md:max-h-[300px] min-h-[300px] mh-full items-start bg-dark-blue flex overflow-hidden rounded-[15px] flex-col text-white justify-items-stretch  "
+          className="md:max-h-[300px] min-h-[300px] mh-full items-start bg-gradient-to-tr from-dark-blue to-[#07137B] flex overflow-hidden rounded-[15px] flex-col text-white justify-items-stretch  "
           style={{ gridRow: "1/2" }}
         >
           <div className="min-w-[100%] min-h-[45%] max-h-[55%]  bg-green overflow-hidden">
@@ -143,13 +263,212 @@ export function SchoolProfile({
                 src={Logo.src}
                 width={200}
                 height={100}
-                alt="School"
+                alt={"image"}
               />
             </div>
-            <div className="w-[85%] pl-7 pt-2">
+            <div className="w-[85%] relative pl-7 pt-2">
+              {isOwner && (
+                <div className={"flex flex-row"}>
+                  <button
+                    className="absolute mr-5 mt-2 top-0 right-0 bg-green p-2 rounded-xl hover:scale-[103%] hover:font-extrabold transition-[0.2s] "
+                    onClick={handleOpen}
+                  >
+                    Edit Profile
+                  </button>
+                  <Link
+                    className="absolute mr-5 mt-2 top-[4rem] right-0 bg-green p-2 rounded-xl hover:scale-[103%] hover:font-extrabold transition-[0.2s] "
+                    href={`/AddCourse/${id}`}
+                  >
+                    Add Course
+                  </Link>
+                </div>
+              )}
+
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                BackdropProps={{
+                  style: {
+                    backgroundColor: "rgba(170,170,170,0.1)",
+
+                    backdropFilter: "blur(3px)",
+                  },
+                }}
+              >
+                <Box sx={style}>
+                  <div className="relative h-full w-full flex-column ">
+                    <div className="pt-[20px] pb-[15px] text-white text-[20px] w-[70%] mx-auto flex justify-center italic border-white border-b-2 ">
+                      Edit Your Profile
+                    </div>
+
+                    <div className=" px-8 mt-[14px] h-[100%] text-white ">
+                      <form
+                        className="flex flex-col w-full"
+                        onSubmit={(e) => {
+                          handleSubmit(e, id as string);
+                        }}
+                      >
+                        <label className="relative py-2 flex flex-row">
+                          School Name:
+                          <input
+                            className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
+                            type="text"
+                            value={schoolName}
+                            onChange={(e) => {
+                              setDisabled(false);
+                              setSchoolName(e.target.value);
+                            }}
+                          />
+                        </label>
+
+                        <label className="relative py-2 flex flex-row">
+                          School Bio:
+                          <input
+                            className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
+                            type="text"
+                            value={
+                              schoolBio === null || schoolBio === undefined
+                                ? ""
+                                : schoolBio
+                            }
+                            onChange={(e) => {
+                              setDisabled(false);
+                              setSchoolBio(e.target.value);
+                            }}
+                          />
+                        </label>
+
+                        <label className="relative py-2 flex flex-row">
+                          School Email:
+                          <input
+                            className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
+                            type="text"
+                            value={
+                              schoolEmail === null || schoolEmail === undefined
+                                ? ""
+                                : schoolEmail
+                            }
+                            onChange={(e) => {
+                              setDisabled(false);
+                              setSchoolEmail(e.target.value);
+                            }}
+                          />
+                        </label>
+
+                        <label className="relative py-2 flex flex-row">
+                          School Website:
+                          <input
+                            className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
+                            type="text"
+                            value={
+                              website === null || website === undefined
+                                ? ""
+                                : website
+                            }
+                            onChange={(e) => {
+                              setDisabled(false);
+                              setWebsite(e.target.value);
+                            }}
+                          />
+                        </label>
+
+                        <label className="relative py-2 flex flex-row">
+                          School Number:
+                          <input
+                            className="focus:outline-none bg-transparent border-green border-b-2 w-[70%] right-0 absolute"
+                            type="text"
+                            value={
+                              phoneNumber === null || phoneNumber === undefined
+                                ? ""
+                                : phoneNumber
+                            }
+                            onChange={(e) => {
+                              setDisabled(false);
+                              setPhoneNumber(e.target.value);
+                            }}
+                          />
+                        </label>
+                        <SelectLocation styled inputs={address} />
+                        <label className="mt-4 flex">
+                          Is the school hiring?
+                          <div className="px-8">
+                            <input
+                              className="w-4 h-4 text-green bg-red-500 border-gray-300 rounded  dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
+                              type="checkbox"
+                              checked={
+                                isHiring === null || isHiring === undefined
+                                  ? false
+                                  : isHiring
+                              }
+                              onChange={(e) => {
+                                setDisabled(false);
+                                setIsHiring(e.target.checked);
+                              }}
+                            />
+                          </div>
+                        </label>
+                        <div className=" mt-4 flex w-full justify-center">
+                          <button
+                            onClick={handleClose}
+                            className="rounded-xl px-4 py-2 hover:font-extrabold hover-scale-[105%] transition-[0.1s] "
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            disabled={disabled}
+                            className="disabled:bg-gray-400 rounded-xl px-4 py-2 bg-green disabled:hover:font-normal hover:font-extrabold hover-scale-[105%] transition-[0.1s] "
+                          >
+                            Save Changes
+                          </button>
+                        </div>
+                        {spinner && (
+                          <div className={"m-8"}>
+                            <Spinner />
+                          </div>
+                        )}
+                        {errorMessage !== "" && (
+                          <p
+                            className={
+                              "bg-red-500 p-2 mt-10 rounded-2xl text-white font-bold text-center"
+                            }
+                          >
+                            {errorMessage}
+                          </p>
+                        )}
+                        {successMessage !== "" && (
+                          <p
+                            className={
+                              "bg-green p-2 mt-10 rounded-2xl text-white font-bold text-center"
+                            }
+                          >
+                            {successMessage}
+                          </p>
+                        )}
+                      </form>
+                    </div>
+                  </div>
+                  <IconButton
+                    sx={{
+                      position: "absolute",
+                      top: "0.5rem",
+                      right: "0.7rem",
+                      color: "#1ACD77",
+                      "&:hover": { color: "#1AFF77" },
+                      transition: "0.1s ease",
+                    }}
+                    onClick={handleClose}
+                  >
+                    <AiFillCloseCircle />
+                  </IconButton>
+                </Box>
+              </Modal>
+
               <h2 className="font-bold ">{school.name}</h2>
               <div className="pt-2 flex flex-row ">
-                <div className="">
+                <div className=" ">
                   <Link
                     className="flex flex-row text-left justify-start"
                     href={`https://www.google.com/maps?q=${
@@ -187,29 +506,29 @@ export function SchoolProfile({
         </div>
 
         <div
-          className="bg-dark-blue text-white p-[20px] rounded-[10px] flex md:h-auto h-[300px] "
+          className="bg-gradient-to-tl from-dark-blue to-[#07135F] text-white p-[20px] rounded-[10px] flex md:h-auto h-[300px] "
           style={{ gridRow: "1/3" }}
         >
-          <h2 className="m-auto italic">Feature not implemented</h2>
+          <h2 className="m-auto italic">Coming Soon</h2>
         </div>
 
-        <div className="bg-dark-blue flex flex-col rounded-[15px] items-center justify-center overflow-hidden md:h-auto h-[250px] ">
+        <div className="bg-gradient-to-bl from-dark-blue to-[#07135F] flex flex-col rounded-[15px] items-center justify-center overflow-hidden md:h-auto h-[250px] ">
           <div className="w-full flex items-center md:h-1/2 h-3/4 md:justify-around md:flex-row flex-col">
             <div className="flex flex-row my-auto">
               <BsFillTelephoneFill className="fill-green scale-[120%] m-auto " />
-              <span className="px-2">missing</span>
+              <span className="px-2">{school.phone_number}</span>
             </div>
             <div className=" md:w-[1px] w-[70%] bg-white md:h-[70%] h-[1px] "></div>
 
             <div className="flex flex-row my-auto ">
               <MdEmail className="fill-green scale-[120%] m-auto " />
-              <span className="px-2">missing</span>
+              <span className="px-2">{school.email}</span>
             </div>
             <div className=" md:w-[1px] w-[80%] bg-white md:h-[70%] h-[1px] "></div>
 
             <div className="flex flex-row my-auto">
               <AiOutlineGlobal className="fill-green scale-[120%] m-auto " />
-              <span className="px-2">website</span>
+              <span className="px-2">{school.website}</span>
             </div>
           </div>
 

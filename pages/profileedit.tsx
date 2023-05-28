@@ -1,17 +1,30 @@
 import React, { MouseEventHandler, useState } from "react";
 import SignUp from "@/components/SignUp-Login/SignUp/SignUp";
 import { NextApiRequest, NextApiResponse } from "next";
-import ChangePasswordComponent from "@/components/SignUp-Login/ProfileEdit/ProfileEditComponent";
-import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
-import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
-
+import { ChangePassword } from "@/components/SignUp-Login/ProfileEdit/ProfileEditComponent";
+import { EditUserInfo } from "@/components/SignUp-Login/ProfileEdit/ProfileEditComponent";
+import { ChangeEmail } from "@/components/SignUp-Login/ProfileEdit/ProfileEditComponent";
+import Navbar from "@/components/SignUp-Login/navbar";
+import {HandlerFactory} from "@/requestHandlers/HandlerFactory";
+import {HandleGetUser} from "@/requestHandlers/HandleGetUser";
+import VerificationForm from "@/components/verification/VerificationForm";
 const Cookies = require("cookies");
 
-function ChangePassword() {
-  return <ChangePasswordComponent />;
+function EditUserProfile() {
+  return (
+    <>
+      <Navbar />
+      <ChangePassword />;
+      <EditUserInfo />
+      <ChangeEmail />
+      {/* <VerificationForm onSubmit={function (e: React.MouseEvent<Element, MouseEvent>, setSpinner: Function): void {
+        throw new Error("Function not implemented.");
+      } } errorMessage={""} /> */}
+    </>
+  );
 }
 
-export default ChangePassword;
+export default EditUserProfile;
 
 export async function getServerSideProps({
   req,

@@ -36,10 +36,6 @@ export default function HomeScreenDashBoard({
   let [spriceMin, setSPriceMin] = useState(500);
   let [spriceMax, setSPriceMax] = useState(1500);
 
-  let [primaryValues, setPrimaryValues] = useState(createBooleanArray(5));
-  let [middleValues, setMiddleValues] = useState(createBooleanArray(4));
-  let [secondaryValues, setSecondaryValues] = useState(createBooleanArray(3));
-
   let [country, setCountry] = useState("");
   let [province, setProvince] = useState("");
   let [city, setCityName] = useState("");
@@ -68,6 +64,7 @@ export default function HomeScreenDashBoard({
   const schoolHandlerFactory = new HandlerFactory("search-school");
   const searchSchoolHandler = schoolHandlerFactory.createHandler({
     name: search,
+    page: 1,
     cityId: city === "" ? undefined : city,
     countryId: country === "" ? undefined : country,
     provinceId: province === "" ? undefined : province,
@@ -77,6 +74,7 @@ export default function HomeScreenDashBoard({
   const CourseHandlerFactory = new HandlerFactory("search-course");
   const searchCourseHandler = CourseHandlerFactory.createHandler({
     title: search,
+    page: 1,
     monthlyPriceEnd: mpriceMax,
     monthlyPriceStart: mpriceMin,
     pricePerSessionEnd: spriceMax,
@@ -174,7 +172,7 @@ export default function HomeScreenDashBoard({
         <TabBar />
         <div
           className={
-            "m-5 p-5 rounded-xl [&>*]:m-3 flex flex-col justify-items-center flex-wrap"
+            "m-5 p-5 rounded-xl [&>*]:m-3 [&>*]:w-72 flex flex-row justify-items-center flex-wrap"
           }
         >
           {((!courses.available && course) ||
@@ -195,7 +193,7 @@ export default function HomeScreenDashBoard({
           {course &&
             courses.available &&
             (courses.array.length === 0 ? (
-              <p className={"p-4 text-center text-xl font-bold"}>
+              <p className={"p-4 m-text-center text-xl font-bold"}>
                 No matching Courses
               </p>
             ) : (

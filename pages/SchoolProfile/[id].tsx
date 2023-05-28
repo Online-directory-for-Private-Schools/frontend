@@ -8,17 +8,27 @@ import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { ISchoolResp } from "@/interfaces/ISchoolResp.interface";
 import { HandleGetSchool } from "@/requestHandlers/handleGetSchool";
 import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
+import { UserType } from "@/interfaces/UserType.enum";
+import { HandleSchoolSearch } from "@/requestHandlers/handleSchoolSearch";
 
 const Cookies = require("cookies");
 const Navbar = dynamic(() => import("../../components/landing/Navbar/Navbar"), {
   ssr: false,
 });
 
-export default function Id(props: { school: ISchoolResp }) {
+export default function Id(props: {
+  school: ISchoolResp;
+  isOwner: boolean;
+  courses: any;
+}) {
   return (
     <>
-      <Navbar loggedIn />
-      <SchoolProfile school={props.school} courses={[]} />
+      <Navbar loggedIn schoolOwner={props.isOwner} />
+      <SchoolProfile
+        school={props.school}
+        courses={props.courses}
+        isOwner={props.isOwner}
+      />
       <Footer />
     </>
   );
@@ -33,15 +43,12 @@ export async function getServerSideProps({
   res: NextApiResponse;
   query: NextApiRequestQuery;
 }) {
+  // Get IDs from Browser
   const cookie = new Cookies(req, res);
   const token = cookie.get("token");
   const { id } = query;
-  const schoolHandlerFactory = new HandlerFactory("get-school");
-  const getSchoolHandler = schoolHandlerFactory.createHandler({
-    id: id,
-    token: token,
-  }) as HandleGetSchool;
 
+  // user is not logged it, redirect
   if (token === "" || !token)
     return {
       redirect: {
@@ -49,12 +56,21 @@ export async function getServerSideProps({
         destination: "/login",
       },
     };
+
+  const schoolHandlerFactory = new HandlerFactory("get-school");
+  const getSchoolHandler = schoolHandlerFactory.createHandler({
+    id: id,
+    token: token,
+  }) as HandleGetSchool;
+
   const userHandlerFactory = new HandlerFactory("get-user");
   const getUserHandler = userHandlerFactory.createHandler({
     token: token,
   }) as HandleGetUser;
-  const resp = await getUserHandler.execute();
 
+  const resp: any = await getUserHandler.execute();
+
+  // User changed cookies, logout
   if (!resp.success) {
     cookie.set("token", "");
 
@@ -66,8 +82,9 @@ export async function getServerSideProps({
     };
   }
 
-  const response = await getSchoolHandler.execute();
+  const response: any = await getSchoolHandler.execute();
 
+  // If School ID is incorrect, redirect to /home
   if (!!response.error) {
     return {
       redirect: {
@@ -77,7 +94,43 @@ export async function getServerSideProps({
     };
   }
 
+  const CourseHandlerFactory = new HandlerFactory("search-course");
+  const searchCourseHandler = CourseHandlerFactory.createHandler({
+    schoolId: id,
+    token: token,
+  }) as HandleSchoolSearch;
+
+  const schools = await searchCourseHandler.execute();
+
+  console.log();
+
+  // If user is School owner, give edit access
+  if (resp.user.type === UserType.SCHOOL_OWNER) {
+    // Check if the user owner is the owner of this SchoolProfile
+
+    if (response.res.school.owner.id === resp.user.id) {
+      return {
+        props: {
+          isOwner: true,
+          school: response.res.school as ISchoolResp,
+          courses: schools.res.data.courses,
+        },
+      };
+    } else {
+      return {
+        props: {
+          isOwner: false,
+          school: response.res.school as ISchoolResp,
+          courses: schools.res.data.courses,
+        },
+      };
+    }
+  }
   return {
-    props: { school: response.res.school as ISchoolResp },
+    props: {
+      isOwner: false,
+      school: response.res.school as ISchoolResp,
+      courses: schools.res.data.courses,
+    },
   };
 }

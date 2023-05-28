@@ -9,6 +9,8 @@ import React, {
 import { NextApiRequest, NextApiResponse } from "next";
 import { HandlerFactory } from "@/requestHandlers/HandlerFactory";
 import { HandleGetUser } from "@/requestHandlers/HandleGetUser";
+import { UserType } from "@/interfaces/UserType.enum";
+import { RequestHandler } from "@/requestHandlers/REST-Handler/RequestHandler";
 const Cookies = require("cookies");
 
 const Navbar = dynamic(() => import("../components/landing/Navbar/Navbar"), {
@@ -25,11 +27,16 @@ export const SearchSubmitContext = createContext({
   setSubmit: (value: boolean) => value,
   value: "",
 });
-export default function Home() {
+export default function Home({
+  isSchoolOwner,
+  schoolId,
+}: {
+  isSchoolOwner: boolean;
+  schoolId: number;
+}) {
   let [course, setCourse] = useState(false);
   let [submit, setSubmit] = useState(false);
   const search = useRef({ value: "" }) as MutableRefObject<any>;
-
   return (
     <SearchSubmitContext.Provider
       value={{
@@ -41,7 +48,13 @@ export default function Home() {
     >
       {/* @ts-ignore */}
       <CourseContext.Provider value={{ course: course, setCourse: setCourse }}>
-        <Navbar home loggedIn search={search} />
+        <Navbar
+          home
+          loggedIn
+          search={search}
+          schoolOwner={isSchoolOwner}
+          schoolId={schoolId}
+        />
         <HomeScreenDashBoard course={course} search={search.current.value} />
       </CourseContext.Provider>
     </SearchSubmitContext.Provider>
@@ -71,10 +84,25 @@ export async function getServerSideProps({
   }) as HandleGetUser;
   const resp = await getUserHandler.execute();
 
-  if (resp.success)
+  if (resp.success) {
+    const handlerFactory = new HandlerFactory("general");
+    const getUserHandler = handlerFactory.createHandler() as RequestHandler;
+    const response: any = await getUserHandler.get("/user/schools", "", token);
+
+    if (response.data)
+      return {
+        props: {
+          isSchoolOwner: resp.user.type === UserType.SCHOOL_OWNER,
+          schoolId: response.data.schools[0].id,
+        },
+      };
+
     return {
-      props: {},
+      props: {
+        isSchoolOwner: resp.user.type === UserType.SCHOOL_OWNER,
+      },
     };
+  }
 
   cookie.set("token", "");
 

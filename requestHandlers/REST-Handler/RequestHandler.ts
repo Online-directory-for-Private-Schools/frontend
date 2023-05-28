@@ -27,7 +27,8 @@ export class RequestHandler {
             Authorization: "Bearer " + token,
           },
         }
-      );
+      ).catch((e) => console.log(e));
+
       // @ts-ignore
       if ("json" in res) {
         res = await res.json();
@@ -97,15 +98,26 @@ export class RequestHandler {
     }
   }
 
-  async put(route: string, id: string, body: object) {
+  async put(route: string, body: object, token: string, id?:string) {
     try {
-      return await fetch(
+      if(!!id) return fetch(
         process.env.NEXT_PUBLIC_BACKEND_URL + route + "/" + id,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + cookie.get("token"),
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify(body),
+        }
+      ).then((res) => res.json());
+      return  fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + route + "/",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
           },
           body: JSON.stringify(body),
         }
