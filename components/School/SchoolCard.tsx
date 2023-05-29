@@ -182,7 +182,7 @@ const SchoolCard = ({
           </Link>
           <div className="pt-2 grid-cols-[50%_50%] grid">
             <div>
-              <Link
+              {/* <Link
                 className="flex flex-row text-left justify-start"
                 // href={`https://www.google.com/maps?q=${lng + ", " + lat}`}
                 href={""}
@@ -191,7 +191,7 @@ const SchoolCard = ({
               >
                 <BiMap className="my-auto mr-2 fill-green" />
                 <h2 className={"my-auto"}></h2>
-              </Link>
+              </Link> */}
             </div>
             {/*<div className="flex flex-row justify-end ">*/}
             {/*  <button*/}

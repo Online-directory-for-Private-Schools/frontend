@@ -32,6 +32,7 @@ export class HandleCourseSearch extends RequestHandler {
   provinceId?: string;
   countryId?: string;
   constructor({
+    schoolId,
     token: token,
     title: title,
     teacher_name: teacher_name,
@@ -53,6 +54,7 @@ export class HandleCourseSearch extends RequestHandler {
     this.monthlyPriceEnd = monthlyPriceEnd;
     this.monthlyPriceStart = monthlyPriceStart;
     this.cityId = cityId;
+    this.schoolId = schoolId;
     this.provinceId = provinceId;
     this.countryId = countryId;
   }
@@ -70,6 +72,11 @@ export class HandleCourseSearch extends RequestHandler {
           ? ""
           : `&pricePerSessionStart=${this.pricePerSessionStart}`
       }${
+        this.schoolId === undefined
+          ? ""
+          : `&schoolId=${this.schoolId}`
+      }
+      ${
         this.monthlyPriceEnd === undefined
           ? ""
           : `&monthlyPriceEnd=${this.monthlyPriceEnd}`
