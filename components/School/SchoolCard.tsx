@@ -38,7 +38,7 @@ const SchoolCard = ({
   // };
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpen(false);
   const handleClose = () => setOpen(false);
 
   const style = {
