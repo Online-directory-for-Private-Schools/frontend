@@ -30,11 +30,11 @@ export default function HomeScreenDashBoard({
   let [schools, setSchools] = useState({ available: false, array: [] });
 
   let [ratingArray, setRatingArray] = useState(createBooleanArray(6));
-  let [mpriceMin, setMPriceMin] = useState(1000);
-  let [mpriceMax, setMPriceMax] = useState(3000);
+  let [mpriceMin, setMPriceMin] = useState(0);
+  let [mpriceMax, setMPriceMax] = useState(Infinity);
 
-  let [spriceMin, setSPriceMin] = useState(500);
-  let [spriceMax, setSPriceMax] = useState(1500);
+  let [spriceMin, setSPriceMin] = useState(0);
+  let [spriceMax, setSPriceMax] = useState(Infinity);
 
   let [country, setCountry] = useState("");
   let [province, setProvince] = useState("");
@@ -146,7 +146,7 @@ export default function HomeScreenDashBoard({
                 },
                 (e: any) => {
                   setSubmit(!submit);
-                  setMPriceMax(e.target.value);
+                  setMPriceMax(e.target.value === "" ? Infinity : +e.target.value);
                 },
               ],
             }}
@@ -155,12 +155,12 @@ export default function HomeScreenDashBoard({
               onChange: [
                 (e: any) => {
                   setSubmit(!submit);
-                  setSPriceMin(e.target.value);
+                  setSPriceMin(+e.target.value);
                 },
                 (e: any) => {
                   setSubmit(!submit);
 
-                  setSPriceMax(e.target.value);
+                  setSPriceMax(e.target.value === "" ? Infinity : +e.target.value);
                 },
               ],
             }}
