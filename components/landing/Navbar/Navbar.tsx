@@ -95,11 +95,11 @@ export default function Navbar({
           }
         >
           <Image
-            className={"cursor-pointer hidden sm:block p-1 rounded-xl"}
+            className={"cursor-pointer min-h-fit hidden sm:block rounded-xl"}
             src={logo.src}
             alt={"logo"}
-            width={200}
-            height={36}
+            width={120}
+            height={64}
             onClick={Redirect}
           />
           {landing && (
