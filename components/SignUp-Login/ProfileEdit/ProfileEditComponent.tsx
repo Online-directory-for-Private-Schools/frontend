@@ -50,6 +50,7 @@ export function ChangePassword() {
         <Form
           title={"Change Password"}
           errorMessage={ErrorMessage}
+          submitMessage={"Save Changes"}
           onSubmit={handleSubmitPassword}
           SuccessMessage={SuccessMessage}
         >
